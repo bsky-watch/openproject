@@ -1,0 +1,8 @@
+packageName: openproject
+withGoMod: true
+hideGenerationTimestamp: true
+gitUserId: ua-bsky-watch
+gitRepoId: openproject
+apiDocs: false
+modelDocs: false
+disallowAdditionalPropertiesIfNotPresent: false
