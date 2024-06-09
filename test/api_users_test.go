@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/ua-bsky-watch/openproject"
+	openapiclient "bsky.watch/openproject"
 )
 
 func Test_openproject_UsersAPIService(t *testing.T) {
@@ -38,7 +38,7 @@ func Test_openproject_UsersAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		httpRes, err := apiClient.UsersAPI.DeleteUser(context.Background(), id).Execute()
 
@@ -63,7 +63,7 @@ func Test_openproject_UsersAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.UsersAPI.LockUser(context.Background(), id).Execute()
 
@@ -77,7 +77,7 @@ func Test_openproject_UsersAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.UsersAPI.UnlockUser(context.Background(), id).Execute()
 
@@ -91,7 +91,7 @@ func Test_openproject_UsersAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.UsersAPI.UpdateUser(context.Background(), id).Execute()
 
@@ -105,7 +105,7 @@ func Test_openproject_UsersAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		httpRes, err := apiClient.UsersAPI.UserUpdateForm(context.Background(), id).Execute()
 

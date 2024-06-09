@@ -21,7 +21,7 @@ var _ MappedNullable = &WikiPageModel{}
 // WikiPageModel struct for WikiPageModel
 type WikiPageModel struct {
 	// Identifier of this wiki page
-	Id *int64 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	// The wiki page's title
 	Title string `json:"title"`
 	Links *WikiPageModelLinks `json:"_links,omitempty"`
@@ -49,9 +49,9 @@ func NewWikiPageModelWithDefaults() *WikiPageModel {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *WikiPageModel) GetId() int64 {
+func (o *WikiPageModel) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -59,7 +59,7 @@ func (o *WikiPageModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WikiPageModel) GetIdOk() (*int64, bool) {
+func (o *WikiPageModel) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -75,8 +75,8 @@ func (o *WikiPageModel) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *WikiPageModel) SetId(v int64) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *WikiPageModel) SetId(v int) {
 	o.Id = &v
 }
 

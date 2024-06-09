@@ -26,7 +26,7 @@ type RevisionsAPIService service
 type ApiViewRevisionRequest struct {
 	ctx context.Context
 	ApiService *RevisionsAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewRevisionRequest) Execute() (*RevisionModel, *http.Response, error) {
@@ -42,7 +42,7 @@ ViewRevision View revision
  @param id Revision id
  @return ApiViewRevisionRequest
 */
-func (a *RevisionsAPIService) ViewRevision(ctx context.Context, id int64) ApiViewRevisionRequest {
+func (a *RevisionsAPIService) ViewRevision(ctx context.Context, id int) ApiViewRevisionRequest {
 	return ApiViewRevisionRequest{
 		ApiService: a,
 		ctx: ctx,

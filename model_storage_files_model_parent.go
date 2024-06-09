@@ -28,7 +28,7 @@ type StorageFilesModelParent struct {
 	// MIME type of the linked file.  To link a folder entity, the custom MIME type `application/x-op-directory` MUST be provided. Otherwise it defaults back to an unknown MIME type.
 	MimeType *string `json:"mimeType,omitempty"`
 	// file size on origin in bytes
-	Size *int64 `json:"size,omitempty"`
+	Size *int `json:"size,omitempty"`
 	// Timestamp of the creation datetime of the file on the origin
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	// Timestamp of the datetime of the last modification of the file on the origin
@@ -149,9 +149,9 @@ func (o *StorageFilesModelParent) SetMimeType(v string) {
 }
 
 // GetSize returns the Size field value if set, zero value otherwise.
-func (o *StorageFilesModelParent) GetSize() int64 {
+func (o *StorageFilesModelParent) GetSize() int {
 	if o == nil || IsNil(o.Size) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Size
@@ -159,7 +159,7 @@ func (o *StorageFilesModelParent) GetSize() int64 {
 
 // GetSizeOk returns a tuple with the Size field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StorageFilesModelParent) GetSizeOk() (*int64, bool) {
+func (o *StorageFilesModelParent) GetSizeOk() (*int, bool) {
 	if o == nil || IsNil(o.Size) {
 		return nil, false
 	}
@@ -175,8 +175,8 @@ func (o *StorageFilesModelParent) HasSize() bool {
 	return false
 }
 
-// SetSize gets a reference to the given int64 and assigns it to the Size field.
-func (o *StorageFilesModelParent) SetSize(v int64) {
+// SetSize gets a reference to the given int and assigns it to the Size field.
+func (o *StorageFilesModelParent) SetSize(v int) {
 	o.Size = &v
 }
 

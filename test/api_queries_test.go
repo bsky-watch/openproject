@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/ua-bsky-watch/openproject"
+	openapiclient "bsky.watch/openproject"
 )
 
 func Test_openproject_QueriesAPIService(t *testing.T) {
@@ -50,7 +50,7 @@ func Test_openproject_QueriesAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		httpRes, err := apiClient.QueriesAPI.DeleteQuery(context.Background(), id).Execute()
 
@@ -63,7 +63,7 @@ func Test_openproject_QueriesAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.QueriesAPI.EditQuery(context.Background(), id).Execute()
 
@@ -100,7 +100,7 @@ func Test_openproject_QueriesAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		httpRes, err := apiClient.QueriesAPI.QueryUpdateForm(context.Background(), id).Execute()
 
@@ -113,7 +113,7 @@ func Test_openproject_QueriesAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.QueriesAPI.StarQuery(context.Background(), id).Execute()
 
@@ -127,7 +127,7 @@ func Test_openproject_QueriesAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.QueriesAPI.UnstarQuery(context.Background(), id).Execute()
 
@@ -153,7 +153,7 @@ func Test_openproject_QueriesAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.QueriesAPI.ViewDefaultQueryForProject(context.Background(), id).Execute()
 
@@ -167,7 +167,7 @@ func Test_openproject_QueriesAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.QueriesAPI.ViewQuery(context.Background(), id).Execute()
 
@@ -193,7 +193,7 @@ func Test_openproject_QueriesAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.QueriesAPI.ViewSchemaForProjectQueries(context.Background(), id).Execute()
 

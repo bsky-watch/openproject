@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/ua-bsky-watch/openproject"
+	openapiclient "bsky.watch/openproject"
 )
 
 func Test_openproject_QueryFilterInstanceSchemaAPIService(t *testing.T) {
@@ -38,7 +38,7 @@ func Test_openproject_QueryFilterInstanceSchemaAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.QueryFilterInstanceSchemaAPI.ListQueryFilterInstanceSchemasForProject(context.Background(), id).Execute()
 

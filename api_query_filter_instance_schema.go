@@ -135,7 +135,7 @@ func (a *QueryFilterInstanceSchemaAPIService) ListQueryFilterInstanceSchemasExec
 type ApiListQueryFilterInstanceSchemasForProjectRequest struct {
 	ctx context.Context
 	ApiService *QueryFilterInstanceSchemaAPIService
-	id int64
+	id int
 }
 
 func (r ApiListQueryFilterInstanceSchemasForProjectRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -151,7 +151,7 @@ Returns the list of QueryFilterInstanceSchemas defined for a query of the specif
  @param id Project id
  @return ApiListQueryFilterInstanceSchemasForProjectRequest
 */
-func (a *QueryFilterInstanceSchemaAPIService) ListQueryFilterInstanceSchemasForProject(ctx context.Context, id int64) ApiListQueryFilterInstanceSchemasForProjectRequest {
+func (a *QueryFilterInstanceSchemaAPIService) ListQueryFilterInstanceSchemasForProject(ctx context.Context, id int) ApiListQueryFilterInstanceSchemasForProjectRequest {
 	return ApiListQueryFilterInstanceSchemasForProjectRequest{
 		ApiService: a,
 		ctx: ctx,

@@ -26,7 +26,7 @@ type RelationsAPIService service
 type ApiDeleteRelationRequest struct {
 	ctx context.Context
 	ApiService *RelationsAPIService
-	id int64
+	id int
 }
 
 func (r ApiDeleteRelationRequest) Execute() (*http.Response, error) {
@@ -42,7 +42,7 @@ Deletes the relation.
  @param id Relation ID
  @return ApiDeleteRelationRequest
 */
-func (a *RelationsAPIService) DeleteRelation(ctx context.Context, id int64) ApiDeleteRelationRequest {
+func (a *RelationsAPIService) DeleteRelation(ctx context.Context, id int) ApiDeleteRelationRequest {
 	return ApiDeleteRelationRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -161,7 +161,7 @@ func (a *RelationsAPIService) DeleteRelationExecute(r ApiDeleteRelationRequest) 
 type ApiEditRelationRequest struct {
 	ctx context.Context
 	ApiService *RelationsAPIService
-	id int64
+	id int
 }
 
 func (r ApiEditRelationRequest) Execute() (*RelationModel, *http.Response, error) {
@@ -182,7 +182,7 @@ The returned Relation object will reflect that change. For instance if you chang
  @param id Relation ID
  @return ApiEditRelationRequest
 */
-func (a *RelationsAPIService) EditRelation(ctx context.Context, id int64) ApiEditRelationRequest {
+func (a *RelationsAPIService) EditRelation(ctx context.Context, id int) ApiEditRelationRequest {
 	return ApiEditRelationRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -443,7 +443,7 @@ func (a *RelationsAPIService) ListRelationsExecute(r ApiListRelationsRequest) (m
 type ApiRelationEditFormRequest struct {
 	ctx context.Context
 	ApiService *RelationsAPIService
-	id int64
+	id int
 }
 
 func (r ApiRelationEditFormRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -459,7 +459,7 @@ RelationEditForm Relation edit form
  @param id ID of the relation being modified
  @return ApiRelationEditFormRequest
 */
-func (a *RelationsAPIService) RelationEditForm(ctx context.Context, id int64) ApiRelationEditFormRequest {
+func (a *RelationsAPIService) RelationEditForm(ctx context.Context, id int) ApiRelationEditFormRequest {
 	return ApiRelationEditFormRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -567,7 +567,7 @@ func (a *RelationsAPIService) RelationEditFormExecute(r ApiRelationEditFormReque
 type ApiViewRelationRequest struct {
 	ctx context.Context
 	ApiService *RelationsAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewRelationRequest) Execute() (*RelationModel, *http.Response, error) {
@@ -583,7 +583,7 @@ ViewRelation View Relation
  @param id Relation id
  @return ApiViewRelationRequest
 */
-func (a *RelationsAPIService) ViewRelation(ctx context.Context, id int64) ApiViewRelationRequest {
+func (a *RelationsAPIService) ViewRelation(ctx context.Context, id int) ApiViewRelationRequest {
 	return ApiViewRelationRequest{
 		ApiService: a,
 		ctx: ctx,

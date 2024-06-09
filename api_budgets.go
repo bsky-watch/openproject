@@ -26,7 +26,7 @@ type BudgetsAPIService service
 type ApiViewBudgetRequest struct {
 	ctx context.Context
 	ApiService *BudgetsAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewBudgetRequest) Execute() (*BudgetModel, *http.Response, error) {
@@ -42,7 +42,7 @@ ViewBudget view Budget
  @param id Budget id
  @return ApiViewBudgetRequest
 */
-func (a *BudgetsAPIService) ViewBudget(ctx context.Context, id int64) ApiViewBudgetRequest {
+func (a *BudgetsAPIService) ViewBudget(ctx context.Context, id int) ApiViewBudgetRequest {
 	return ApiViewBudgetRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -139,7 +139,7 @@ func (a *BudgetsAPIService) ViewBudgetExecute(r ApiViewBudgetRequest) (*BudgetMo
 type ApiViewBudgetsOfAProjectRequest struct {
 	ctx context.Context
 	ApiService *BudgetsAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewBudgetsOfAProjectRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -155,7 +155,7 @@ ViewBudgetsOfAProject view Budgets of a Project
  @param id Project id
  @return ApiViewBudgetsOfAProjectRequest
 */
-func (a *BudgetsAPIService) ViewBudgetsOfAProject(ctx context.Context, id int64) ApiViewBudgetsOfAProjectRequest {
+func (a *BudgetsAPIService) ViewBudgetsOfAProject(ctx context.Context, id int) ApiViewBudgetsOfAProjectRequest {
 	return ApiViewBudgetsOfAProjectRequest{
 		ApiService: a,
 		ctx: ctx,

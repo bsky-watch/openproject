@@ -290,7 +290,7 @@ func (a *TimeEntriesAPIService) CreateTimeEntryExecute(r ApiCreateTimeEntryReque
 type ApiDeleteTimeEntryRequest struct {
 	ctx context.Context
 	ApiService *TimeEntriesAPIService
-	id int64
+	id int
 }
 
 func (r ApiDeleteTimeEntryRequest) Execute() (*http.Response, error) {
@@ -306,7 +306,7 @@ Permanently deletes the specified time entry.
  @param id Time entry id
  @return ApiDeleteTimeEntryRequest
 */
-func (a *TimeEntriesAPIService) DeleteTimeEntry(ctx context.Context, id int64) ApiDeleteTimeEntryRequest {
+func (a *TimeEntriesAPIService) DeleteTimeEntry(ctx context.Context, id int) ApiDeleteTimeEntryRequest {
 	return ApiDeleteTimeEntryRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -425,7 +425,7 @@ func (a *TimeEntriesAPIService) DeleteTimeEntryExecute(r ApiDeleteTimeEntryReque
 type ApiGetTimeEntryRequest struct {
 	ctx context.Context
 	ApiService *TimeEntriesAPIService
-	id int64
+	id int
 }
 
 func (r ApiGetTimeEntryRequest) Execute() (*TimeEntryModel, *http.Response, error) {
@@ -441,7 +441,7 @@ Retrieves a single time entry identified by the given id.
  @param id time entry id
  @return ApiGetTimeEntryRequest
 */
-func (a *TimeEntriesAPIService) GetTimeEntry(ctx context.Context, id int64) ApiGetTimeEntryRequest {
+func (a *TimeEntriesAPIService) GetTimeEntry(ctx context.Context, id int) ApiGetTimeEntryRequest {
 	return ApiGetTimeEntryRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -538,20 +538,20 @@ func (a *TimeEntriesAPIService) GetTimeEntryExecute(r ApiGetTimeEntryRequest) (*
 type ApiListTimeEntriesRequest struct {
 	ctx context.Context
 	ApiService *TimeEntriesAPIService
-	offset *int64
-	pageSize *int64
+	offset *int
+	pageSize *int
 	sortBy *string
 	filters *string
 }
 
 // Page number inside the requested collection.
-func (r ApiListTimeEntriesRequest) Offset(offset int64) ApiListTimeEntriesRequest {
+func (r ApiListTimeEntriesRequest) Offset(offset int) ApiListTimeEntriesRequest {
 	r.offset = &offset
 	return r
 }
 
 // Number of elements to display per page.
-func (r ApiListTimeEntriesRequest) PageSize(pageSize int64) ApiListTimeEntriesRequest {
+func (r ApiListTimeEntriesRequest) PageSize(pageSize int) ApiListTimeEntriesRequest {
 	r.pageSize = &pageSize
 	return r
 }
@@ -612,7 +612,7 @@ func (a *TimeEntriesAPIService) ListTimeEntriesExecute(r ApiListTimeEntriesReque
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
 	} else {
-		var defaultValue int64 = 1
+		var defaultValue int = 1
 		r.offset = &defaultValue
 	}
 	if r.pageSize != nil {
@@ -836,12 +836,12 @@ func (a *TimeEntriesAPIService) TimeEntryCreateFormExecute(r ApiTimeEntryCreateF
 type ApiTimeEntryUpdateFormRequest struct {
 	ctx context.Context
 	ApiService *TimeEntriesAPIService
-	id int64
-	body *int64
+	id int
+	body *int
 }
 
 // Time entries activity id
-func (r ApiTimeEntryUpdateFormRequest) Body(body int64) ApiTimeEntryUpdateFormRequest {
+func (r ApiTimeEntryUpdateFormRequest) Body(body int) ApiTimeEntryUpdateFormRequest {
 	r.body = &body
 	return r
 }
@@ -859,7 +859,7 @@ TimeEntryUpdateForm Time entry update form
  @param id Time entries activity id
  @return ApiTimeEntryUpdateFormRequest
 */
-func (a *TimeEntriesAPIService) TimeEntryUpdateForm(ctx context.Context, id int64) ApiTimeEntryUpdateFormRequest {
+func (a *TimeEntriesAPIService) TimeEntryUpdateForm(ctx context.Context, id int) ApiTimeEntryUpdateFormRequest {
 	return ApiTimeEntryUpdateFormRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -994,7 +994,7 @@ func (a *TimeEntriesAPIService) TimeEntryUpdateFormExecute(r ApiTimeEntryUpdateF
 type ApiUpdateTimeEntryRequest struct {
 	ctx context.Context
 	ApiService *TimeEntriesAPIService
-	id int64
+	id int
 }
 
 func (r ApiUpdateTimeEntryRequest) Execute() (*TimeEntryModel, *http.Response, error) {
@@ -1012,7 +1012,7 @@ can extend a time entries' attributes and are accepted by the endpoint.
  @param id Time entry id
  @return ApiUpdateTimeEntryRequest
 */
-func (a *TimeEntriesAPIService) UpdateTimeEntry(ctx context.Context, id int64) ApiUpdateTimeEntryRequest {
+func (a *TimeEntriesAPIService) UpdateTimeEntry(ctx context.Context, id int) ApiUpdateTimeEntryRequest {
 	return ApiUpdateTimeEntryRequest{
 		ApiService: a,
 		ctx: ctx,

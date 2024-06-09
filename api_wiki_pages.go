@@ -26,7 +26,7 @@ type WikiPagesAPIService service
 type ApiViewWikiPageRequest struct {
 	ctx context.Context
 	ApiService *WikiPagesAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewWikiPageRequest) Execute() (*WikiPageModel, *http.Response, error) {
@@ -42,7 +42,7 @@ Retrieve an individual wiki page as identified by the id parameter
  @param id Wiki page identifier
  @return ApiViewWikiPageRequest
 */
-func (a *WikiPagesAPIService) ViewWikiPage(ctx context.Context, id int64) ApiViewWikiPageRequest {
+func (a *WikiPagesAPIService) ViewWikiPage(ctx context.Context, id int) ApiViewWikiPageRequest {
 	return ApiViewWikiPageRequest{
 		ApiService: a,
 		ctx: ctx,

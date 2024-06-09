@@ -22,7 +22,7 @@ var _ MappedNullable = &RoleModel{}
 type RoleModel struct {
 	Type *string `json:"_type,omitempty"`
 	// Role id
-	Id *int64 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	// Role name
 	Name string `json:"name"`
 	Links *RoleModelLinks `json:"_links,omitempty"`
@@ -82,9 +82,9 @@ func (o *RoleModel) SetType(v string) {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *RoleModel) GetId() int64 {
+func (o *RoleModel) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -92,7 +92,7 @@ func (o *RoleModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RoleModel) GetIdOk() (*int64, bool) {
+func (o *RoleModel) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -108,8 +108,8 @@ func (o *RoleModel) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *RoleModel) SetId(v int64) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *RoleModel) SetId(v int) {
 	o.Id = &v
 }
 

@@ -1,4 +1,4 @@
-module github.com/ua-bsky-watch/openproject
+module bsky.watch/openproject
 
 go 1.18
 

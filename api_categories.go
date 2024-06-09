@@ -26,7 +26,7 @@ type CategoriesAPIService service
 type ApiListCategoriesOfAProjectRequest struct {
 	ctx context.Context
 	ApiService *CategoriesAPIService
-	id int64
+	id int
 }
 
 func (r ApiListCategoriesOfAProjectRequest) Execute() (*CategoriesByProjectModel, *http.Response, error) {
@@ -42,7 +42,7 @@ ListCategoriesOfAProject List categories of a project
  @param id ID of the project whose categories will be listed
  @return ApiListCategoriesOfAProjectRequest
 */
-func (a *CategoriesAPIService) ListCategoriesOfAProject(ctx context.Context, id int64) ApiListCategoriesOfAProjectRequest {
+func (a *CategoriesAPIService) ListCategoriesOfAProject(ctx context.Context, id int) ApiListCategoriesOfAProjectRequest {
 	return ApiListCategoriesOfAProjectRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -139,7 +139,7 @@ func (a *CategoriesAPIService) ListCategoriesOfAProjectExecute(r ApiListCategori
 type ApiViewCategoryRequest struct {
 	ctx context.Context
 	ApiService *CategoriesAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewCategoryRequest) Execute() (*CategoryModel, *http.Response, error) {
@@ -155,7 +155,7 @@ ViewCategory View Category
  @param id Category id
  @return ApiViewCategoryRequest
 */
-func (a *CategoriesAPIService) ViewCategory(ctx context.Context, id int64) ApiViewCategoryRequest {
+func (a *CategoriesAPIService) ViewCategory(ctx context.Context, id int) ApiViewCategoryRequest {
 	return ApiViewCategoryRequest{
 		ApiService: a,
 		ctx: ctx,

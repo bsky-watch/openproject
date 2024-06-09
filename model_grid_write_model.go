@@ -20,9 +20,9 @@ var _ MappedNullable = &GridWriteModel{}
 // GridWriteModel struct for GridWriteModel
 type GridWriteModel struct {
 	// The number of rows the grid has
-	RowCount *int64 `json:"rowCount,omitempty"`
+	RowCount *int `json:"rowCount,omitempty"`
 	// The number of columns the grid has
-	ColumnCount *int64 `json:"columnCount,omitempty"`
+	ColumnCount *int `json:"columnCount,omitempty"`
 	// The set of `GridWidget`s selected for the grid.  # Conditions  - The widgets must not overlap.
 	Widgets []GridWidgetModel `json:"widgets,omitempty"`
 	Links *GridWriteModelLinks `json:"_links,omitempty"`
@@ -49,9 +49,9 @@ func NewGridWriteModelWithDefaults() *GridWriteModel {
 }
 
 // GetRowCount returns the RowCount field value if set, zero value otherwise.
-func (o *GridWriteModel) GetRowCount() int64 {
+func (o *GridWriteModel) GetRowCount() int {
 	if o == nil || IsNil(o.RowCount) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.RowCount
@@ -59,7 +59,7 @@ func (o *GridWriteModel) GetRowCount() int64 {
 
 // GetRowCountOk returns a tuple with the RowCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GridWriteModel) GetRowCountOk() (*int64, bool) {
+func (o *GridWriteModel) GetRowCountOk() (*int, bool) {
 	if o == nil || IsNil(o.RowCount) {
 		return nil, false
 	}
@@ -75,15 +75,15 @@ func (o *GridWriteModel) HasRowCount() bool {
 	return false
 }
 
-// SetRowCount gets a reference to the given int64 and assigns it to the RowCount field.
-func (o *GridWriteModel) SetRowCount(v int64) {
+// SetRowCount gets a reference to the given int and assigns it to the RowCount field.
+func (o *GridWriteModel) SetRowCount(v int) {
 	o.RowCount = &v
 }
 
 // GetColumnCount returns the ColumnCount field value if set, zero value otherwise.
-func (o *GridWriteModel) GetColumnCount() int64 {
+func (o *GridWriteModel) GetColumnCount() int {
 	if o == nil || IsNil(o.ColumnCount) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.ColumnCount
@@ -91,7 +91,7 @@ func (o *GridWriteModel) GetColumnCount() int64 {
 
 // GetColumnCountOk returns a tuple with the ColumnCount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GridWriteModel) GetColumnCountOk() (*int64, bool) {
+func (o *GridWriteModel) GetColumnCountOk() (*int, bool) {
 	if o == nil || IsNil(o.ColumnCount) {
 		return nil, false
 	}
@@ -107,8 +107,8 @@ func (o *GridWriteModel) HasColumnCount() bool {
 	return false
 }
 
-// SetColumnCount gets a reference to the given int64 and assigns it to the ColumnCount field.
-func (o *GridWriteModel) SetColumnCount(v int64) {
+// SetColumnCount gets a reference to the given int and assigns it to the ColumnCount field.
+func (o *GridWriteModel) SetColumnCount(v int) {
 	o.ColumnCount = &v
 }
 

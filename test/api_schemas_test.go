@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/ua-bsky-watch/openproject"
+	openapiclient "bsky.watch/openproject"
 )
 
 func Test_openproject_SchemasAPIService(t *testing.T) {

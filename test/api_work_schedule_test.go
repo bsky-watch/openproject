@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/ua-bsky-watch/openproject"
+	openapiclient "bsky.watch/openproject"
 )
 
 func Test_openproject_WorkScheduleAPIService(t *testing.T) {
@@ -101,7 +101,7 @@ func Test_openproject_WorkScheduleAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var day int64
+		var day int
 
 		resp, httpRes, err := apiClient.WorkScheduleAPI.UpdateWeekDay(context.Background(), day).Execute()
 
@@ -155,7 +155,7 @@ func Test_openproject_WorkScheduleAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var day int64
+		var day int
 
 		resp, httpRes, err := apiClient.WorkScheduleAPI.ViewWeekDay(context.Background(), day).Execute()
 

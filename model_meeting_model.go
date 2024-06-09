@@ -21,7 +21,7 @@ var _ MappedNullable = &MeetingModel{}
 // MeetingModel struct for MeetingModel
 type MeetingModel struct {
 	// Identifier of this meeting
-	Id *int64 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	// The meeting's title
 	Title string `json:"title"`
 	Links *MeetingModelLinks `json:"_links,omitempty"`
@@ -49,9 +49,9 @@ func NewMeetingModelWithDefaults() *MeetingModel {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *MeetingModel) GetId() int64 {
+func (o *MeetingModel) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -59,7 +59,7 @@ func (o *MeetingModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *MeetingModel) GetIdOk() (*int64, bool) {
+func (o *MeetingModel) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -75,8 +75,8 @@ func (o *MeetingModel) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *MeetingModel) SetId(v int64) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *MeetingModel) SetId(v int) {
 	o.Id = &v
 }
 

@@ -22,7 +22,7 @@ var _ MappedNullable = &RevisionModel{}
 // RevisionModel struct for RevisionModel
 type RevisionModel struct {
 	// Revision's id, assigned by OpenProject
-	Id *int64 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	// The raw SCM identifier of the revision (e.g. full SHA hash)
 	Identifier string `json:"identifier"`
 	// The SCM identifier of the revision, formatted (e.g. shortened unambiguous SHA hash). May be identical to identifier in many cases
@@ -61,9 +61,9 @@ func NewRevisionModelWithDefaults() *RevisionModel {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *RevisionModel) GetId() int64 {
+func (o *RevisionModel) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -71,7 +71,7 @@ func (o *RevisionModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RevisionModel) GetIdOk() (*int64, bool) {
+func (o *RevisionModel) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -87,8 +87,8 @@ func (o *RevisionModel) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *RevisionModel) SetId(v int64) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *RevisionModel) SetId(v int) {
 	o.Id = &v
 }
 

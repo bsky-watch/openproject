@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/ua-bsky-watch/openproject"
+	openapiclient "bsky.watch/openproject"
 )
 
 func Test_openproject_FileLinksAPIService(t *testing.T) {
@@ -38,7 +38,7 @@ func Test_openproject_FileLinksAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.FileLinksAPI.CreateStorageOauthCredentials(context.Background(), id).Execute()
 
@@ -52,7 +52,7 @@ func Test_openproject_FileLinksAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		httpRes, err := apiClient.FileLinksAPI.DeleteFileLink(context.Background(), id).Execute()
 
@@ -65,7 +65,7 @@ func Test_openproject_FileLinksAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		httpRes, err := apiClient.FileLinksAPI.DeleteStorage(context.Background(), id).Execute()
 
@@ -78,7 +78,7 @@ func Test_openproject_FileLinksAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		httpRes, err := apiClient.FileLinksAPI.DownloadFileLink(context.Background(), id).Execute()
 
@@ -91,7 +91,7 @@ func Test_openproject_FileLinksAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.FileLinksAPI.GetProjectStorage(context.Background(), id).Execute()
 
@@ -105,7 +105,7 @@ func Test_openproject_FileLinksAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.FileLinksAPI.GetStorage(context.Background(), id).Execute()
 
@@ -119,7 +119,7 @@ func Test_openproject_FileLinksAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.FileLinksAPI.GetStorageFiles(context.Background(), id).Execute()
 
@@ -157,7 +157,7 @@ func Test_openproject_FileLinksAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		httpRes, err := apiClient.FileLinksAPI.OpenFileLink(context.Background(), id).Execute()
 
@@ -170,7 +170,7 @@ func Test_openproject_FileLinksAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		httpRes, err := apiClient.FileLinksAPI.OpenProjectStorage(context.Background(), id).Execute()
 
@@ -183,7 +183,7 @@ func Test_openproject_FileLinksAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		httpRes, err := apiClient.FileLinksAPI.OpenStorage(context.Background(), id).Execute()
 
@@ -196,7 +196,7 @@ func Test_openproject_FileLinksAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.FileLinksAPI.PrepareStorageFileUpload(context.Background(), id).Execute()
 
@@ -210,7 +210,7 @@ func Test_openproject_FileLinksAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.FileLinksAPI.UpdateStorage(context.Background(), id).Execute()
 
@@ -224,7 +224,7 @@ func Test_openproject_FileLinksAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.FileLinksAPI.ViewFileLink(context.Background(), id).Execute()
 

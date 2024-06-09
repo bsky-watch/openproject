@@ -21,9 +21,9 @@ var _ MappedNullable = &ActivityModel{}
 // ActivityModel struct for ActivityModel
 type ActivityModel struct {
 	// Activity id
-	Id *int64 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	// Activity version
-	Version *int64 `json:"version,omitempty"`
+	Version *int `json:"version,omitempty"`
 	Comment *ActivityModelComment `json:"comment,omitempty"`
 	Details []Formattable `json:"details,omitempty"`
 	// Time of creation
@@ -53,9 +53,9 @@ func NewActivityModelWithDefaults() *ActivityModel {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *ActivityModel) GetId() int64 {
+func (o *ActivityModel) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -63,7 +63,7 @@ func (o *ActivityModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ActivityModel) GetIdOk() (*int64, bool) {
+func (o *ActivityModel) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -79,15 +79,15 @@ func (o *ActivityModel) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *ActivityModel) SetId(v int64) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *ActivityModel) SetId(v int) {
 	o.Id = &v
 }
 
 // GetVersion returns the Version field value if set, zero value otherwise.
-func (o *ActivityModel) GetVersion() int64 {
+func (o *ActivityModel) GetVersion() int {
 	if o == nil || IsNil(o.Version) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Version
@@ -95,7 +95,7 @@ func (o *ActivityModel) GetVersion() int64 {
 
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ActivityModel) GetVersionOk() (*int64, bool) {
+func (o *ActivityModel) GetVersionOk() (*int, bool) {
 	if o == nil || IsNil(o.Version) {
 		return nil, false
 	}
@@ -111,8 +111,8 @@ func (o *ActivityModel) HasVersion() bool {
 	return false
 }
 
-// SetVersion gets a reference to the given int64 and assigns it to the Version field.
-func (o *ActivityModel) SetVersion(v int64) {
+// SetVersion gets a reference to the given int and assigns it to the Version field.
+func (o *ActivityModel) SetVersion(v int) {
 	o.Version = &v
 }
 

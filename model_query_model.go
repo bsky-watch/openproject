@@ -22,7 +22,7 @@ var _ MappedNullable = &QueryModel{}
 // QueryModel struct for QueryModel
 type QueryModel struct {
 	// Query id
-	Id *int64 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	// Query name
 	Name *string `json:"name,omitempty"`
 	// A set of QueryFilters which will be applied to the work packages to determine the resulting work packages
@@ -82,9 +82,9 @@ func NewQueryModelWithDefaults() *QueryModel {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *QueryModel) GetId() int64 {
+func (o *QueryModel) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -92,7 +92,7 @@ func (o *QueryModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *QueryModel) GetIdOk() (*int64, bool) {
+func (o *QueryModel) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -108,8 +108,8 @@ func (o *QueryModel) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *QueryModel) SetId(v int64) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *QueryModel) SetId(v int) {
 	o.Id = &v
 }
 

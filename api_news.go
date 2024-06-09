@@ -26,20 +26,20 @@ type NewsAPIService service
 type ApiListNewsRequest struct {
 	ctx context.Context
 	ApiService *NewsAPIService
-	offset *int64
-	pageSize *int64
+	offset *int
+	pageSize *int
 	sortBy *string
 	filters *string
 }
 
 // Page number inside the requested collection.
-func (r ApiListNewsRequest) Offset(offset int64) ApiListNewsRequest {
+func (r ApiListNewsRequest) Offset(offset int) ApiListNewsRequest {
 	r.offset = &offset
 	return r
 }
 
 // Number of elements to display per page.
-func (r ApiListNewsRequest) PageSize(pageSize int64) ApiListNewsRequest {
+func (r ApiListNewsRequest) PageSize(pageSize int) ApiListNewsRequest {
 	r.pageSize = &pageSize
 	return r
 }
@@ -99,7 +99,7 @@ func (a *NewsAPIService) ListNewsExecute(r ApiListNewsRequest) (map[string]inter
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
 	} else {
-		var defaultValue int64 = 1
+		var defaultValue int = 1
 		r.offset = &defaultValue
 	}
 	if r.pageSize != nil {
@@ -189,7 +189,7 @@ func (a *NewsAPIService) ListNewsExecute(r ApiListNewsRequest) (map[string]inter
 type ApiViewNewsRequest struct {
 	ctx context.Context
 	ApiService *NewsAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewNewsRequest) Execute() (*NewsModel, *http.Response, error) {
@@ -205,7 +205,7 @@ ViewNews View news
  @param id news id
  @return ApiViewNewsRequest
 */
-func (a *NewsAPIService) ViewNews(ctx context.Context, id int64) ApiViewNewsRequest {
+func (a *NewsAPIService) ViewNews(ctx context.Context, id int) ApiViewNewsRequest {
 	return ApiViewNewsRequest{
 		ApiService: a,
 		ctx: ctx,

@@ -22,11 +22,11 @@ var _ MappedNullable = &TimeEntryActivityModel{}
 type TimeEntryActivityModel struct {
 	Type string `json:"_type"`
 	// Time entry id
-	Id int64 `json:"id"`
+	Id int `json:"id"`
 	// The human readable name chosen for this activity
 	Name string `json:"name"`
 	// The rank the activity has in a list of activities
-	Position int64 `json:"position"`
+	Position int `json:"position"`
 	// Flag to signal whether this activity is the default activity
 	Default bool `json:"default"`
 	Embedded TimeEntryActivityModelEmbedded `json:"_embedded"`
@@ -40,7 +40,7 @@ type _TimeEntryActivityModel TimeEntryActivityModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTimeEntryActivityModel(type_ string, id int64, name string, position int64, default_ bool, embedded TimeEntryActivityModelEmbedded, links TimeEntryActivityModelLinks) *TimeEntryActivityModel {
+func NewTimeEntryActivityModel(type_ string, id int, name string, position int, default_ bool, embedded TimeEntryActivityModelEmbedded, links TimeEntryActivityModelLinks) *TimeEntryActivityModel {
 	this := TimeEntryActivityModel{}
 	this.Type = type_
 	this.Id = id
@@ -85,9 +85,9 @@ func (o *TimeEntryActivityModel) SetType(v string) {
 }
 
 // GetId returns the Id field value
-func (o *TimeEntryActivityModel) GetId() int64 {
+func (o *TimeEntryActivityModel) GetId() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -96,7 +96,7 @@ func (o *TimeEntryActivityModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *TimeEntryActivityModel) GetIdOk() (*int64, bool) {
+func (o *TimeEntryActivityModel) GetIdOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -104,7 +104,7 @@ func (o *TimeEntryActivityModel) GetIdOk() (*int64, bool) {
 }
 
 // SetId sets field value
-func (o *TimeEntryActivityModel) SetId(v int64) {
+func (o *TimeEntryActivityModel) SetId(v int) {
 	o.Id = v
 }
 
@@ -133,9 +133,9 @@ func (o *TimeEntryActivityModel) SetName(v string) {
 }
 
 // GetPosition returns the Position field value
-func (o *TimeEntryActivityModel) GetPosition() int64 {
+func (o *TimeEntryActivityModel) GetPosition() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -144,7 +144,7 @@ func (o *TimeEntryActivityModel) GetPosition() int64 {
 
 // GetPositionOk returns a tuple with the Position field value
 // and a boolean to check if the value has been set.
-func (o *TimeEntryActivityModel) GetPositionOk() (*int64, bool) {
+func (o *TimeEntryActivityModel) GetPositionOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -152,7 +152,7 @@ func (o *TimeEntryActivityModel) GetPositionOk() (*int64, bool) {
 }
 
 // SetPosition sets field value
-func (o *TimeEntryActivityModel) SetPosition(v int64) {
+func (o *TimeEntryActivityModel) SetPosition(v int) {
 	o.Position = v
 }
 

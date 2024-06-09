@@ -26,7 +26,7 @@ type WorkPackagesAPIService service
 type ApiAddWatcherRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
+	id int
 	addWatcherRequest *AddWatcherRequest
 }
 
@@ -54,7 +54,7 @@ In case the user was already watching the work package an `HTTP 200` is returned
  @param id Work package id
  @return ApiAddWatcherRequest
 */
-func (a *WorkPackagesAPIService) AddWatcher(ctx context.Context, id int64) ApiAddWatcherRequest {
+func (a *WorkPackagesAPIService) AddWatcher(ctx context.Context, id int) ApiAddWatcherRequest {
 	return ApiAddWatcherRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -187,7 +187,7 @@ func (a *WorkPackagesAPIService) AddWatcherExecute(r ApiAddWatcherRequest) (*htt
 type ApiAvailableProjectsForWorkPackageRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
+	id int
 }
 
 func (r ApiAvailableProjectsForWorkPackageRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -203,7 +203,7 @@ Gets a list of projects that are available as projects to which the work package
  @param id work package id
  @return ApiAvailableProjectsForWorkPackageRequest
 */
-func (a *WorkPackagesAPIService) AvailableProjectsForWorkPackage(ctx context.Context, id int64) ApiAvailableProjectsForWorkPackageRequest {
+func (a *WorkPackagesAPIService) AvailableProjectsForWorkPackage(ctx context.Context, id int) ApiAvailableProjectsForWorkPackageRequest {
 	return ApiAvailableProjectsForWorkPackageRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -311,7 +311,7 @@ func (a *WorkPackagesAPIService) AvailableProjectsForWorkPackageExecute(r ApiAva
 type ApiAvailableWatchersRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
+	id int
 }
 
 func (r ApiAvailableWatchersRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -327,7 +327,7 @@ Gets a list of users that are able to be watchers of the specified work package.
  @param id work package id
  @return ApiAvailableWatchersRequest
 */
-func (a *WorkPackagesAPIService) AvailableWatchers(ctx context.Context, id int64) ApiAvailableWatchersRequest {
+func (a *WorkPackagesAPIService) AvailableWatchers(ctx context.Context, id int) ApiAvailableWatchersRequest {
 	return ApiAvailableWatchersRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -435,7 +435,7 @@ func (a *WorkPackagesAPIService) AvailableWatchersExecute(r ApiAvailableWatchers
 type ApiCommentWorkPackageRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
+	id int
 	notify *bool
 	commentWorkPackageRequest *CommentWorkPackageRequest
 }
@@ -465,7 +465,7 @@ updated activity.
  @param id Work package id
  @return ApiCommentWorkPackageRequest
 */
-func (a *WorkPackagesAPIService) CommentWorkPackage(ctx context.Context, id int64) ApiCommentWorkPackageRequest {
+func (a *WorkPackagesAPIService) CommentWorkPackage(ctx context.Context, id int) ApiCommentWorkPackageRequest {
 	return ApiCommentWorkPackageRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -592,7 +592,7 @@ func (a *WorkPackagesAPIService) CommentWorkPackageExecute(r ApiCommentWorkPacka
 type ApiCreateProjectWorkPackageRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
+	id int
 	notify *bool
 	workPackageModel *WorkPackageModel
 }
@@ -623,7 +623,7 @@ the respective form. Note that it is only allowed to provide properties or links
  @param id Project id
  @return ApiCreateProjectWorkPackageRequest
 */
-func (a *WorkPackagesAPIService) CreateProjectWorkPackage(ctx context.Context, id int64) ApiCreateProjectWorkPackageRequest {
+func (a *WorkPackagesAPIService) CreateProjectWorkPackage(ctx context.Context, id int) ApiCreateProjectWorkPackageRequest {
 	return ApiCreateProjectWorkPackageRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -783,7 +783,7 @@ func (a *WorkPackagesAPIService) CreateProjectWorkPackageExecute(r ApiCreateProj
 type ApiCreateRelationRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
+	id int
 	createRelationRequest *CreateRelationRequest
 }
 
@@ -807,7 +807,7 @@ Note that it is only allowed to provide properties or links supporting the write
  @param id Work package id
  @return ApiCreateRelationRequest
 */
-func (a *WorkPackagesAPIService) CreateRelation(ctx context.Context, id int64) ApiCreateRelationRequest {
+func (a *WorkPackagesAPIService) CreateRelation(ctx context.Context, id int) ApiCreateRelationRequest {
 	return ApiCreateRelationRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1141,7 +1141,7 @@ func (a *WorkPackagesAPIService) CreateWorkPackageExecute(r ApiCreateWorkPackage
 type ApiCreateWorkPackageFileLinkRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
+	id int
 	fileLinkCollectionWriteModel *FileLinkCollectionWriteModel
 }
 
@@ -1178,7 +1178,7 @@ additional file link or update the meta data. Instead the information from the e
  @param id Work package id
  @return ApiCreateWorkPackageFileLinkRequest
 */
-func (a *WorkPackagesAPIService) CreateWorkPackageFileLink(ctx context.Context, id int64) ApiCreateWorkPackageFileLinkRequest {
+func (a *WorkPackagesAPIService) CreateWorkPackageFileLink(ctx context.Context, id int) ApiCreateWorkPackageFileLinkRequest {
 	return ApiCreateWorkPackageFileLinkRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1332,7 +1332,7 @@ func (a *WorkPackagesAPIService) CreateWorkPackageFileLinkExecute(r ApiCreateWor
 type ApiDeleteWorkPackageRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
+	id int
 }
 
 func (r ApiDeleteWorkPackageRequest) Execute() (*http.Response, error) {
@@ -1351,7 +1351,7 @@ Deletes the work package, as well as:
  @param id Work package id
  @return ApiDeleteWorkPackageRequest
 */
-func (a *WorkPackagesAPIService) DeleteWorkPackage(ctx context.Context, id int64) ApiDeleteWorkPackageRequest {
+func (a *WorkPackagesAPIService) DeleteWorkPackage(ctx context.Context, id int) ApiDeleteWorkPackageRequest {
 	return ApiDeleteWorkPackageRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1470,9 +1470,9 @@ func (a *WorkPackagesAPIService) DeleteWorkPackageExecute(r ApiDeleteWorkPackage
 type ApiGetProjectWorkPackageCollectionRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
-	offset *int64
-	pageSize *int64
+	id int
+	offset *int
+	pageSize *int
 	filters *string
 	sortBy *string
 	groupBy *string
@@ -1481,13 +1481,13 @@ type ApiGetProjectWorkPackageCollectionRequest struct {
 }
 
 // Page number inside the requested collection.
-func (r ApiGetProjectWorkPackageCollectionRequest) Offset(offset int64) ApiGetProjectWorkPackageCollectionRequest {
+func (r ApiGetProjectWorkPackageCollectionRequest) Offset(offset int) ApiGetProjectWorkPackageCollectionRequest {
 	r.offset = &offset
 	return r
 }
 
 // Number of elements to display per page.
-func (r ApiGetProjectWorkPackageCollectionRequest) PageSize(pageSize int64) ApiGetProjectWorkPackageCollectionRequest {
+func (r ApiGetProjectWorkPackageCollectionRequest) PageSize(pageSize int) ApiGetProjectWorkPackageCollectionRequest {
 	r.pageSize = &pageSize
 	return r
 }
@@ -1535,7 +1535,7 @@ Returns the collection of work packages that are related to the given project.
  @param id Project id
  @return ApiGetProjectWorkPackageCollectionRequest
 */
-func (a *WorkPackagesAPIService) GetProjectWorkPackageCollection(ctx context.Context, id int64) ApiGetProjectWorkPackageCollectionRequest {
+func (a *WorkPackagesAPIService) GetProjectWorkPackageCollection(ctx context.Context, id int) ApiGetProjectWorkPackageCollectionRequest {
 	return ApiGetProjectWorkPackageCollectionRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1568,7 +1568,7 @@ func (a *WorkPackagesAPIService) GetProjectWorkPackageCollectionExecute(r ApiGet
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
 	} else {
-		var defaultValue int64 = 1
+		var defaultValue int = 1
 		r.offset = &defaultValue
 	}
 	if r.pageSize != nil {
@@ -1687,8 +1687,8 @@ func (a *WorkPackagesAPIService) GetProjectWorkPackageCollectionExecute(r ApiGet
 type ApiListAvailableRelationCandidatesRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
-	pageSize *int64
+	id int
+	pageSize *int
 	filters *string
 	query *string
 	type_ *string
@@ -1696,7 +1696,7 @@ type ApiListAvailableRelationCandidatesRequest struct {
 }
 
 // Maximum number of candidates to list (default 10)
-func (r ApiListAvailableRelationCandidatesRequest) PageSize(pageSize int64) ApiListAvailableRelationCandidatesRequest {
+func (r ApiListAvailableRelationCandidatesRequest) PageSize(pageSize int) ApiListAvailableRelationCandidatesRequest {
 	r.pageSize = &pageSize
 	return r
 }
@@ -1738,7 +1738,7 @@ ListAvailableRelationCandidates Available relation candidates
  @param id Project id
  @return ApiListAvailableRelationCandidatesRequest
 */
-func (a *WorkPackagesAPIService) ListAvailableRelationCandidates(ctx context.Context, id int64) ApiListAvailableRelationCandidatesRequest {
+func (a *WorkPackagesAPIService) ListAvailableRelationCandidates(ctx context.Context, id int) ApiListAvailableRelationCandidatesRequest {
 	return ApiListAvailableRelationCandidatesRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1853,7 +1853,7 @@ func (a *WorkPackagesAPIService) ListAvailableRelationCandidatesExecute(r ApiLis
 type ApiListWatchersRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
+	id int
 }
 
 func (r ApiListWatchersRequest) Execute() (*WatchersModel, *http.Response, error) {
@@ -1869,7 +1869,7 @@ ListWatchers List watchers
  @param id Work package id
  @return ApiListWatchersRequest
 */
-func (a *WorkPackagesAPIService) ListWatchers(ctx context.Context, id int64) ApiListWatchersRequest {
+func (a *WorkPackagesAPIService) ListWatchers(ctx context.Context, id int) ApiListWatchersRequest {
 	return ApiListWatchersRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1977,7 +1977,7 @@ func (a *WorkPackagesAPIService) ListWatchersExecute(r ApiListWatchersRequest) (
 type ApiListWorkPackageActivitiesRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
+	id int
 }
 
 func (r ApiListWorkPackageActivitiesRequest) Execute() (*WorkPackageActivitiesModel, *http.Response, error) {
@@ -1993,7 +1993,7 @@ ListWorkPackageActivities List work package activities
  @param id Work package id
  @return ApiListWorkPackageActivitiesRequest
 */
-func (a *WorkPackagesAPIService) ListWorkPackageActivities(ctx context.Context, id int64) ApiListWorkPackageActivitiesRequest {
+func (a *WorkPackagesAPIService) ListWorkPackageActivities(ctx context.Context, id int) ApiListWorkPackageActivitiesRequest {
 	return ApiListWorkPackageActivitiesRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -2090,7 +2090,7 @@ func (a *WorkPackagesAPIService) ListWorkPackageActivitiesExecute(r ApiListWorkP
 type ApiListWorkPackageFileLinksRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
+	id int
 	filters *string
 }
 
@@ -2116,7 +2116,7 @@ the file link's data before returning, as well as retrieving permissions of the 
  @param id Work package id
  @return ApiListWorkPackageFileLinksRequest
 */
-func (a *WorkPackagesAPIService) ListWorkPackageFileLinks(ctx context.Context, id int64) ApiListWorkPackageFileLinksRequest {
+func (a *WorkPackagesAPIService) ListWorkPackageFileLinks(ctx context.Context, id int) ApiListWorkPackageFileLinksRequest {
 	return ApiListWorkPackageFileLinksRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -2227,7 +2227,7 @@ func (a *WorkPackagesAPIService) ListWorkPackageFileLinksExecute(r ApiListWorkPa
 type ApiListWorkPackageRelationsRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
+	id int
 }
 
 func (r ApiListWorkPackageRelationsRequest) Execute() (*http.Response, error) {
@@ -2243,7 +2243,7 @@ Lists all relations this work package is involved in.
  @param id Work package id
  @return ApiListWorkPackageRelationsRequest
 */
-func (a *WorkPackagesAPIService) ListWorkPackageRelations(ctx context.Context, id int64) ApiListWorkPackageRelationsRequest {
+func (a *WorkPackagesAPIService) ListWorkPackageRelations(ctx context.Context, id int) ApiListWorkPackageRelationsRequest {
 	return ApiListWorkPackageRelationsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -2460,8 +2460,8 @@ func (a *WorkPackagesAPIService) ListWorkPackageSchemasExecute(r ApiListWorkPack
 type ApiListWorkPackagesRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	offset *int64
-	pageSize *int64
+	offset *int
+	pageSize *int
 	filters *string
 	sortBy *string
 	groupBy *string
@@ -2471,13 +2471,13 @@ type ApiListWorkPackagesRequest struct {
 }
 
 // Page number inside the requested collection.
-func (r ApiListWorkPackagesRequest) Offset(offset int64) ApiListWorkPackagesRequest {
+func (r ApiListWorkPackagesRequest) Offset(offset int) ApiListWorkPackagesRequest {
 	r.offset = &offset
 	return r
 }
 
 // Number of elements to display per page.
-func (r ApiListWorkPackagesRequest) PageSize(pageSize int64) ApiListWorkPackagesRequest {
+func (r ApiListWorkPackagesRequest) PageSize(pageSize int) ApiListWorkPackagesRequest {
 	r.pageSize = &pageSize
 	return r
 }
@@ -2561,7 +2561,7 @@ func (a *WorkPackagesAPIService) ListWorkPackagesExecute(r ApiListWorkPackagesRe
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
 	} else {
-		var defaultValue int64 = 1
+		var defaultValue int = 1
 		r.offset = &defaultValue
 	}
 	if r.pageSize != nil {
@@ -2675,7 +2675,7 @@ func (a *WorkPackagesAPIService) ListWorkPackagesExecute(r ApiListWorkPackagesRe
 type ApiProjectAvailableAssigneesRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
+	id int
 }
 
 func (r ApiProjectAvailableAssigneesRequest) Execute() (*AvailableAssigneesModel, *http.Response, error) {
@@ -2691,7 +2691,7 @@ Gets a list of users that can be assigned to work packages in the given project.
  @param id Project id
  @return ApiProjectAvailableAssigneesRequest
 */
-func (a *WorkPackagesAPIService) ProjectAvailableAssignees(ctx context.Context, id int64) ApiProjectAvailableAssigneesRequest {
+func (a *WorkPackagesAPIService) ProjectAvailableAssignees(ctx context.Context, id int) ApiProjectAvailableAssigneesRequest {
 	return ApiProjectAvailableAssigneesRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -2799,8 +2799,8 @@ func (a *WorkPackagesAPIService) ProjectAvailableAssigneesExecute(r ApiProjectAv
 type ApiRemoveWatcherRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
-	userId int64
+	id int
+	userId int
 }
 
 func (r ApiRemoveWatcherRequest) Execute() (*http.Response, error) {
@@ -2821,7 +2821,7 @@ If the request succeeds, the specified user is not watching the work package any
  @param userId User id
  @return ApiRemoveWatcherRequest
 */
-func (a *WorkPackagesAPIService) RemoveWatcher(ctx context.Context, id int64, userId int64) ApiRemoveWatcherRequest {
+func (a *WorkPackagesAPIService) RemoveWatcher(ctx context.Context, id int, userId int) ApiRemoveWatcherRequest {
 	return ApiRemoveWatcherRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -2942,7 +2942,7 @@ func (a *WorkPackagesAPIService) RemoveWatcherExecute(r ApiRemoveWatcherRequest)
 type ApiRevisionsRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
+	id int
 }
 
 func (r ApiRevisionsRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -2959,7 +2959,7 @@ Only linked revisions from repositories are shown if the user has the view chang
  @param id Work package id
  @return ApiRevisionsRequest
 */
-func (a *WorkPackagesAPIService) Revisions(ctx context.Context, id int64) ApiRevisionsRequest {
+func (a *WorkPackagesAPIService) Revisions(ctx context.Context, id int) ApiRevisionsRequest {
 	return ApiRevisionsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3067,7 +3067,7 @@ func (a *WorkPackagesAPIService) RevisionsExecute(r ApiRevisionsRequest) (map[st
 type ApiUpdateWorkPackageRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
+	id int
 	notify *bool
 	workPackageModel *WorkPackageModel
 }
@@ -3104,7 +3104,7 @@ The value of `lockVersion` is used to implement
  @param id Work package id
  @return ApiUpdateWorkPackageRequest
 */
-func (a *WorkPackagesAPIService) UpdateWorkPackage(ctx context.Context, id int64) ApiUpdateWorkPackageRequest {
+func (a *WorkPackagesAPIService) UpdateWorkPackage(ctx context.Context, id int) ApiUpdateWorkPackageRequest {
 	return ApiUpdateWorkPackageRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3275,7 +3275,7 @@ func (a *WorkPackagesAPIService) UpdateWorkPackageExecute(r ApiUpdateWorkPackage
 type ApiViewWorkPackageRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
+	id int
 	timestamps *string
 }
 
@@ -3298,7 +3298,7 @@ Returns the specified work package.
  @param id Work package id
  @return ApiViewWorkPackageRequest
 */
-func (a *WorkPackagesAPIService) ViewWorkPackage(ctx context.Context, id int64) ApiViewWorkPackageRequest {
+func (a *WorkPackagesAPIService) ViewWorkPackage(ctx context.Context, id int) ApiViewWorkPackageRequest {
 	return ApiViewWorkPackageRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3503,7 +3503,7 @@ func (a *WorkPackagesAPIService) ViewWorkPackageSchemaExecute(r ApiViewWorkPacka
 type ApiWorkPackageAvailableAssigneesRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
+	id int
 }
 
 func (r ApiWorkPackageAvailableAssigneesRequest) Execute() (*AvailableAssigneesModel, *http.Response, error) {
@@ -3519,7 +3519,7 @@ Gets a list of users that can be assigned to the given work package.
  @param id Work package id
  @return ApiWorkPackageAvailableAssigneesRequest
 */
-func (a *WorkPackagesAPIService) WorkPackageAvailableAssignees(ctx context.Context, id int64) ApiWorkPackageAvailableAssigneesRequest {
+func (a *WorkPackagesAPIService) WorkPackageAvailableAssignees(ctx context.Context, id int) ApiWorkPackageAvailableAssigneesRequest {
 	return ApiWorkPackageAvailableAssigneesRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3715,7 +3715,7 @@ func (a *WorkPackagesAPIService) WorkPackageCreateFormExecute(r ApiWorkPackageCr
 type ApiWorkPackageCreateFormForProjectRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
+	id int
 }
 
 func (r ApiWorkPackageCreateFormForProjectRequest) Execute() (*http.Response, error) {
@@ -3731,7 +3731,7 @@ WorkPackageCreateFormForProject Work Package Create Form For Project
  @param id ID of the project in which the work package will be created
  @return ApiWorkPackageCreateFormForProjectRequest
 */
-func (a *WorkPackagesAPIService) WorkPackageCreateFormForProject(ctx context.Context, id int64) ApiWorkPackageCreateFormForProjectRequest {
+func (a *WorkPackagesAPIService) WorkPackageCreateFormForProject(ctx context.Context, id int) ApiWorkPackageCreateFormForProjectRequest {
 	return ApiWorkPackageCreateFormForProjectRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -3807,7 +3807,7 @@ func (a *WorkPackagesAPIService) WorkPackageCreateFormForProjectExecute(r ApiWor
 type ApiWorkPackageEditFormRequest struct {
 	ctx context.Context
 	ApiService *WorkPackagesAPIService
-	id int64
+	id int
 	workPackageModel *WorkPackageModel
 }
 
@@ -3833,7 +3833,7 @@ When setting start date, finish date, and duration together, their correctness w
  @param id ID of the work package being modified
  @return ApiWorkPackageEditFormRequest
 */
-func (a *WorkPackagesAPIService) WorkPackageEditForm(ctx context.Context, id int64) ApiWorkPackageEditFormRequest {
+func (a *WorkPackagesAPIService) WorkPackageEditForm(ctx context.Context, id int) ApiWorkPackageEditFormRequest {
 	return ApiWorkPackageEditFormRequest{
 		ApiService: a,
 		ctx: ctx,

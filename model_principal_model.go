@@ -23,7 +23,7 @@ var _ MappedNullable = &PrincipalModel{}
 type PrincipalModel struct {
 	Type string `json:"_type"`
 	// The principal's unique identifier.
-	Id int64 `json:"id"`
+	Id int `json:"id"`
 	// The principal's display name, layout depends on instance settings.
 	Name string `json:"name"`
 	// Time of creation
@@ -40,7 +40,7 @@ type _PrincipalModel PrincipalModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPrincipalModel(type_ string, id int64, name string, links PrincipalModelLinks) *PrincipalModel {
+func NewPrincipalModel(type_ string, id int, name string, links PrincipalModelLinks) *PrincipalModel {
 	this := PrincipalModel{}
 	this.Type = type_
 	this.Id = id
@@ -82,9 +82,9 @@ func (o *PrincipalModel) SetType(v string) {
 }
 
 // GetId returns the Id field value
-func (o *PrincipalModel) GetId() int64 {
+func (o *PrincipalModel) GetId() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -93,7 +93,7 @@ func (o *PrincipalModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *PrincipalModel) GetIdOk() (*int64, bool) {
+func (o *PrincipalModel) GetIdOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -101,7 +101,7 @@ func (o *PrincipalModel) GetIdOk() (*int64, bool) {
 }
 
 // SetId sets field value
-func (o *PrincipalModel) SetId(v int64) {
+func (o *PrincipalModel) SetId(v int) {
 	o.Id = v
 }
 

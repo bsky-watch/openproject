@@ -26,7 +26,7 @@ type CustomOptionsAPIService service
 type ApiViewCustomOptionRequest struct {
 	ctx context.Context
 	ApiService *CustomOptionsAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewCustomOptionRequest) Execute() (*CustomOptionModel, *http.Response, error) {
@@ -42,7 +42,7 @@ ViewCustomOption View Custom Option
  @param id The custom option's identifier
  @return ApiViewCustomOptionRequest
 */
-func (a *CustomOptionsAPIService) ViewCustomOption(ctx context.Context, id int64) ApiViewCustomOptionRequest {
+func (a *CustomOptionsAPIService) ViewCustomOption(ctx context.Context, id int) ApiViewCustomOptionRequest {
 	return ApiViewCustomOptionRequest{
 		ApiService: a,
 		ctx: ctx,

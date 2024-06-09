@@ -20,7 +20,7 @@ var _ MappedNullable = &CategoriesByProjectModelAllOfEmbeddedElements{}
 // CategoriesByProjectModelAllOfEmbeddedElements struct for CategoriesByProjectModelAllOfEmbeddedElements
 type CategoriesByProjectModelAllOfEmbeddedElements struct {
 	// Category id
-	Id *int64 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	// Category name
 	Name *string `json:"name,omitempty"`
 	Links *CategoryModelLinks `json:"_links,omitempty"`
@@ -47,9 +47,9 @@ func NewCategoriesByProjectModelAllOfEmbeddedElementsWithDefaults() *CategoriesB
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *CategoriesByProjectModelAllOfEmbeddedElements) GetId() int64 {
+func (o *CategoriesByProjectModelAllOfEmbeddedElements) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -57,7 +57,7 @@ func (o *CategoriesByProjectModelAllOfEmbeddedElements) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CategoriesByProjectModelAllOfEmbeddedElements) GetIdOk() (*int64, bool) {
+func (o *CategoriesByProjectModelAllOfEmbeddedElements) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -73,8 +73,8 @@ func (o *CategoriesByProjectModelAllOfEmbeddedElements) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *CategoriesByProjectModelAllOfEmbeddedElements) SetId(v int64) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *CategoriesByProjectModelAllOfEmbeddedElements) SetId(v int) {
 	o.Id = &v
 }
 

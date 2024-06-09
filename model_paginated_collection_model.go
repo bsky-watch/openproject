@@ -22,14 +22,14 @@ var _ MappedNullable = &PaginatedCollectionModel{}
 type PaginatedCollectionModel struct {
 	Type string `json:"_type"`
 	// The total amount of elements available in the collection.
-	Total int64 `json:"total"`
+	Total int `json:"total"`
 	// Actual amount of elements in this response.
-	Count int64 `json:"count"`
+	Count int `json:"count"`
 	Links PaginatedCollectionModelAllOfLinks `json:"_links"`
 	// Amount of elements that a response will hold.
-	PageSize int64 `json:"pageSize"`
+	PageSize int `json:"pageSize"`
 	// The page number that is requested from paginated collection.
-	Offset int64 `json:"offset"`
+	Offset int `json:"offset"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -39,7 +39,7 @@ type _PaginatedCollectionModel PaginatedCollectionModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaginatedCollectionModel(type_ string, total int64, count int64, links PaginatedCollectionModelAllOfLinks, pageSize int64, offset int64) *PaginatedCollectionModel {
+func NewPaginatedCollectionModel(type_ string, total int, count int, links PaginatedCollectionModelAllOfLinks, pageSize int, offset int) *PaginatedCollectionModel {
 	this := PaginatedCollectionModel{}
 	this.Type = type_
 	this.Total = total
@@ -83,9 +83,9 @@ func (o *PaginatedCollectionModel) SetType(v string) {
 }
 
 // GetTotal returns the Total field value
-func (o *PaginatedCollectionModel) GetTotal() int64 {
+func (o *PaginatedCollectionModel) GetTotal() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -94,7 +94,7 @@ func (o *PaginatedCollectionModel) GetTotal() int64 {
 
 // GetTotalOk returns a tuple with the Total field value
 // and a boolean to check if the value has been set.
-func (o *PaginatedCollectionModel) GetTotalOk() (*int64, bool) {
+func (o *PaginatedCollectionModel) GetTotalOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -102,14 +102,14 @@ func (o *PaginatedCollectionModel) GetTotalOk() (*int64, bool) {
 }
 
 // SetTotal sets field value
-func (o *PaginatedCollectionModel) SetTotal(v int64) {
+func (o *PaginatedCollectionModel) SetTotal(v int) {
 	o.Total = v
 }
 
 // GetCount returns the Count field value
-func (o *PaginatedCollectionModel) GetCount() int64 {
+func (o *PaginatedCollectionModel) GetCount() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -118,7 +118,7 @@ func (o *PaginatedCollectionModel) GetCount() int64 {
 
 // GetCountOk returns a tuple with the Count field value
 // and a boolean to check if the value has been set.
-func (o *PaginatedCollectionModel) GetCountOk() (*int64, bool) {
+func (o *PaginatedCollectionModel) GetCountOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -126,7 +126,7 @@ func (o *PaginatedCollectionModel) GetCountOk() (*int64, bool) {
 }
 
 // SetCount sets field value
-func (o *PaginatedCollectionModel) SetCount(v int64) {
+func (o *PaginatedCollectionModel) SetCount(v int) {
 	o.Count = v
 }
 
@@ -155,9 +155,9 @@ func (o *PaginatedCollectionModel) SetLinks(v PaginatedCollectionModelAllOfLinks
 }
 
 // GetPageSize returns the PageSize field value
-func (o *PaginatedCollectionModel) GetPageSize() int64 {
+func (o *PaginatedCollectionModel) GetPageSize() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -166,7 +166,7 @@ func (o *PaginatedCollectionModel) GetPageSize() int64 {
 
 // GetPageSizeOk returns a tuple with the PageSize field value
 // and a boolean to check if the value has been set.
-func (o *PaginatedCollectionModel) GetPageSizeOk() (*int64, bool) {
+func (o *PaginatedCollectionModel) GetPageSizeOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -174,14 +174,14 @@ func (o *PaginatedCollectionModel) GetPageSizeOk() (*int64, bool) {
 }
 
 // SetPageSize sets field value
-func (o *PaginatedCollectionModel) SetPageSize(v int64) {
+func (o *PaginatedCollectionModel) SetPageSize(v int) {
 	o.PageSize = v
 }
 
 // GetOffset returns the Offset field value
-func (o *PaginatedCollectionModel) GetOffset() int64 {
+func (o *PaginatedCollectionModel) GetOffset() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -190,7 +190,7 @@ func (o *PaginatedCollectionModel) GetOffset() int64 {
 
 // GetOffsetOk returns a tuple with the Offset field value
 // and a boolean to check if the value has been set.
-func (o *PaginatedCollectionModel) GetOffsetOk() (*int64, bool) {
+func (o *PaginatedCollectionModel) GetOffsetOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -198,7 +198,7 @@ func (o *PaginatedCollectionModel) GetOffsetOk() (*int64, bool) {
 }
 
 // SetOffset sets field value
-func (o *PaginatedCollectionModel) SetOffset(v int64) {
+func (o *PaginatedCollectionModel) SetOffset(v int) {
 	o.Offset = v
 }
 

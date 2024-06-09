@@ -22,7 +22,7 @@ var _ MappedNullable = &StorageReadModel{}
 // StorageReadModel struct for StorageReadModel
 type StorageReadModel struct {
 	// Storage id
-	Id int64 `json:"id"`
+	Id int `json:"id"`
 	Type string `json:"_type"`
 	// Storage name
 	Name string `json:"name"`
@@ -43,7 +43,7 @@ type _StorageReadModel StorageReadModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStorageReadModel(id int64, type_ string, name string, links StorageReadModelLinks) *StorageReadModel {
+func NewStorageReadModel(id int, type_ string, name string, links StorageReadModelLinks) *StorageReadModel {
 	this := StorageReadModel{}
 	this.Id = id
 	this.Type = type_
@@ -61,9 +61,9 @@ func NewStorageReadModelWithDefaults() *StorageReadModel {
 }
 
 // GetId returns the Id field value
-func (o *StorageReadModel) GetId() int64 {
+func (o *StorageReadModel) GetId() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -72,7 +72,7 @@ func (o *StorageReadModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *StorageReadModel) GetIdOk() (*int64, bool) {
+func (o *StorageReadModel) GetIdOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -80,7 +80,7 @@ func (o *StorageReadModel) GetIdOk() (*int64, bool) {
 }
 
 // SetId sets field value
-func (o *StorageReadModel) SetId(v int64) {
+func (o *StorageReadModel) SetId(v int) {
 	o.Id = v
 }
 

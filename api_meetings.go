@@ -26,7 +26,7 @@ type MeetingsAPIService service
 type ApiViewMeetingRequest struct {
 	ctx context.Context
 	ApiService *MeetingsAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewMeetingRequest) Execute() (*MeetingModel, *http.Response, error) {
@@ -42,7 +42,7 @@ Retrieve an individual meeting as identified by the id parameter
  @param id Meeting identifier
  @return ApiViewMeetingRequest
 */
-func (a *MeetingsAPIService) ViewMeeting(ctx context.Context, id int64) ApiViewMeetingRequest {
+func (a *MeetingsAPIService) ViewMeeting(ctx context.Context, id int) ApiViewMeetingRequest {
 	return ApiViewMeetingRequest{
 		ApiService: a,
 		ctx: ctx,

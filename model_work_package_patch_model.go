@@ -22,7 +22,7 @@ var _ MappedNullable = &WorkPackagePatchModel{}
 // WorkPackagePatchModel struct for WorkPackagePatchModel
 type WorkPackagePatchModel struct {
 	// The version of the item as used for optimistic locking
-	LockVersion int64 `json:"lockVersion"`
+	LockVersion int `json:"lockVersion"`
 	// Work package subject
 	Subject *string `json:"subject,omitempty"`
 	Description *WorkPackageModelDescription `json:"description,omitempty"`
@@ -41,7 +41,7 @@ type WorkPackagePatchModel struct {
 	// The time booked for this work package by users working on it  # Conditions  **Permission** view time entries
 	SpentTime *string `json:"spentTime,omitempty"`
 	// Amount of total completion for a work package
-	PercentageDone *int64 `json:"percentageDone,omitempty"`
+	PercentageDone *int `json:"percentageDone,omitempty"`
 	// Time of creation
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	// Time of the most recent change to the work package
@@ -56,7 +56,7 @@ type _WorkPackagePatchModel WorkPackagePatchModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWorkPackagePatchModel(lockVersion int64) *WorkPackagePatchModel {
+func NewWorkPackagePatchModel(lockVersion int) *WorkPackagePatchModel {
 	this := WorkPackagePatchModel{}
 	this.LockVersion = lockVersion
 	return &this
@@ -71,9 +71,9 @@ func NewWorkPackagePatchModelWithDefaults() *WorkPackagePatchModel {
 }
 
 // GetLockVersion returns the LockVersion field value
-func (o *WorkPackagePatchModel) GetLockVersion() int64 {
+func (o *WorkPackagePatchModel) GetLockVersion() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -82,7 +82,7 @@ func (o *WorkPackagePatchModel) GetLockVersion() int64 {
 
 // GetLockVersionOk returns a tuple with the LockVersion field value
 // and a boolean to check if the value has been set.
-func (o *WorkPackagePatchModel) GetLockVersionOk() (*int64, bool) {
+func (o *WorkPackagePatchModel) GetLockVersionOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -90,7 +90,7 @@ func (o *WorkPackagePatchModel) GetLockVersionOk() (*int64, bool) {
 }
 
 // SetLockVersion sets field value
-func (o *WorkPackagePatchModel) SetLockVersion(v int64) {
+func (o *WorkPackagePatchModel) SetLockVersion(v int) {
 	o.LockVersion = v
 }
 
@@ -383,9 +383,9 @@ func (o *WorkPackagePatchModel) SetSpentTime(v string) {
 }
 
 // GetPercentageDone returns the PercentageDone field value if set, zero value otherwise.
-func (o *WorkPackagePatchModel) GetPercentageDone() int64 {
+func (o *WorkPackagePatchModel) GetPercentageDone() int {
 	if o == nil || IsNil(o.PercentageDone) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.PercentageDone
@@ -393,7 +393,7 @@ func (o *WorkPackagePatchModel) GetPercentageDone() int64 {
 
 // GetPercentageDoneOk returns a tuple with the PercentageDone field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkPackagePatchModel) GetPercentageDoneOk() (*int64, bool) {
+func (o *WorkPackagePatchModel) GetPercentageDoneOk() (*int, bool) {
 	if o == nil || IsNil(o.PercentageDone) {
 		return nil, false
 	}
@@ -409,8 +409,8 @@ func (o *WorkPackagePatchModel) HasPercentageDone() bool {
 	return false
 }
 
-// SetPercentageDone gets a reference to the given int64 and assigns it to the PercentageDone field.
-func (o *WorkPackagePatchModel) SetPercentageDone(v int64) {
+// SetPercentageDone gets a reference to the given int and assigns it to the PercentageDone field.
+func (o *WorkPackagePatchModel) SetPercentageDone(v int) {
 	o.PercentageDone = &v
 }
 

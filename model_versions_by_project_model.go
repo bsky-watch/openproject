@@ -22,9 +22,9 @@ var _ MappedNullable = &VersionsByProjectModel{}
 type VersionsByProjectModel struct {
 	Type string `json:"_type"`
 	// The total amount of elements available in the collection.
-	Total int64 `json:"total"`
+	Total int `json:"total"`
 	// Actual amount of elements in this response.
-	Count int64 `json:"count"`
+	Count int `json:"count"`
 	Links VersionsByProjectModelAllOfLinks `json:"_links"`
 	Embedded VersionsByProjectModelAllOfEmbedded `json:"_embedded"`
 	AdditionalProperties map[string]interface{}
@@ -36,7 +36,7 @@ type _VersionsByProjectModel VersionsByProjectModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewVersionsByProjectModel(type_ string, total int64, count int64, links VersionsByProjectModelAllOfLinks, embedded VersionsByProjectModelAllOfEmbedded) *VersionsByProjectModel {
+func NewVersionsByProjectModel(type_ string, total int, count int, links VersionsByProjectModelAllOfLinks, embedded VersionsByProjectModelAllOfEmbedded) *VersionsByProjectModel {
 	this := VersionsByProjectModel{}
 	this.Type = type_
 	this.Total = total
@@ -79,9 +79,9 @@ func (o *VersionsByProjectModel) SetType(v string) {
 }
 
 // GetTotal returns the Total field value
-func (o *VersionsByProjectModel) GetTotal() int64 {
+func (o *VersionsByProjectModel) GetTotal() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -90,7 +90,7 @@ func (o *VersionsByProjectModel) GetTotal() int64 {
 
 // GetTotalOk returns a tuple with the Total field value
 // and a boolean to check if the value has been set.
-func (o *VersionsByProjectModel) GetTotalOk() (*int64, bool) {
+func (o *VersionsByProjectModel) GetTotalOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -98,14 +98,14 @@ func (o *VersionsByProjectModel) GetTotalOk() (*int64, bool) {
 }
 
 // SetTotal sets field value
-func (o *VersionsByProjectModel) SetTotal(v int64) {
+func (o *VersionsByProjectModel) SetTotal(v int) {
 	o.Total = v
 }
 
 // GetCount returns the Count field value
-func (o *VersionsByProjectModel) GetCount() int64 {
+func (o *VersionsByProjectModel) GetCount() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -114,7 +114,7 @@ func (o *VersionsByProjectModel) GetCount() int64 {
 
 // GetCountOk returns a tuple with the Count field value
 // and a boolean to check if the value has been set.
-func (o *VersionsByProjectModel) GetCountOk() (*int64, bool) {
+func (o *VersionsByProjectModel) GetCountOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -122,7 +122,7 @@ func (o *VersionsByProjectModel) GetCountOk() (*int64, bool) {
 }
 
 // SetCount sets field value
-func (o *VersionsByProjectModel) SetCount(v int64) {
+func (o *VersionsByProjectModel) SetCount(v int) {
 	o.Count = v
 }
 

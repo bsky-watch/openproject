@@ -22,7 +22,7 @@ var _ MappedNullable = &NotificationModel{}
 type NotificationModel struct {
 	Type *string `json:"_type,omitempty"`
 	// Notification id
-	Id *int64 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	// The reason for the notification
 	Reason *string `json:"reason,omitempty"`
 	// Whether the notification is marked as read
@@ -90,9 +90,9 @@ func (o *NotificationModel) SetType(v string) {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *NotificationModel) GetId() int64 {
+func (o *NotificationModel) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -100,7 +100,7 @@ func (o *NotificationModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NotificationModel) GetIdOk() (*int64, bool) {
+func (o *NotificationModel) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -116,8 +116,8 @@ func (o *NotificationModel) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *NotificationModel) SetId(v int64) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *NotificationModel) SetId(v int) {
 	o.Id = &v
 }
 

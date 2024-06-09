@@ -23,11 +23,11 @@ var _ MappedNullable = &GridReadModel{}
 type GridReadModel struct {
 	Type string `json:"_type"`
 	// Grid's id
-	Id int64 `json:"id"`
+	Id int `json:"id"`
 	// The number of rows the grid has
-	RowCount int64 `json:"rowCount"`
+	RowCount int `json:"rowCount"`
 	// The number of columns the grid has
-	ColumnCount int64 `json:"columnCount"`
+	ColumnCount int `json:"columnCount"`
 	// The set of `GridWidget`s selected for the grid.  # Conditions  - The widgets must not overlap.
 	Widgets []GridWidgetModel `json:"widgets"`
 	// The time the grid was created.
@@ -44,7 +44,7 @@ type _GridReadModel GridReadModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGridReadModel(type_ string, id int64, rowCount int64, columnCount int64, widgets []GridWidgetModel, links GridReadModelLinks) *GridReadModel {
+func NewGridReadModel(type_ string, id int, rowCount int, columnCount int, widgets []GridWidgetModel, links GridReadModelLinks) *GridReadModel {
 	this := GridReadModel{}
 	this.Type = type_
 	this.Id = id
@@ -88,9 +88,9 @@ func (o *GridReadModel) SetType(v string) {
 }
 
 // GetId returns the Id field value
-func (o *GridReadModel) GetId() int64 {
+func (o *GridReadModel) GetId() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -99,7 +99,7 @@ func (o *GridReadModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *GridReadModel) GetIdOk() (*int64, bool) {
+func (o *GridReadModel) GetIdOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -107,14 +107,14 @@ func (o *GridReadModel) GetIdOk() (*int64, bool) {
 }
 
 // SetId sets field value
-func (o *GridReadModel) SetId(v int64) {
+func (o *GridReadModel) SetId(v int) {
 	o.Id = v
 }
 
 // GetRowCount returns the RowCount field value
-func (o *GridReadModel) GetRowCount() int64 {
+func (o *GridReadModel) GetRowCount() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -123,7 +123,7 @@ func (o *GridReadModel) GetRowCount() int64 {
 
 // GetRowCountOk returns a tuple with the RowCount field value
 // and a boolean to check if the value has been set.
-func (o *GridReadModel) GetRowCountOk() (*int64, bool) {
+func (o *GridReadModel) GetRowCountOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -131,14 +131,14 @@ func (o *GridReadModel) GetRowCountOk() (*int64, bool) {
 }
 
 // SetRowCount sets field value
-func (o *GridReadModel) SetRowCount(v int64) {
+func (o *GridReadModel) SetRowCount(v int) {
 	o.RowCount = v
 }
 
 // GetColumnCount returns the ColumnCount field value
-func (o *GridReadModel) GetColumnCount() int64 {
+func (o *GridReadModel) GetColumnCount() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -147,7 +147,7 @@ func (o *GridReadModel) GetColumnCount() int64 {
 
 // GetColumnCountOk returns a tuple with the ColumnCount field value
 // and a boolean to check if the value has been set.
-func (o *GridReadModel) GetColumnCountOk() (*int64, bool) {
+func (o *GridReadModel) GetColumnCountOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -155,7 +155,7 @@ func (o *GridReadModel) GetColumnCountOk() (*int64, bool) {
 }
 
 // SetColumnCount sets field value
-func (o *GridReadModel) SetColumnCount(v int64) {
+func (o *GridReadModel) SetColumnCount(v int) {
 	o.ColumnCount = v
 }
 

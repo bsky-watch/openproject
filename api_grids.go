@@ -179,7 +179,7 @@ func (a *GridsAPIService) CreateGridExecute(r ApiCreateGridRequest) (*GridReadMo
 type ApiGetGridRequest struct {
 	ctx context.Context
 	ApiService *GridsAPIService
-	id int64
+	id int
 }
 
 func (r ApiGetGridRequest) Execute() (*GridReadModel, *http.Response, error) {
@@ -195,7 +195,7 @@ Fetches a single grid identified by its id.
  @param id Grid id
  @return ApiGetGridRequest
 */
-func (a *GridsAPIService) GetGrid(ctx context.Context, id int64) ApiGetGridRequest {
+func (a *GridsAPIService) GetGrid(ctx context.Context, id int) ApiGetGridRequest {
 	return ApiGetGridRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -380,7 +380,7 @@ func (a *GridsAPIService) GridCreateFormExecute(r ApiGridCreateFormRequest) (*ht
 type ApiGridUpdateFormRequest struct {
 	ctx context.Context
 	ApiService *GridsAPIService
-	id int64
+	id int
 }
 
 func (r ApiGridUpdateFormRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -396,7 +396,7 @@ GridUpdateForm Grid Update Form
  @param id ID of the grid being modified
  @return ApiGridUpdateFormRequest
 */
-func (a *GridsAPIService) GridUpdateForm(ctx context.Context, id int64) ApiGridUpdateFormRequest {
+func (a *GridsAPIService) GridUpdateForm(ctx context.Context, id int) ApiGridUpdateFormRequest {
 	return ApiGridUpdateFormRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -526,19 +526,19 @@ func (a *GridsAPIService) GridUpdateFormExecute(r ApiGridUpdateFormRequest) (map
 type ApiListGridsRequest struct {
 	ctx context.Context
 	ApiService *GridsAPIService
-	offset *int64
-	pageSize *int64
+	offset *int
+	pageSize *int
 	filters *string
 }
 
 // Page number inside the requested collection.
-func (r ApiListGridsRequest) Offset(offset int64) ApiListGridsRequest {
+func (r ApiListGridsRequest) Offset(offset int) ApiListGridsRequest {
 	r.offset = &offset
 	return r
 }
 
 // Number of elements to display per page.
-func (r ApiListGridsRequest) PageSize(pageSize int64) ApiListGridsRequest {
+func (r ApiListGridsRequest) PageSize(pageSize int) ApiListGridsRequest {
 	r.pageSize = &pageSize
 	return r
 }
@@ -593,13 +593,13 @@ func (a *GridsAPIService) ListGridsExecute(r ApiListGridsRequest) (*GridCollecti
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
 	} else {
-		var defaultValue int64 = 1
+		var defaultValue int = 1
 		r.offset = &defaultValue
 	}
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "")
 	} else {
-		var defaultValue int64 = 30
+		var defaultValue int = 30
 		r.pageSize = &defaultValue
 	}
 	if r.filters != nil {

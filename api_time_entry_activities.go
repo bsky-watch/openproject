@@ -26,7 +26,7 @@ type TimeEntryActivitiesAPIService service
 type ApiGetTimeEntriesActivityRequest struct {
 	ctx context.Context
 	ApiService *TimeEntryActivitiesAPIService
-	id int64
+	id int
 }
 
 func (r ApiGetTimeEntriesActivityRequest) Execute() (*TimeEntryActivityModel, *http.Response, error) {
@@ -42,7 +42,7 @@ Fetches the time entry activity resource by the given id.
  @param id Time entries activity id
  @return ApiGetTimeEntriesActivityRequest
 */
-func (a *TimeEntryActivitiesAPIService) GetTimeEntriesActivity(ctx context.Context, id int64) ApiGetTimeEntriesActivityRequest {
+func (a *TimeEntryActivitiesAPIService) GetTimeEntriesActivity(ctx context.Context, id int) ApiGetTimeEntriesActivityRequest {
 	return ApiGetTimeEntriesActivityRequest{
 		ApiService: a,
 		ctx: ctx,

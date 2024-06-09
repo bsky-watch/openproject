@@ -22,14 +22,14 @@ var _ MappedNullable = &MembershipCollectionModel{}
 type MembershipCollectionModel struct {
 	Type string `json:"_type"`
 	// The total amount of elements available in the collection.
-	Total int64 `json:"total"`
+	Total int `json:"total"`
 	// Actual amount of elements in this response.
-	Count int64 `json:"count"`
+	Count int `json:"count"`
 	Links PaginatedCollectionModelAllOfLinks `json:"_links"`
 	// Amount of elements that a response will hold.
-	PageSize int64 `json:"pageSize"`
+	PageSize int `json:"pageSize"`
 	// The page number that is requested from paginated collection.
-	Offset int64 `json:"offset"`
+	Offset int `json:"offset"`
 	Embedded MembershipCollectionModelAllOfEmbedded `json:"_embedded"`
 	AdditionalProperties map[string]interface{}
 }
@@ -40,7 +40,7 @@ type _MembershipCollectionModel MembershipCollectionModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMembershipCollectionModel(type_ string, total int64, count int64, links PaginatedCollectionModelAllOfLinks, pageSize int64, offset int64, embedded MembershipCollectionModelAllOfEmbedded) *MembershipCollectionModel {
+func NewMembershipCollectionModel(type_ string, total int, count int, links PaginatedCollectionModelAllOfLinks, pageSize int, offset int, embedded MembershipCollectionModelAllOfEmbedded) *MembershipCollectionModel {
 	this := MembershipCollectionModel{}
 	this.Type = type_
 	this.Total = total
@@ -85,9 +85,9 @@ func (o *MembershipCollectionModel) SetType(v string) {
 }
 
 // GetTotal returns the Total field value
-func (o *MembershipCollectionModel) GetTotal() int64 {
+func (o *MembershipCollectionModel) GetTotal() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -96,7 +96,7 @@ func (o *MembershipCollectionModel) GetTotal() int64 {
 
 // GetTotalOk returns a tuple with the Total field value
 // and a boolean to check if the value has been set.
-func (o *MembershipCollectionModel) GetTotalOk() (*int64, bool) {
+func (o *MembershipCollectionModel) GetTotalOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -104,14 +104,14 @@ func (o *MembershipCollectionModel) GetTotalOk() (*int64, bool) {
 }
 
 // SetTotal sets field value
-func (o *MembershipCollectionModel) SetTotal(v int64) {
+func (o *MembershipCollectionModel) SetTotal(v int) {
 	o.Total = v
 }
 
 // GetCount returns the Count field value
-func (o *MembershipCollectionModel) GetCount() int64 {
+func (o *MembershipCollectionModel) GetCount() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -120,7 +120,7 @@ func (o *MembershipCollectionModel) GetCount() int64 {
 
 // GetCountOk returns a tuple with the Count field value
 // and a boolean to check if the value has been set.
-func (o *MembershipCollectionModel) GetCountOk() (*int64, bool) {
+func (o *MembershipCollectionModel) GetCountOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -128,7 +128,7 @@ func (o *MembershipCollectionModel) GetCountOk() (*int64, bool) {
 }
 
 // SetCount sets field value
-func (o *MembershipCollectionModel) SetCount(v int64) {
+func (o *MembershipCollectionModel) SetCount(v int) {
 	o.Count = v
 }
 
@@ -157,9 +157,9 @@ func (o *MembershipCollectionModel) SetLinks(v PaginatedCollectionModelAllOfLink
 }
 
 // GetPageSize returns the PageSize field value
-func (o *MembershipCollectionModel) GetPageSize() int64 {
+func (o *MembershipCollectionModel) GetPageSize() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -168,7 +168,7 @@ func (o *MembershipCollectionModel) GetPageSize() int64 {
 
 // GetPageSizeOk returns a tuple with the PageSize field value
 // and a boolean to check if the value has been set.
-func (o *MembershipCollectionModel) GetPageSizeOk() (*int64, bool) {
+func (o *MembershipCollectionModel) GetPageSizeOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -176,14 +176,14 @@ func (o *MembershipCollectionModel) GetPageSizeOk() (*int64, bool) {
 }
 
 // SetPageSize sets field value
-func (o *MembershipCollectionModel) SetPageSize(v int64) {
+func (o *MembershipCollectionModel) SetPageSize(v int) {
 	o.PageSize = v
 }
 
 // GetOffset returns the Offset field value
-func (o *MembershipCollectionModel) GetOffset() int64 {
+func (o *MembershipCollectionModel) GetOffset() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -192,7 +192,7 @@ func (o *MembershipCollectionModel) GetOffset() int64 {
 
 // GetOffsetOk returns a tuple with the Offset field value
 // and a boolean to check if the value has been set.
-func (o *MembershipCollectionModel) GetOffsetOk() (*int64, bool) {
+func (o *MembershipCollectionModel) GetOffsetOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -200,7 +200,7 @@ func (o *MembershipCollectionModel) GetOffsetOk() (*int64, bool) {
 }
 
 // SetOffset sets field value
-func (o *MembershipCollectionModel) SetOffset(v int64) {
+func (o *MembershipCollectionModel) SetOffset(v int) {
 	o.Offset = v
 }
 

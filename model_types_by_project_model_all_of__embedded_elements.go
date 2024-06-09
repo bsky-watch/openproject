@@ -21,13 +21,13 @@ var _ MappedNullable = &TypesByProjectModelAllOfEmbeddedElements{}
 // TypesByProjectModelAllOfEmbeddedElements struct for TypesByProjectModelAllOfEmbeddedElements
 type TypesByProjectModelAllOfEmbeddedElements struct {
 	// Type id
-	Id *int64 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	// Type name
 	Name *string `json:"name,omitempty"`
 	// The color used to represent this type
 	Color *string `json:"color,omitempty"`
 	// Sort index of the type
-	Position *int64 `json:"position,omitempty"`
+	Position *int `json:"position,omitempty"`
 	// Is this type active by default in new projects?
 	IsDefault *bool `json:"isDefault,omitempty"`
 	// Do work packages of this type represent a milestone?
@@ -60,9 +60,9 @@ func NewTypesByProjectModelAllOfEmbeddedElementsWithDefaults() *TypesByProjectMo
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *TypesByProjectModelAllOfEmbeddedElements) GetId() int64 {
+func (o *TypesByProjectModelAllOfEmbeddedElements) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -70,7 +70,7 @@ func (o *TypesByProjectModelAllOfEmbeddedElements) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TypesByProjectModelAllOfEmbeddedElements) GetIdOk() (*int64, bool) {
+func (o *TypesByProjectModelAllOfEmbeddedElements) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -86,8 +86,8 @@ func (o *TypesByProjectModelAllOfEmbeddedElements) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *TypesByProjectModelAllOfEmbeddedElements) SetId(v int64) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *TypesByProjectModelAllOfEmbeddedElements) SetId(v int) {
 	o.Id = &v
 }
 
@@ -156,9 +156,9 @@ func (o *TypesByProjectModelAllOfEmbeddedElements) SetColor(v string) {
 }
 
 // GetPosition returns the Position field value if set, zero value otherwise.
-func (o *TypesByProjectModelAllOfEmbeddedElements) GetPosition() int64 {
+func (o *TypesByProjectModelAllOfEmbeddedElements) GetPosition() int {
 	if o == nil || IsNil(o.Position) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Position
@@ -166,7 +166,7 @@ func (o *TypesByProjectModelAllOfEmbeddedElements) GetPosition() int64 {
 
 // GetPositionOk returns a tuple with the Position field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TypesByProjectModelAllOfEmbeddedElements) GetPositionOk() (*int64, bool) {
+func (o *TypesByProjectModelAllOfEmbeddedElements) GetPositionOk() (*int, bool) {
 	if o == nil || IsNil(o.Position) {
 		return nil, false
 	}
@@ -182,8 +182,8 @@ func (o *TypesByProjectModelAllOfEmbeddedElements) HasPosition() bool {
 	return false
 }
 
-// SetPosition gets a reference to the given int64 and assigns it to the Position field.
-func (o *TypesByProjectModelAllOfEmbeddedElements) SetPosition(v int64) {
+// SetPosition gets a reference to the given int and assigns it to the Position field.
+func (o *TypesByProjectModelAllOfEmbeddedElements) SetPosition(v int) {
 	o.Position = &v
 }
 

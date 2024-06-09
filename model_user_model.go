@@ -23,7 +23,7 @@ var _ MappedNullable = &UserModel{}
 type UserModel struct {
 	Type string `json:"_type"`
 	// The principal's unique identifier.
-	Id int64 `json:"id"`
+	Id int `json:"id"`
 	// The principal's display name, layout depends on instance settings.
 	Name string `json:"name"`
 	// Time of creation
@@ -58,7 +58,7 @@ type _UserModel UserModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewUserModel(type_ string, id int64, name string, links UserModelAllOfLinks, avatar string) *UserModel {
+func NewUserModel(type_ string, id int, name string, links UserModelAllOfLinks, avatar string) *UserModel {
 	this := UserModel{}
 	this.Type = type_
 	this.Id = id
@@ -101,9 +101,9 @@ func (o *UserModel) SetType(v string) {
 }
 
 // GetId returns the Id field value
-func (o *UserModel) GetId() int64 {
+func (o *UserModel) GetId() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -112,7 +112,7 @@ func (o *UserModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *UserModel) GetIdOk() (*int64, bool) {
+func (o *UserModel) GetIdOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -120,7 +120,7 @@ func (o *UserModel) GetIdOk() (*int64, bool) {
 }
 
 // SetId sets field value
-func (o *UserModel) SetId(v int64) {
+func (o *UserModel) SetId(v int) {
 	o.Id = v
 }
 

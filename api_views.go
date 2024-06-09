@@ -293,7 +293,7 @@ func (a *ViewsAPIService) ListViewsExecute(r ApiListViewsRequest) (*http.Respons
 type ApiViewViewRequest struct {
 	ctx context.Context
 	ApiService *ViewsAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewViewRequest) Execute() (*http.Response, error) {
@@ -309,7 +309,7 @@ ViewView View view
  @param id View id
  @return ApiViewViewRequest
 */
-func (a *ViewsAPIService) ViewView(ctx context.Context, id int64) ApiViewViewRequest {
+func (a *ViewsAPIService) ViewView(ctx context.Context, id int) ApiViewViewRequest {
 	return ApiViewViewRequest{
 		ApiService: a,
 		ctx: ctx,

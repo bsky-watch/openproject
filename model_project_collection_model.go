@@ -22,9 +22,9 @@ var _ MappedNullable = &ProjectCollectionModel{}
 type ProjectCollectionModel struct {
 	Type string `json:"_type"`
 	// The total amount of elements available in the collection.
-	Total int64 `json:"total"`
+	Total int `json:"total"`
 	// Actual amount of elements in this response.
-	Count int64 `json:"count"`
+	Count int `json:"count"`
 	Links ProjectCollectionModelAllOfLinks `json:"_links"`
 	Embedded ProjectCollectionModelAllOfEmbedded `json:"_embedded"`
 	AdditionalProperties map[string]interface{}
@@ -36,7 +36,7 @@ type _ProjectCollectionModel ProjectCollectionModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProjectCollectionModel(type_ string, total int64, count int64, links ProjectCollectionModelAllOfLinks, embedded ProjectCollectionModelAllOfEmbedded) *ProjectCollectionModel {
+func NewProjectCollectionModel(type_ string, total int, count int, links ProjectCollectionModelAllOfLinks, embedded ProjectCollectionModelAllOfEmbedded) *ProjectCollectionModel {
 	this := ProjectCollectionModel{}
 	this.Type = type_
 	this.Total = total
@@ -79,9 +79,9 @@ func (o *ProjectCollectionModel) SetType(v string) {
 }
 
 // GetTotal returns the Total field value
-func (o *ProjectCollectionModel) GetTotal() int64 {
+func (o *ProjectCollectionModel) GetTotal() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -90,7 +90,7 @@ func (o *ProjectCollectionModel) GetTotal() int64 {
 
 // GetTotalOk returns a tuple with the Total field value
 // and a boolean to check if the value has been set.
-func (o *ProjectCollectionModel) GetTotalOk() (*int64, bool) {
+func (o *ProjectCollectionModel) GetTotalOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -98,14 +98,14 @@ func (o *ProjectCollectionModel) GetTotalOk() (*int64, bool) {
 }
 
 // SetTotal sets field value
-func (o *ProjectCollectionModel) SetTotal(v int64) {
+func (o *ProjectCollectionModel) SetTotal(v int) {
 	o.Total = v
 }
 
 // GetCount returns the Count field value
-func (o *ProjectCollectionModel) GetCount() int64 {
+func (o *ProjectCollectionModel) GetCount() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -114,7 +114,7 @@ func (o *ProjectCollectionModel) GetCount() int64 {
 
 // GetCountOk returns a tuple with the Count field value
 // and a boolean to check if the value has been set.
-func (o *ProjectCollectionModel) GetCountOk() (*int64, bool) {
+func (o *ProjectCollectionModel) GetCountOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -122,7 +122,7 @@ func (o *ProjectCollectionModel) GetCountOk() (*int64, bool) {
 }
 
 // SetCount sets field value
-func (o *ProjectCollectionModel) SetCount(v int64) {
+func (o *ProjectCollectionModel) SetCount(v int) {
 	o.Count = v
 }
 

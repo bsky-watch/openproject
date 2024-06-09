@@ -21,7 +21,7 @@ var _ MappedNullable = &DocumentModel{}
 // DocumentModel struct for DocumentModel
 type DocumentModel struct {
 	// Document's id
-	Id *int64 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	// The title chosen for the collection of documents
 	Title *string `json:"title,omitempty"`
 	// A text describing the documents
@@ -52,9 +52,9 @@ func NewDocumentModelWithDefaults() *DocumentModel {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *DocumentModel) GetId() int64 {
+func (o *DocumentModel) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -62,7 +62,7 @@ func (o *DocumentModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *DocumentModel) GetIdOk() (*int64, bool) {
+func (o *DocumentModel) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -78,8 +78,8 @@ func (o *DocumentModel) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *DocumentModel) SetId(v int64) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *DocumentModel) SetId(v int) {
 	o.Id = &v
 }
 

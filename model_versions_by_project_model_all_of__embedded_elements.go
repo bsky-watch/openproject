@@ -22,7 +22,7 @@ var _ MappedNullable = &VersionsByProjectModelAllOfEmbeddedElements{}
 // VersionsByProjectModelAllOfEmbeddedElements struct for VersionsByProjectModelAllOfEmbeddedElements
 type VersionsByProjectModelAllOfEmbeddedElements struct {
 	// Version id
-	Id *int64 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	// Version name
 	Name string `json:"name"`
 	Description *ActivityModelComment `json:"description,omitempty"`
@@ -65,9 +65,9 @@ func NewVersionsByProjectModelAllOfEmbeddedElementsWithDefaults() *VersionsByPro
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *VersionsByProjectModelAllOfEmbeddedElements) GetId() int64 {
+func (o *VersionsByProjectModelAllOfEmbeddedElements) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -75,7 +75,7 @@ func (o *VersionsByProjectModelAllOfEmbeddedElements) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VersionsByProjectModelAllOfEmbeddedElements) GetIdOk() (*int64, bool) {
+func (o *VersionsByProjectModelAllOfEmbeddedElements) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -91,8 +91,8 @@ func (o *VersionsByProjectModelAllOfEmbeddedElements) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *VersionsByProjectModelAllOfEmbeddedElements) SetId(v int64) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *VersionsByProjectModelAllOfEmbeddedElements) SetId(v int) {
 	o.Id = &v
 }
 

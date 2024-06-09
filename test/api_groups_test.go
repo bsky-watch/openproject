@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/ua-bsky-watch/openproject"
+	openapiclient "bsky.watch/openproject"
 )
 
 func Test_openproject_GroupsAPIService(t *testing.T) {
@@ -38,7 +38,7 @@ func Test_openproject_GroupsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		httpRes, err := apiClient.GroupsAPI.DeleteGroup(context.Background(), id).Execute()
 
@@ -51,7 +51,7 @@ func Test_openproject_GroupsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.GroupsAPI.GetGroup(context.Background(), id).Execute()
 
@@ -77,7 +77,7 @@ func Test_openproject_GroupsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.GroupsAPI.UpdateGroup(context.Background(), id).Execute()
 

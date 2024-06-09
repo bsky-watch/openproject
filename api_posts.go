@@ -26,7 +26,7 @@ type PostsAPIService service
 type ApiViewPostRequest struct {
 	ctx context.Context
 	ApiService *PostsAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewPostRequest) Execute() (*PostModel, *http.Response, error) {
@@ -42,7 +42,7 @@ Retrieve an individual post as identified by the id parameter
  @param id Post's identifier
  @return ApiViewPostRequest
 */
-func (a *PostsAPIService) ViewPost(ctx context.Context, id int64) ApiViewPostRequest {
+func (a *PostsAPIService) ViewPost(ctx context.Context, id int) ApiViewPostRequest {
 	return ApiViewPostRequest{
 		ApiService: a,
 		ctx: ctx,

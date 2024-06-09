@@ -135,7 +135,7 @@ func (a *PrioritiesAPIService) ListAllPrioritiesExecute(r ApiListAllPrioritiesRe
 type ApiViewPriorityRequest struct {
 	ctx context.Context
 	ApiService *PrioritiesAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewPriorityRequest) Execute() (*PriorityModel, *http.Response, error) {
@@ -151,7 +151,7 @@ ViewPriority View Priority
  @param id Priority id
  @return ApiViewPriorityRequest
 */
-func (a *PrioritiesAPIService) ViewPriority(ctx context.Context, id int64) ApiViewPriorityRequest {
+func (a *PrioritiesAPIService) ViewPriority(ctx context.Context, id int) ApiViewPriorityRequest {
 	return ApiViewPriorityRequest{
 		ApiService: a,
 		ctx: ctx,

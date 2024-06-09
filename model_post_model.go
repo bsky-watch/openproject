@@ -21,7 +21,7 @@ var _ MappedNullable = &PostModel{}
 // PostModel struct for PostModel
 type PostModel struct {
 	// Identifier of this post
-	Id *int64 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	// The post's subject
 	Subject string `json:"subject"`
 	Links *PostModelLinks `json:"_links,omitempty"`
@@ -49,9 +49,9 @@ func NewPostModelWithDefaults() *PostModel {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *PostModel) GetId() int64 {
+func (o *PostModel) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -59,7 +59,7 @@ func (o *PostModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PostModel) GetIdOk() (*int64, bool) {
+func (o *PostModel) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -75,8 +75,8 @@ func (o *PostModel) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *PostModel) SetId(v int64) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *PostModel) SetId(v int) {
 	o.Id = &v
 }
 

@@ -23,7 +23,7 @@ var _ MappedNullable = &ProjectStorageModel{}
 type ProjectStorageModel struct {
 	Type string `json:"_type"`
 	// The project storage's id
-	Id int64 `json:"id"`
+	Id int `json:"id"`
 	ProjectFolderMode string `json:"projectFolderMode"`
 	// Time of creation
 	CreatedAt time.Time `json:"createdAt"`
@@ -39,7 +39,7 @@ type _ProjectStorageModel ProjectStorageModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewProjectStorageModel(type_ string, id int64, projectFolderMode string, createdAt time.Time, updatedAt time.Time) *ProjectStorageModel {
+func NewProjectStorageModel(type_ string, id int, projectFolderMode string, createdAt time.Time, updatedAt time.Time) *ProjectStorageModel {
 	this := ProjectStorageModel{}
 	this.Type = type_
 	this.Id = id
@@ -82,9 +82,9 @@ func (o *ProjectStorageModel) SetType(v string) {
 }
 
 // GetId returns the Id field value
-func (o *ProjectStorageModel) GetId() int64 {
+func (o *ProjectStorageModel) GetId() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -93,7 +93,7 @@ func (o *ProjectStorageModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *ProjectStorageModel) GetIdOk() (*int64, bool) {
+func (o *ProjectStorageModel) GetIdOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -101,7 +101,7 @@ func (o *ProjectStorageModel) GetIdOk() (*int64, bool) {
 }
 
 // SetId sets field value
-func (o *ProjectStorageModel) SetId(v int64) {
+func (o *ProjectStorageModel) SetId(v int) {
 	o.Id = v
 }
 

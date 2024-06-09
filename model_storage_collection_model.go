@@ -22,9 +22,9 @@ var _ MappedNullable = &StorageCollectionModel{}
 type StorageCollectionModel struct {
 	Type string `json:"_type"`
 	// The total amount of elements available in the collection.
-	Total int64 `json:"total"`
+	Total int `json:"total"`
 	// Actual amount of elements in this response.
-	Count int64 `json:"count"`
+	Count int `json:"count"`
 	Links StorageCollectionModelAllOfLinks `json:"_links"`
 	Embedded StorageCollectionModelAllOfEmbedded `json:"_embedded"`
 	AdditionalProperties map[string]interface{}
@@ -36,7 +36,7 @@ type _StorageCollectionModel StorageCollectionModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStorageCollectionModel(type_ string, total int64, count int64, links StorageCollectionModelAllOfLinks, embedded StorageCollectionModelAllOfEmbedded) *StorageCollectionModel {
+func NewStorageCollectionModel(type_ string, total int, count int, links StorageCollectionModelAllOfLinks, embedded StorageCollectionModelAllOfEmbedded) *StorageCollectionModel {
 	this := StorageCollectionModel{}
 	this.Type = type_
 	this.Total = total
@@ -79,9 +79,9 @@ func (o *StorageCollectionModel) SetType(v string) {
 }
 
 // GetTotal returns the Total field value
-func (o *StorageCollectionModel) GetTotal() int64 {
+func (o *StorageCollectionModel) GetTotal() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -90,7 +90,7 @@ func (o *StorageCollectionModel) GetTotal() int64 {
 
 // GetTotalOk returns a tuple with the Total field value
 // and a boolean to check if the value has been set.
-func (o *StorageCollectionModel) GetTotalOk() (*int64, bool) {
+func (o *StorageCollectionModel) GetTotalOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -98,14 +98,14 @@ func (o *StorageCollectionModel) GetTotalOk() (*int64, bool) {
 }
 
 // SetTotal sets field value
-func (o *StorageCollectionModel) SetTotal(v int64) {
+func (o *StorageCollectionModel) SetTotal(v int) {
 	o.Total = v
 }
 
 // GetCount returns the Count field value
-func (o *StorageCollectionModel) GetCount() int64 {
+func (o *StorageCollectionModel) GetCount() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -114,7 +114,7 @@ func (o *StorageCollectionModel) GetCount() int64 {
 
 // GetCountOk returns a tuple with the Count field value
 // and a boolean to check if the value has been set.
-func (o *StorageCollectionModel) GetCountOk() (*int64, bool) {
+func (o *StorageCollectionModel) GetCountOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -122,7 +122,7 @@ func (o *StorageCollectionModel) GetCountOk() (*int64, bool) {
 }
 
 // SetCount sets field value
-func (o *StorageCollectionModel) SetCount(v int64) {
+func (o *StorageCollectionModel) SetCount(v int) {
 	o.Count = v
 }
 

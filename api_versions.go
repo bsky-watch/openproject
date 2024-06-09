@@ -280,7 +280,7 @@ func (a *VersionsAPIService) CreateVersionExecute(r ApiCreateVersionRequest) (*V
 type ApiDeleteVersionRequest struct {
 	ctx context.Context
 	ApiService *VersionsAPIService
-	id int64
+	id int
 }
 
 func (r ApiDeleteVersionRequest) Execute() (*http.Response, error) {
@@ -296,7 +296,7 @@ Deletes the version. Work packages associated to the version will no longer be a
  @param id Version id
  @return ApiDeleteVersionRequest
 */
-func (a *VersionsAPIService) DeleteVersion(ctx context.Context, id int64) ApiDeleteVersionRequest {
+func (a *VersionsAPIService) DeleteVersion(ctx context.Context, id int) ApiDeleteVersionRequest {
 	return ApiDeleteVersionRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -524,7 +524,7 @@ func (a *VersionsAPIService) ListVersionsExecute(r ApiListVersionsRequest) (map[
 type ApiListVersionsAvailableInAProjectRequest struct {
 	ctx context.Context
 	ApiService *VersionsAPIService
-	id int64
+	id int
 }
 
 func (r ApiListVersionsAvailableInAProjectRequest) Execute() (*VersionsByProjectModel, *http.Response, error) {
@@ -541,7 +541,7 @@ Note that due to sharing this might be more than the versions *defined* by that 
  @param id ID of the project whose versions will be listed
  @return ApiListVersionsAvailableInAProjectRequest
 */
-func (a *VersionsAPIService) ListVersionsAvailableInAProject(ctx context.Context, id int64) ApiListVersionsAvailableInAProjectRequest {
+func (a *VersionsAPIService) ListVersionsAvailableInAProject(ctx context.Context, id int) ApiListVersionsAvailableInAProjectRequest {
 	return ApiListVersionsAvailableInAProjectRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -638,7 +638,7 @@ func (a *VersionsAPIService) ListVersionsAvailableInAProjectExecute(r ApiListVer
 type ApiUpdateVersionRequest struct {
 	ctx context.Context
 	ApiService *VersionsAPIService
-	id int64
+	id int
 }
 
 func (r ApiUpdateVersionRequest) Execute() (*VersionModel, *http.Response, error) {
@@ -654,7 +654,7 @@ Updates the given version by applying the attributes provided in the body. Pleas
  @param id Version id
  @return ApiUpdateVersionRequest
 */
-func (a *VersionsAPIService) UpdateVersion(ctx context.Context, id int64) ApiUpdateVersionRequest {
+func (a *VersionsAPIService) UpdateVersion(ctx context.Context, id int) ApiUpdateVersionRequest {
 	return ApiUpdateVersionRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -927,7 +927,7 @@ func (a *VersionsAPIService) VersionCreateFormExecute(r ApiVersionCreateFormRequ
 type ApiVersionUpdateFormRequest struct {
 	ctx context.Context
 	ApiService *VersionsAPIService
-	id int64
+	id int
 }
 
 func (r ApiVersionUpdateFormRequest) Execute() (*http.Response, error) {
@@ -943,7 +943,7 @@ VersionUpdateForm Version update form
  @param id Project id
  @return ApiVersionUpdateFormRequest
 */
-func (a *VersionsAPIService) VersionUpdateForm(ctx context.Context, id int64) ApiVersionUpdateFormRequest {
+func (a *VersionsAPIService) VersionUpdateForm(ctx context.Context, id int) ApiVersionUpdateFormRequest {
 	return ApiVersionUpdateFormRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1062,7 +1062,7 @@ func (a *VersionsAPIService) VersionUpdateFormExecute(r ApiVersionUpdateFormRequ
 type ApiViewVersionRequest struct {
 	ctx context.Context
 	ApiService *VersionsAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewVersionRequest) Execute() (*VersionModel, *http.Response, error) {
@@ -1078,7 +1078,7 @@ ViewVersion View version
  @param id Version id
  @return ApiViewVersionRequest
 */
-func (a *VersionsAPIService) ViewVersion(ctx context.Context, id int64) ApiViewVersionRequest {
+func (a *VersionsAPIService) ViewVersion(ctx context.Context, id int) ApiViewVersionRequest {
 	return ApiViewVersionRequest{
 		ApiService: a,
 		ctx: ctx,

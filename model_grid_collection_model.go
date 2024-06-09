@@ -22,14 +22,14 @@ var _ MappedNullable = &GridCollectionModel{}
 type GridCollectionModel struct {
 	Type string `json:"_type"`
 	// The total amount of elements available in the collection.
-	Total int64 `json:"total"`
+	Total int `json:"total"`
 	// Actual amount of elements in this response.
-	Count int64 `json:"count"`
+	Count int `json:"count"`
 	Links PaginatedCollectionModelAllOfLinks `json:"_links"`
 	// Amount of elements that a response will hold.
-	PageSize int64 `json:"pageSize"`
+	PageSize int `json:"pageSize"`
 	// The page number that is requested from paginated collection.
-	Offset int64 `json:"offset"`
+	Offset int `json:"offset"`
 	Embedded GridCollectionModelAllOfEmbedded `json:"_embedded"`
 	AdditionalProperties map[string]interface{}
 }
@@ -40,7 +40,7 @@ type _GridCollectionModel GridCollectionModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGridCollectionModel(type_ string, total int64, count int64, links PaginatedCollectionModelAllOfLinks, pageSize int64, offset int64, embedded GridCollectionModelAllOfEmbedded) *GridCollectionModel {
+func NewGridCollectionModel(type_ string, total int, count int, links PaginatedCollectionModelAllOfLinks, pageSize int, offset int, embedded GridCollectionModelAllOfEmbedded) *GridCollectionModel {
 	this := GridCollectionModel{}
 	this.Type = type_
 	this.Total = total
@@ -85,9 +85,9 @@ func (o *GridCollectionModel) SetType(v string) {
 }
 
 // GetTotal returns the Total field value
-func (o *GridCollectionModel) GetTotal() int64 {
+func (o *GridCollectionModel) GetTotal() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -96,7 +96,7 @@ func (o *GridCollectionModel) GetTotal() int64 {
 
 // GetTotalOk returns a tuple with the Total field value
 // and a boolean to check if the value has been set.
-func (o *GridCollectionModel) GetTotalOk() (*int64, bool) {
+func (o *GridCollectionModel) GetTotalOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -104,14 +104,14 @@ func (o *GridCollectionModel) GetTotalOk() (*int64, bool) {
 }
 
 // SetTotal sets field value
-func (o *GridCollectionModel) SetTotal(v int64) {
+func (o *GridCollectionModel) SetTotal(v int) {
 	o.Total = v
 }
 
 // GetCount returns the Count field value
-func (o *GridCollectionModel) GetCount() int64 {
+func (o *GridCollectionModel) GetCount() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -120,7 +120,7 @@ func (o *GridCollectionModel) GetCount() int64 {
 
 // GetCountOk returns a tuple with the Count field value
 // and a boolean to check if the value has been set.
-func (o *GridCollectionModel) GetCountOk() (*int64, bool) {
+func (o *GridCollectionModel) GetCountOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -128,7 +128,7 @@ func (o *GridCollectionModel) GetCountOk() (*int64, bool) {
 }
 
 // SetCount sets field value
-func (o *GridCollectionModel) SetCount(v int64) {
+func (o *GridCollectionModel) SetCount(v int) {
 	o.Count = v
 }
 
@@ -157,9 +157,9 @@ func (o *GridCollectionModel) SetLinks(v PaginatedCollectionModelAllOfLinks) {
 }
 
 // GetPageSize returns the PageSize field value
-func (o *GridCollectionModel) GetPageSize() int64 {
+func (o *GridCollectionModel) GetPageSize() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -168,7 +168,7 @@ func (o *GridCollectionModel) GetPageSize() int64 {
 
 // GetPageSizeOk returns a tuple with the PageSize field value
 // and a boolean to check if the value has been set.
-func (o *GridCollectionModel) GetPageSizeOk() (*int64, bool) {
+func (o *GridCollectionModel) GetPageSizeOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -176,14 +176,14 @@ func (o *GridCollectionModel) GetPageSizeOk() (*int64, bool) {
 }
 
 // SetPageSize sets field value
-func (o *GridCollectionModel) SetPageSize(v int64) {
+func (o *GridCollectionModel) SetPageSize(v int) {
 	o.PageSize = v
 }
 
 // GetOffset returns the Offset field value
-func (o *GridCollectionModel) GetOffset() int64 {
+func (o *GridCollectionModel) GetOffset() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -192,7 +192,7 @@ func (o *GridCollectionModel) GetOffset() int64 {
 
 // GetOffsetOk returns a tuple with the Offset field value
 // and a boolean to check if the value has been set.
-func (o *GridCollectionModel) GetOffsetOk() (*int64, bool) {
+func (o *GridCollectionModel) GetOffsetOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -200,7 +200,7 @@ func (o *GridCollectionModel) GetOffsetOk() (*int64, bool) {
 }
 
 // SetOffset sets field value
-func (o *GridCollectionModel) SetOffset(v int64) {
+func (o *GridCollectionModel) SetOffset(v int) {
 	o.Offset = v
 }
 

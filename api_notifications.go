@@ -26,21 +26,21 @@ type NotificationsAPIService service
 type ApiListNotificationsRequest struct {
 	ctx context.Context
 	ApiService *NotificationsAPIService
-	offset *int64
-	pageSize *int64
+	offset *int
+	pageSize *int
 	sortBy *string
 	groupBy *string
 	filters *string
 }
 
 // Page number inside the requested collection.
-func (r ApiListNotificationsRequest) Offset(offset int64) ApiListNotificationsRequest {
+func (r ApiListNotificationsRequest) Offset(offset int) ApiListNotificationsRequest {
 	r.offset = &offset
 	return r
 }
 
 // Number of elements to display per page.
-func (r ApiListNotificationsRequest) PageSize(pageSize int64) ApiListNotificationsRequest {
+func (r ApiListNotificationsRequest) PageSize(pageSize int) ApiListNotificationsRequest {
 	r.pageSize = &pageSize
 	return r
 }
@@ -111,13 +111,13 @@ func (a *NotificationsAPIService) ListNotificationsExecute(r ApiListNotification
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
 	} else {
-		var defaultValue int64 = 1
+		var defaultValue int = 1
 		r.offset = &defaultValue
 	}
 	if r.pageSize != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "")
 	} else {
-		var defaultValue int64 = 20
+		var defaultValue int = 20
 		r.pageSize = &defaultValue
 	}
 	if r.sortBy != nil {
@@ -207,7 +207,7 @@ func (a *NotificationsAPIService) ListNotificationsExecute(r ApiListNotification
 type ApiReadNotificationRequest struct {
 	ctx context.Context
 	ApiService *NotificationsAPIService
-	id int64
+	id int
 }
 
 func (r ApiReadNotificationRequest) Execute() (*http.Response, error) {
@@ -223,7 +223,7 @@ Marks the given notification as read.
  @param id notification id
  @return ApiReadNotificationRequest
 */
-func (a *NotificationsAPIService) ReadNotification(ctx context.Context, id int64) ApiReadNotificationRequest {
+func (a *NotificationsAPIService) ReadNotification(ctx context.Context, id int) ApiReadNotificationRequest {
 	return ApiReadNotificationRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -440,7 +440,7 @@ func (a *NotificationsAPIService) ReadNotificationsExecute(r ApiReadNotification
 type ApiUnreadNotificationRequest struct {
 	ctx context.Context
 	ApiService *NotificationsAPIService
-	id int64
+	id int
 }
 
 func (r ApiUnreadNotificationRequest) Execute() (*http.Response, error) {
@@ -456,7 +456,7 @@ Marks the given notification as unread.
  @param id notification id
  @return ApiUnreadNotificationRequest
 */
-func (a *NotificationsAPIService) UnreadNotification(ctx context.Context, id int64) ApiUnreadNotificationRequest {
+func (a *NotificationsAPIService) UnreadNotification(ctx context.Context, id int) ApiUnreadNotificationRequest {
 	return ApiUnreadNotificationRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -673,7 +673,7 @@ func (a *NotificationsAPIService) UnreadNotificationsExecute(r ApiUnreadNotifica
 type ApiViewNotificationRequest struct {
 	ctx context.Context
 	ApiService *NotificationsAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewNotificationRequest) Execute() (*NotificationModel, *http.Response, error) {
@@ -689,7 +689,7 @@ Returns the notification identified by the notification id.
  @param id notification id
  @return ApiViewNotificationRequest
 */
-func (a *NotificationsAPIService) ViewNotification(ctx context.Context, id int64) ApiViewNotificationRequest {
+func (a *NotificationsAPIService) ViewNotification(ctx context.Context, id int) ApiViewNotificationRequest {
 	return ApiViewNotificationRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -786,8 +786,8 @@ func (a *NotificationsAPIService) ViewNotificationExecute(r ApiViewNotificationR
 type ApiViewNotificationDetailRequest struct {
 	ctx context.Context
 	ApiService *NotificationsAPIService
-	notificationId int64
-	id int64
+	notificationId int
+	id int
 }
 
 func (r ApiViewNotificationDetailRequest) Execute() (*ValuesPropertyModel, *http.Response, error) {
@@ -804,7 +804,7 @@ Returns an individual detail of a notification identified by the notification id
  @param id detail id
  @return ApiViewNotificationDetailRequest
 */
-func (a *NotificationsAPIService) ViewNotificationDetail(ctx context.Context, notificationId int64, id int64) ApiViewNotificationDetailRequest {
+func (a *NotificationsAPIService) ViewNotificationDetail(ctx context.Context, notificationId int, id int) ApiViewNotificationDetailRequest {
 	return ApiViewNotificationDetailRequest{
 		ApiService: a,
 		ctx: ctx,

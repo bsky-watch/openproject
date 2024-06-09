@@ -21,7 +21,7 @@ var _ MappedNullable = &NewsModel{}
 // NewsModel struct for NewsModel
 type NewsModel struct {
 	// News' id
-	Id *int64 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	// The headline of the news
 	Title *string `json:"title,omitempty"`
 	// A short summary
@@ -54,9 +54,9 @@ func NewNewsModelWithDefaults() *NewsModel {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *NewsModel) GetId() int64 {
+func (o *NewsModel) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -64,7 +64,7 @@ func (o *NewsModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *NewsModel) GetIdOk() (*int64, bool) {
+func (o *NewsModel) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -80,8 +80,8 @@ func (o *NewsModel) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *NewsModel) SetId(v int64) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *NewsModel) SetId(v int) {
 	o.Id = &v
 }
 

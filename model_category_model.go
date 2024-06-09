@@ -20,7 +20,7 @@ var _ MappedNullable = &CategoryModel{}
 // CategoryModel struct for CategoryModel
 type CategoryModel struct {
 	// Category id
-	Id *int64 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	// Category name
 	Name *string `json:"name,omitempty"`
 	Links *CategoryModelLinks `json:"_links,omitempty"`
@@ -47,9 +47,9 @@ func NewCategoryModelWithDefaults() *CategoryModel {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *CategoryModel) GetId() int64 {
+func (o *CategoryModel) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -57,7 +57,7 @@ func (o *CategoryModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CategoryModel) GetIdOk() (*int64, bool) {
+func (o *CategoryModel) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -73,8 +73,8 @@ func (o *CategoryModel) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *CategoryModel) SetId(v int64) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *CategoryModel) SetId(v int) {
 	o.Id = &v
 }
 

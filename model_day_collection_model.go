@@ -22,9 +22,9 @@ var _ MappedNullable = &DayCollectionModel{}
 type DayCollectionModel struct {
 	Type string `json:"_type"`
 	// The total amount of elements available in the collection.
-	Total int64 `json:"total"`
+	Total int `json:"total"`
 	// Actual amount of elements in this response.
-	Count int64 `json:"count"`
+	Count int `json:"count"`
 	Links DayCollectionModelAllOfLinks `json:"_links"`
 	Embedded DayCollectionModelAllOfEmbedded `json:"_embedded"`
 	AdditionalProperties map[string]interface{}
@@ -36,7 +36,7 @@ type _DayCollectionModel DayCollectionModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewDayCollectionModel(type_ string, total int64, count int64, links DayCollectionModelAllOfLinks, embedded DayCollectionModelAllOfEmbedded) *DayCollectionModel {
+func NewDayCollectionModel(type_ string, total int, count int, links DayCollectionModelAllOfLinks, embedded DayCollectionModelAllOfEmbedded) *DayCollectionModel {
 	this := DayCollectionModel{}
 	this.Type = type_
 	this.Total = total
@@ -79,9 +79,9 @@ func (o *DayCollectionModel) SetType(v string) {
 }
 
 // GetTotal returns the Total field value
-func (o *DayCollectionModel) GetTotal() int64 {
+func (o *DayCollectionModel) GetTotal() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -90,7 +90,7 @@ func (o *DayCollectionModel) GetTotal() int64 {
 
 // GetTotalOk returns a tuple with the Total field value
 // and a boolean to check if the value has been set.
-func (o *DayCollectionModel) GetTotalOk() (*int64, bool) {
+func (o *DayCollectionModel) GetTotalOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -98,14 +98,14 @@ func (o *DayCollectionModel) GetTotalOk() (*int64, bool) {
 }
 
 // SetTotal sets field value
-func (o *DayCollectionModel) SetTotal(v int64) {
+func (o *DayCollectionModel) SetTotal(v int) {
 	o.Total = v
 }
 
 // GetCount returns the Count field value
-func (o *DayCollectionModel) GetCount() int64 {
+func (o *DayCollectionModel) GetCount() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -114,7 +114,7 @@ func (o *DayCollectionModel) GetCount() int64 {
 
 // GetCountOk returns a tuple with the Count field value
 // and a boolean to check if the value has been set.
-func (o *DayCollectionModel) GetCountOk() (*int64, bool) {
+func (o *DayCollectionModel) GetCountOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -122,7 +122,7 @@ func (o *DayCollectionModel) GetCountOk() (*int64, bool) {
 }
 
 // SetCount sets field value
-func (o *DayCollectionModel) SetCount(v int64) {
+func (o *DayCollectionModel) SetCount(v int) {
 	o.Count = v
 }
 

@@ -189,7 +189,7 @@ func (a *ProjectsAPIService) CreateProjectExecute(r ApiCreateProjectRequest) (*P
 type ApiCreateProjectCopyRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	id int64
+	id int
 }
 
 func (r ApiCreateProjectCopyRequest) Execute() (*http.Response, error) {
@@ -205,7 +205,7 @@ CreateProjectCopy Create project copy
  @param id Project id
  @return ApiCreateProjectCopyRequest
 */
-func (a *ProjectsAPIService) CreateProjectCopy(ctx context.Context, id int64) ApiCreateProjectCopyRequest {
+func (a *ProjectsAPIService) CreateProjectCopy(ctx context.Context, id int) ApiCreateProjectCopyRequest {
 	return ApiCreateProjectCopyRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -335,7 +335,7 @@ func (a *ProjectsAPIService) CreateProjectCopyExecute(r ApiCreateProjectCopyRequ
 type ApiDeleteProjectRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	id int64
+	id int
 }
 
 func (r ApiDeleteProjectRequest) Execute() (*http.Response, error) {
@@ -353,7 +353,7 @@ the project scheduled for deletion, it is archived at once.
  @param id Project id
  @return ApiDeleteProjectRequest
 */
-func (a *ProjectsAPIService) DeleteProject(ctx context.Context, id int64) ApiDeleteProjectRequest {
+func (a *ProjectsAPIService) DeleteProject(ctx context.Context, id int) ApiDeleteProjectRequest {
 	return ApiDeleteProjectRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -775,7 +775,7 @@ func (a *ProjectsAPIService) ListProjectsExecute(r ApiListProjectsRequest) (*Pro
 type ApiListProjectsWithVersionRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	id int64
+	id int
 }
 
 func (r ApiListProjectsWithVersionRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -794,7 +794,7 @@ but are also limited to the projects that the current user is allowed to see.
  @param id Version id
  @return ApiListProjectsWithVersionRequest
 */
-func (a *ProjectsAPIService) ListProjectsWithVersion(ctx context.Context, id int64) ApiListProjectsWithVersionRequest {
+func (a *ProjectsAPIService) ListProjectsWithVersion(ctx context.Context, id int) ApiListProjectsWithVersionRequest {
 	return ApiListProjectsWithVersionRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -881,7 +881,7 @@ func (a *ProjectsAPIService) ListProjectsWithVersionExecute(r ApiListProjectsWit
 type ApiProjectCopyFormRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	id int64
+	id int
 }
 
 func (r ApiProjectCopyFormRequest) Execute() (*http.Response, error) {
@@ -897,7 +897,7 @@ ProjectCopyForm Project copy form
  @param id Project id
  @return ApiProjectCopyFormRequest
 */
-func (a *ProjectsAPIService) ProjectCopyForm(ctx context.Context, id int64) ApiProjectCopyFormRequest {
+func (a *ProjectsAPIService) ProjectCopyForm(ctx context.Context, id int) ApiProjectCopyFormRequest {
 	return ApiProjectCopyFormRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1166,7 +1166,7 @@ func (a *ProjectsAPIService) ProjectCreateFormExecute(r ApiProjectCreateFormRequ
 type ApiProjectUpdateFormRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	id int64
+	id int
 	body *map[string]interface{}
 }
 
@@ -1188,7 +1188,7 @@ ProjectUpdateForm Project update form
  @param id Project id
  @return ApiProjectUpdateFormRequest
 */
-func (a *ProjectsAPIService) ProjectUpdateForm(ctx context.Context, id int64) ApiProjectUpdateFormRequest {
+func (a *ProjectsAPIService) ProjectUpdateForm(ctx context.Context, id int) ApiProjectUpdateFormRequest {
 	return ApiProjectUpdateFormRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1309,7 +1309,7 @@ func (a *ProjectsAPIService) ProjectUpdateFormExecute(r ApiProjectUpdateFormRequ
 type ApiUpdateProjectRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	id int64
+	id int
 	body *map[string]interface{}
 }
 
@@ -1331,7 +1331,7 @@ Updates the given project by applying the attributes provided in the body.
  @param id Project id
  @return ApiUpdateProjectRequest
 */
-func (a *ProjectsAPIService) UpdateProject(ctx context.Context, id int64) ApiUpdateProjectRequest {
+func (a *ProjectsAPIService) UpdateProject(ctx context.Context, id int) ApiUpdateProjectRequest {
 	return ApiUpdateProjectRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1485,7 +1485,7 @@ func (a *ProjectsAPIService) UpdateProjectExecute(r ApiUpdateProjectRequest) (*P
 type ApiViewProjectRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewProjectRequest) Execute() (*ProjectModel, *http.Response, error) {
@@ -1501,7 +1501,7 @@ ViewProject View project
  @param id Project id
  @return ApiViewProjectRequest
 */
-func (a *ProjectsAPIService) ViewProject(ctx context.Context, id int64) ApiViewProjectRequest {
+func (a *ProjectsAPIService) ViewProject(ctx context.Context, id int) ApiViewProjectRequest {
 	return ApiViewProjectRequest{
 		ApiService: a,
 		ctx: ctx,

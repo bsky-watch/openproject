@@ -20,11 +20,11 @@ var _ MappedNullable = &ConfigurationModel{}
 // ConfigurationModel struct for ConfigurationModel
 type ConfigurationModel struct {
 	// The maximum allowed size of an attachment in Bytes
-	MaximumAttachmentFileSize *int64 `json:"maximumAttachmentFileSize,omitempty"`
+	MaximumAttachmentFileSize *int `json:"maximumAttachmentFileSize,omitempty"`
 	// The host name configured for the system
 	HostName *string `json:"hostName,omitempty"`
 	// Page size steps to be offered in paginated list UI
-	PerPageOptions []int64 `json:"perPageOptions,omitempty"`
+	PerPageOptions []int `json:"perPageOptions,omitempty"`
 	// The list of all feature flags that are active
 	ActiveFeatureFlags []string `json:"activeFeatureFlags,omitempty"`
 	AdditionalProperties map[string]interface{}
@@ -50,9 +50,9 @@ func NewConfigurationModelWithDefaults() *ConfigurationModel {
 }
 
 // GetMaximumAttachmentFileSize returns the MaximumAttachmentFileSize field value if set, zero value otherwise.
-func (o *ConfigurationModel) GetMaximumAttachmentFileSize() int64 {
+func (o *ConfigurationModel) GetMaximumAttachmentFileSize() int {
 	if o == nil || IsNil(o.MaximumAttachmentFileSize) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.MaximumAttachmentFileSize
@@ -60,7 +60,7 @@ func (o *ConfigurationModel) GetMaximumAttachmentFileSize() int64 {
 
 // GetMaximumAttachmentFileSizeOk returns a tuple with the MaximumAttachmentFileSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationModel) GetMaximumAttachmentFileSizeOk() (*int64, bool) {
+func (o *ConfigurationModel) GetMaximumAttachmentFileSizeOk() (*int, bool) {
 	if o == nil || IsNil(o.MaximumAttachmentFileSize) {
 		return nil, false
 	}
@@ -76,8 +76,8 @@ func (o *ConfigurationModel) HasMaximumAttachmentFileSize() bool {
 	return false
 }
 
-// SetMaximumAttachmentFileSize gets a reference to the given int64 and assigns it to the MaximumAttachmentFileSize field.
-func (o *ConfigurationModel) SetMaximumAttachmentFileSize(v int64) {
+// SetMaximumAttachmentFileSize gets a reference to the given int and assigns it to the MaximumAttachmentFileSize field.
+func (o *ConfigurationModel) SetMaximumAttachmentFileSize(v int) {
 	o.MaximumAttachmentFileSize = &v
 }
 
@@ -114,9 +114,9 @@ func (o *ConfigurationModel) SetHostName(v string) {
 }
 
 // GetPerPageOptions returns the PerPageOptions field value if set, zero value otherwise.
-func (o *ConfigurationModel) GetPerPageOptions() []int64 {
+func (o *ConfigurationModel) GetPerPageOptions() []int {
 	if o == nil || IsNil(o.PerPageOptions) {
-		var ret []int64
+		var ret []int
 		return ret
 	}
 	return o.PerPageOptions
@@ -124,7 +124,7 @@ func (o *ConfigurationModel) GetPerPageOptions() []int64 {
 
 // GetPerPageOptionsOk returns a tuple with the PerPageOptions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ConfigurationModel) GetPerPageOptionsOk() ([]int64, bool) {
+func (o *ConfigurationModel) GetPerPageOptionsOk() ([]int, bool) {
 	if o == nil || IsNil(o.PerPageOptions) {
 		return nil, false
 	}
@@ -140,8 +140,8 @@ func (o *ConfigurationModel) HasPerPageOptions() bool {
 	return false
 }
 
-// SetPerPageOptions gets a reference to the given []int64 and assigns it to the PerPageOptions field.
-func (o *ConfigurationModel) SetPerPageOptions(v []int64) {
+// SetPerPageOptions gets a reference to the given []int and assigns it to the PerPageOptions field.
+func (o *ConfigurationModel) SetPerPageOptions(v []int) {
 	o.PerPageOptions = v
 }
 

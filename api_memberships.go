@@ -197,7 +197,7 @@ func (a *MembershipsAPIService) CreateMembershipExecute(r ApiCreateMembershipReq
 type ApiDeleteMembershipRequest struct {
 	ctx context.Context
 	ApiService *MembershipsAPIService
-	id int64
+	id int
 }
 
 func (r ApiDeleteMembershipRequest) Execute() (*http.Response, error) {
@@ -213,7 +213,7 @@ Deletes the membership.
  @param id Membership id
  @return ApiDeleteMembershipRequest
 */
-func (a *MembershipsAPIService) DeleteMembership(ctx context.Context, id int64) ApiDeleteMembershipRequest {
+func (a *MembershipsAPIService) DeleteMembership(ctx context.Context, id int) ApiDeleteMembershipRequest {
 	return ApiDeleteMembershipRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -483,7 +483,7 @@ func (a *MembershipsAPIService) FormCreateMembershipExecute(r ApiFormCreateMembe
 type ApiFormUpdateMembershipRequest struct {
 	ctx context.Context
 	ApiService *MembershipsAPIService
-	id int64
+	id int
 	membershipWriteModel *MembershipWriteModel
 }
 
@@ -506,7 +506,7 @@ is validated. The form endpoint itself does not change the membership.
  @param id Membership id
  @return ApiFormUpdateMembershipRequest
 */
-func (a *MembershipsAPIService) FormUpdateMembership(ctx context.Context, id int64) ApiFormUpdateMembershipRequest {
+func (a *MembershipsAPIService) FormUpdateMembership(ctx context.Context, id int) ApiFormUpdateMembershipRequest {
 	return ApiFormUpdateMembershipRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -638,7 +638,7 @@ func (a *MembershipsAPIService) FormUpdateMembershipExecute(r ApiFormUpdateMembe
 type ApiGetMembershipRequest struct {
 	ctx context.Context
 	ApiService *MembershipsAPIService
-	id int64
+	id int
 }
 
 func (r ApiGetMembershipRequest) Execute() (*MembershipReadModel, *http.Response, error) {
@@ -654,7 +654,7 @@ Retrieves a membership resource identified by the given id.
  @param id Membership id
  @return ApiGetMembershipRequest
 */
-func (a *MembershipsAPIService) GetMembership(ctx context.Context, id int64) ApiGetMembershipRequest {
+func (a *MembershipsAPIService) GetMembership(ctx context.Context, id int) ApiGetMembershipRequest {
 	return ApiGetMembershipRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1116,7 +1116,7 @@ func (a *MembershipsAPIService) ListMembershipsExecute(r ApiListMembershipsReque
 type ApiUpdateMembershipRequest struct {
 	ctx context.Context
 	ApiService *MembershipsAPIService
-	id int64
+	id int
 	membershipWriteModel *MembershipWriteModel
 }
 
@@ -1143,7 +1143,7 @@ By including `{ "sendNotifications": false }` within the `_meta` block of the pa
  @param id Membership id
  @return ApiUpdateMembershipRequest
 */
-func (a *MembershipsAPIService) UpdateMembership(ctx context.Context, id int64) ApiUpdateMembershipRequest {
+func (a *MembershipsAPIService) UpdateMembership(ctx context.Context, id int) ApiUpdateMembershipRequest {
 	return ApiUpdateMembershipRequest{
 		ApiService: a,
 		ctx: ctx,

@@ -20,7 +20,7 @@ var _ MappedNullable = &RelationModel{}
 // RelationModel struct for RelationModel
 type RelationModel struct {
 	// Relation ID
-	Id *int64 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	// The internationalized name of this kind of relation
 	Name *string `json:"name,omitempty"`
 	// Which kind of relation (blocks, precedes, etc.)
@@ -30,7 +30,7 @@ type RelationModel struct {
 	// Short text further describing the relation
 	Description *string `json:"description,omitempty"`
 	// The lag in days between closing of `from` and start of `to`
-	Lag *int64 `json:"lag*,omitempty"`
+	Lag *int `json:"lag*,omitempty"`
 	Links *RelationModelLinks `json:"_links,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -55,9 +55,9 @@ func NewRelationModelWithDefaults() *RelationModel {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *RelationModel) GetId() int64 {
+func (o *RelationModel) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -65,7 +65,7 @@ func (o *RelationModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RelationModel) GetIdOk() (*int64, bool) {
+func (o *RelationModel) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -81,8 +81,8 @@ func (o *RelationModel) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *RelationModel) SetId(v int64) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *RelationModel) SetId(v int) {
 	o.Id = &v
 }
 
@@ -215,9 +215,9 @@ func (o *RelationModel) SetDescription(v string) {
 }
 
 // GetLag returns the Lag field value if set, zero value otherwise.
-func (o *RelationModel) GetLag() int64 {
+func (o *RelationModel) GetLag() int {
 	if o == nil || IsNil(o.Lag) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Lag
@@ -225,7 +225,7 @@ func (o *RelationModel) GetLag() int64 {
 
 // GetLagOk returns a tuple with the Lag field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RelationModel) GetLagOk() (*int64, bool) {
+func (o *RelationModel) GetLagOk() (*int, bool) {
 	if o == nil || IsNil(o.Lag) {
 		return nil, false
 	}
@@ -241,8 +241,8 @@ func (o *RelationModel) HasLag() bool {
 	return false
 }
 
-// SetLag gets a reference to the given int64 and assigns it to the Lag field.
-func (o *RelationModel) SetLag(v int64) {
+// SetLag gets a reference to the given int and assigns it to the Lag field.
+func (o *RelationModel) SetLag(v int) {
 	o.Lag = &v
 }
 

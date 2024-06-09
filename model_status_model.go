@@ -21,18 +21,18 @@ var _ MappedNullable = &StatusModel{}
 type StatusModel struct {
 	Type *string `json:"_type,omitempty"`
 	// Status id
-	Id *int64 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	// Status name
 	Name *string `json:"name,omitempty"`
 	// Sort index of the status
-	Position *int64 `json:"position,omitempty"`
+	Position *int `json:"position,omitempty"`
 	IsDefault *bool `json:"isDefault,omitempty"`
 	// are tickets of this status considered closed?
 	IsClosed *bool `json:"isClosed,omitempty"`
 	// are tickets of this status read only?
 	IsReadonly *bool `json:"isReadonly,omitempty"`
 	// The percentageDone being applied when changing to this status
-	DefaultDoneRatio *int64 `json:"defaultDoneRatio,omitempty"`
+	DefaultDoneRatio *int `json:"defaultDoneRatio,omitempty"`
 	Links *StatusModelLinks `json:"_links,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -89,9 +89,9 @@ func (o *StatusModel) SetType(v string) {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *StatusModel) GetId() int64 {
+func (o *StatusModel) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -99,7 +99,7 @@ func (o *StatusModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StatusModel) GetIdOk() (*int64, bool) {
+func (o *StatusModel) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -115,8 +115,8 @@ func (o *StatusModel) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *StatusModel) SetId(v int64) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *StatusModel) SetId(v int) {
 	o.Id = &v
 }
 
@@ -153,9 +153,9 @@ func (o *StatusModel) SetName(v string) {
 }
 
 // GetPosition returns the Position field value if set, zero value otherwise.
-func (o *StatusModel) GetPosition() int64 {
+func (o *StatusModel) GetPosition() int {
 	if o == nil || IsNil(o.Position) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Position
@@ -163,7 +163,7 @@ func (o *StatusModel) GetPosition() int64 {
 
 // GetPositionOk returns a tuple with the Position field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StatusModel) GetPositionOk() (*int64, bool) {
+func (o *StatusModel) GetPositionOk() (*int, bool) {
 	if o == nil || IsNil(o.Position) {
 		return nil, false
 	}
@@ -179,8 +179,8 @@ func (o *StatusModel) HasPosition() bool {
 	return false
 }
 
-// SetPosition gets a reference to the given int64 and assigns it to the Position field.
-func (o *StatusModel) SetPosition(v int64) {
+// SetPosition gets a reference to the given int and assigns it to the Position field.
+func (o *StatusModel) SetPosition(v int) {
 	o.Position = &v
 }
 
@@ -281,9 +281,9 @@ func (o *StatusModel) SetIsReadonly(v bool) {
 }
 
 // GetDefaultDoneRatio returns the DefaultDoneRatio field value if set, zero value otherwise.
-func (o *StatusModel) GetDefaultDoneRatio() int64 {
+func (o *StatusModel) GetDefaultDoneRatio() int {
 	if o == nil || IsNil(o.DefaultDoneRatio) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.DefaultDoneRatio
@@ -291,7 +291,7 @@ func (o *StatusModel) GetDefaultDoneRatio() int64 {
 
 // GetDefaultDoneRatioOk returns a tuple with the DefaultDoneRatio field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *StatusModel) GetDefaultDoneRatioOk() (*int64, bool) {
+func (o *StatusModel) GetDefaultDoneRatioOk() (*int, bool) {
 	if o == nil || IsNil(o.DefaultDoneRatio) {
 		return nil, false
 	}
@@ -307,8 +307,8 @@ func (o *StatusModel) HasDefaultDoneRatio() bool {
 	return false
 }
 
-// SetDefaultDoneRatio gets a reference to the given int64 and assigns it to the DefaultDoneRatio field.
-func (o *StatusModel) SetDefaultDoneRatio(v int64) {
+// SetDefaultDoneRatio gets a reference to the given int and assigns it to the DefaultDoneRatio field.
+func (o *StatusModel) SetDefaultDoneRatio(v int) {
 	o.DefaultDoneRatio = &v
 }
 

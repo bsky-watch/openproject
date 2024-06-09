@@ -21,7 +21,7 @@ var _ MappedNullable = &OAuthClientCredentialsReadModel{}
 
 // OAuthClientCredentialsReadModel struct for OAuthClientCredentialsReadModel
 type OAuthClientCredentialsReadModel struct {
-	Id int64 `json:"id"`
+	Id int `json:"id"`
 	Type string `json:"_type"`
 	// OAuth 2 client id
 	ClientId string `json:"clientId"`
@@ -41,7 +41,7 @@ type _OAuthClientCredentialsReadModel OAuthClientCredentialsReadModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOAuthClientCredentialsReadModel(id int64, type_ string, clientId string, confidential bool, links OAuthClientCredentialsReadModelLinks) *OAuthClientCredentialsReadModel {
+func NewOAuthClientCredentialsReadModel(id int, type_ string, clientId string, confidential bool, links OAuthClientCredentialsReadModelLinks) *OAuthClientCredentialsReadModel {
 	this := OAuthClientCredentialsReadModel{}
 	this.Id = id
 	this.Type = type_
@@ -60,9 +60,9 @@ func NewOAuthClientCredentialsReadModelWithDefaults() *OAuthClientCredentialsRea
 }
 
 // GetId returns the Id field value
-func (o *OAuthClientCredentialsReadModel) GetId() int64 {
+func (o *OAuthClientCredentialsReadModel) GetId() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -71,7 +71,7 @@ func (o *OAuthClientCredentialsReadModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *OAuthClientCredentialsReadModel) GetIdOk() (*int64, bool) {
+func (o *OAuthClientCredentialsReadModel) GetIdOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -79,7 +79,7 @@ func (o *OAuthClientCredentialsReadModel) GetIdOk() (*int64, bool) {
 }
 
 // SetId sets field value
-func (o *OAuthClientCredentialsReadModel) SetId(v int64) {
+func (o *OAuthClientCredentialsReadModel) SetId(v int) {
 	o.Id = v
 }
 

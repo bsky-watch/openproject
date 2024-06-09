@@ -21,9 +21,9 @@ var _ MappedNullable = &WorkPackageModel{}
 // WorkPackageModel struct for WorkPackageModel
 type WorkPackageModel struct {
 	// Work package id
-	Id *int64 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	// The version of the item as used for optimistic locking
-	LockVersion *int64 `json:"lockVersion,omitempty"`
+	LockVersion *int `json:"lockVersion,omitempty"`
 	// Work package subject
 	Subject *string `json:"subject,omitempty"`
 	Type *string `json:"_type,omitempty"`
@@ -53,9 +53,9 @@ type WorkPackageModel struct {
 	// The time booked for this work package by users working on it  # Conditions  **Permission** view time entries
 	SpentTime *string `json:"spentTime,omitempty"`
 	// Amount of total completion for a work package
-	PercentageDone *int64 `json:"percentageDone,omitempty"`
+	PercentageDone *int `json:"percentageDone,omitempty"`
 	// Amount of total completion for a work package derived from itself and its descendant work packages
-	DerivedPercentageDone *int64 `json:"derivedPercentageDone,omitempty"`
+	DerivedPercentageDone *int `json:"derivedPercentageDone,omitempty"`
 	// Time of creation. Can be writable by admins with the `apiv3_write_readonly_attributes` setting enabled.
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	// Time of the most recent change to the work package.
@@ -84,9 +84,9 @@ func NewWorkPackageModelWithDefaults() *WorkPackageModel {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *WorkPackageModel) GetId() int64 {
+func (o *WorkPackageModel) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -94,7 +94,7 @@ func (o *WorkPackageModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkPackageModel) GetIdOk() (*int64, bool) {
+func (o *WorkPackageModel) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -110,15 +110,15 @@ func (o *WorkPackageModel) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *WorkPackageModel) SetId(v int64) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *WorkPackageModel) SetId(v int) {
 	o.Id = &v
 }
 
 // GetLockVersion returns the LockVersion field value if set, zero value otherwise.
-func (o *WorkPackageModel) GetLockVersion() int64 {
+func (o *WorkPackageModel) GetLockVersion() int {
 	if o == nil || IsNil(o.LockVersion) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.LockVersion
@@ -126,7 +126,7 @@ func (o *WorkPackageModel) GetLockVersion() int64 {
 
 // GetLockVersionOk returns a tuple with the LockVersion field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkPackageModel) GetLockVersionOk() (*int64, bool) {
+func (o *WorkPackageModel) GetLockVersionOk() (*int, bool) {
 	if o == nil || IsNil(o.LockVersion) {
 		return nil, false
 	}
@@ -142,8 +142,8 @@ func (o *WorkPackageModel) HasLockVersion() bool {
 	return false
 }
 
-// SetLockVersion gets a reference to the given int64 and assigns it to the LockVersion field.
-func (o *WorkPackageModel) SetLockVersion(v int64) {
+// SetLockVersion gets a reference to the given int and assigns it to the LockVersion field.
+func (o *WorkPackageModel) SetLockVersion(v int) {
 	o.LockVersion = &v
 }
 
@@ -628,9 +628,9 @@ func (o *WorkPackageModel) SetSpentTime(v string) {
 }
 
 // GetPercentageDone returns the PercentageDone field value if set, zero value otherwise.
-func (o *WorkPackageModel) GetPercentageDone() int64 {
+func (o *WorkPackageModel) GetPercentageDone() int {
 	if o == nil || IsNil(o.PercentageDone) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.PercentageDone
@@ -638,7 +638,7 @@ func (o *WorkPackageModel) GetPercentageDone() int64 {
 
 // GetPercentageDoneOk returns a tuple with the PercentageDone field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkPackageModel) GetPercentageDoneOk() (*int64, bool) {
+func (o *WorkPackageModel) GetPercentageDoneOk() (*int, bool) {
 	if o == nil || IsNil(o.PercentageDone) {
 		return nil, false
 	}
@@ -654,15 +654,15 @@ func (o *WorkPackageModel) HasPercentageDone() bool {
 	return false
 }
 
-// SetPercentageDone gets a reference to the given int64 and assigns it to the PercentageDone field.
-func (o *WorkPackageModel) SetPercentageDone(v int64) {
+// SetPercentageDone gets a reference to the given int and assigns it to the PercentageDone field.
+func (o *WorkPackageModel) SetPercentageDone(v int) {
 	o.PercentageDone = &v
 }
 
 // GetDerivedPercentageDone returns the DerivedPercentageDone field value if set, zero value otherwise.
-func (o *WorkPackageModel) GetDerivedPercentageDone() int64 {
+func (o *WorkPackageModel) GetDerivedPercentageDone() int {
 	if o == nil || IsNil(o.DerivedPercentageDone) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.DerivedPercentageDone
@@ -670,7 +670,7 @@ func (o *WorkPackageModel) GetDerivedPercentageDone() int64 {
 
 // GetDerivedPercentageDoneOk returns a tuple with the DerivedPercentageDone field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkPackageModel) GetDerivedPercentageDoneOk() (*int64, bool) {
+func (o *WorkPackageModel) GetDerivedPercentageDoneOk() (*int, bool) {
 	if o == nil || IsNil(o.DerivedPercentageDone) {
 		return nil, false
 	}
@@ -686,8 +686,8 @@ func (o *WorkPackageModel) HasDerivedPercentageDone() bool {
 	return false
 }
 
-// SetDerivedPercentageDone gets a reference to the given int64 and assigns it to the DerivedPercentageDone field.
-func (o *WorkPackageModel) SetDerivedPercentageDone(v int64) {
+// SetDerivedPercentageDone gets a reference to the given int and assigns it to the DerivedPercentageDone field.
+func (o *WorkPackageModel) SetDerivedPercentageDone(v int) {
 	o.DerivedPercentageDone = &v
 }
 

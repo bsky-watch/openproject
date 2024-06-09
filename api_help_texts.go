@@ -26,7 +26,7 @@ type HelpTextsAPIService service
 type ApiGetHelpTextRequest struct {
 	ctx context.Context
 	ApiService *HelpTextsAPIService
-	id int64
+	id int
 }
 
 func (r ApiGetHelpTextRequest) Execute() (*HelpTextModel, *http.Response, error) {
@@ -42,7 +42,7 @@ Fetches the help text from the given id.
  @param id Help text id
  @return ApiGetHelpTextRequest
 */
-func (a *HelpTextsAPIService) GetHelpText(ctx context.Context, id int64) ApiGetHelpTextRequest {
+func (a *HelpTextsAPIService) GetHelpText(ctx context.Context, id int) ApiGetHelpTextRequest {
 	return ApiGetHelpTextRequest{
 		ApiService: a,
 		ctx: ctx,

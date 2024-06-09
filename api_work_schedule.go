@@ -872,7 +872,7 @@ func (a *WorkScheduleAPIService) UpdateNonWorkingDayExecute(r ApiUpdateNonWorkin
 type ApiUpdateWeekDayRequest struct {
 	ctx context.Context
 	ApiService *WorkScheduleAPIService
-	day int64
+	day int
 	weekDayWriteModel *WeekDayWriteModel
 }
 
@@ -898,7 +898,7 @@ finish dates of work packages but will affect their duration attribute.
  @param day The week day from 1 to 7. 1 is Monday. 7 is Sunday.
  @return ApiUpdateWeekDayRequest
 */
-func (a *WorkScheduleAPIService) UpdateWeekDay(ctx context.Context, day int64) ApiUpdateWeekDayRequest {
+func (a *WorkScheduleAPIService) UpdateWeekDay(ctx context.Context, day int) ApiUpdateWeekDayRequest {
 	return ApiUpdateWeekDayRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1435,7 +1435,7 @@ func (a *WorkScheduleAPIService) ViewNonWorkingDayExecute(r ApiViewNonWorkingDay
 type ApiViewWeekDayRequest struct {
 	ctx context.Context
 	ApiService *WorkScheduleAPIService
-	day int64
+	day int
 }
 
 func (r ApiViewWeekDayRequest) Execute() (*WeekDayModel, *http.Response, error) {
@@ -1451,7 +1451,7 @@ View a week day and its attributes.
  @param day The week day from 1 to 7. 1 is Monday. 7 is Sunday.
  @return ApiViewWeekDayRequest
 */
-func (a *WorkScheduleAPIService) ViewWeekDay(ctx context.Context, day int64) ApiViewWeekDayRequest {
+func (a *WorkScheduleAPIService) ViewWeekDay(ctx context.Context, day int) ApiViewWeekDayRequest {
 	return ApiViewWeekDayRequest{
 		ApiService: a,
 		ctx: ctx,

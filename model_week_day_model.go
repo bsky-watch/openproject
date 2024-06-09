@@ -22,7 +22,7 @@ var _ MappedNullable = &WeekDayModel{}
 type WeekDayModel struct {
 	Type string `json:"_type"`
 	// The week day from 1 to 7. 1 is Monday. 7 is Sunday.
-	Day int64 `json:"day"`
+	Day int `json:"day"`
 	// The week day name.
 	Name string `json:"name"`
 	// `true` for a working week day, `false` otherwise.
@@ -37,7 +37,7 @@ type _WeekDayModel WeekDayModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewWeekDayModel(type_ string, day int64, name string, working bool) *WeekDayModel {
+func NewWeekDayModel(type_ string, day int, name string, working bool) *WeekDayModel {
 	this := WeekDayModel{}
 	this.Type = type_
 	this.Day = day
@@ -79,9 +79,9 @@ func (o *WeekDayModel) SetType(v string) {
 }
 
 // GetDay returns the Day field value
-func (o *WeekDayModel) GetDay() int64 {
+func (o *WeekDayModel) GetDay() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -90,7 +90,7 @@ func (o *WeekDayModel) GetDay() int64 {
 
 // GetDayOk returns a tuple with the Day field value
 // and a boolean to check if the value has been set.
-func (o *WeekDayModel) GetDayOk() (*int64, bool) {
+func (o *WeekDayModel) GetDayOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -98,7 +98,7 @@ func (o *WeekDayModel) GetDayOk() (*int64, bool) {
 }
 
 // SetDay sets field value
-func (o *WeekDayModel) SetDay(v int64) {
+func (o *WeekDayModel) SetDay(v int) {
 	o.Day = v
 }
 

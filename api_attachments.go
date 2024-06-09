@@ -27,7 +27,7 @@ type AttachmentsAPIService service
 type ApiAddAttachmentToMeetingRequest struct {
 	ctx context.Context
 	ApiService *AttachmentsAPIService
-	id int64
+	id int
 }
 
 func (r ApiAddAttachmentToMeetingRequest) Execute() (*http.Response, error) {
@@ -43,7 +43,7 @@ Adds an attachment with the meeting as it's container.
  @param id ID of the meeting to receive the attachment
  @return ApiAddAttachmentToMeetingRequest
 */
-func (a *AttachmentsAPIService) AddAttachmentToMeeting(ctx context.Context, id int64) ApiAddAttachmentToMeetingRequest {
+func (a *AttachmentsAPIService) AddAttachmentToMeeting(ctx context.Context, id int) ApiAddAttachmentToMeetingRequest {
 	return ApiAddAttachmentToMeetingRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -184,7 +184,7 @@ func (a *AttachmentsAPIService) AddAttachmentToMeetingExecute(r ApiAddAttachment
 type ApiAddAttachmentToPostRequest struct {
 	ctx context.Context
 	ApiService *AttachmentsAPIService
-	id int64
+	id int
 }
 
 func (r ApiAddAttachmentToPostRequest) Execute() (*http.Response, error) {
@@ -200,7 +200,7 @@ Adds an attachment with the post as it's container.
  @param id ID of the post to receive the attachment
  @return ApiAddAttachmentToPostRequest
 */
-func (a *AttachmentsAPIService) AddAttachmentToPost(ctx context.Context, id int64) ApiAddAttachmentToPostRequest {
+func (a *AttachmentsAPIService) AddAttachmentToPost(ctx context.Context, id int) ApiAddAttachmentToPostRequest {
 	return ApiAddAttachmentToPostRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -341,7 +341,7 @@ func (a *AttachmentsAPIService) AddAttachmentToPostExecute(r ApiAddAttachmentToP
 type ApiAddAttachmentToWikiPageRequest struct {
 	ctx context.Context
 	ApiService *AttachmentsAPIService
-	id int64
+	id int
 }
 
 func (r ApiAddAttachmentToWikiPageRequest) Execute() (*http.Response, error) {
@@ -357,7 +357,7 @@ Adds an attachment with the wiki page as it's container.
  @param id ID of the wiki page to receive the attachment
  @return ApiAddAttachmentToWikiPageRequest
 */
-func (a *AttachmentsAPIService) AddAttachmentToWikiPage(ctx context.Context, id int64) ApiAddAttachmentToWikiPageRequest {
+func (a *AttachmentsAPIService) AddAttachmentToWikiPage(ctx context.Context, id int) ApiAddAttachmentToWikiPageRequest {
 	return ApiAddAttachmentToWikiPageRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -699,7 +699,7 @@ func (a *AttachmentsAPIService) CreateAttachmentExecute(r ApiCreateAttachmentReq
 type ApiCreateWorkPackageAttachmentRequest struct {
 	ctx context.Context
 	ApiService *AttachmentsAPIService
-	id int64
+	id int
 	metadata *CreateAttachmentRequestMetadata
 	file *os.File
 }
@@ -736,7 +736,7 @@ Instead the `fileName` inside the JSON of the metadata part will be used.
  @param id ID of the work package to receive the attachment
  @return ApiCreateWorkPackageAttachmentRequest
 */
-func (a *AttachmentsAPIService) CreateWorkPackageAttachment(ctx context.Context, id int64) ApiCreateWorkPackageAttachmentRequest {
+func (a *AttachmentsAPIService) CreateWorkPackageAttachment(ctx context.Context, id int) ApiCreateWorkPackageAttachmentRequest {
 	return ApiCreateWorkPackageAttachmentRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -910,7 +910,7 @@ func (a *AttachmentsAPIService) CreateWorkPackageAttachmentExecute(r ApiCreateWo
 type ApiDeleteAttachmentRequest struct {
 	ctx context.Context
 	ApiService *AttachmentsAPIService
-	id int64
+	id int
 }
 
 func (r ApiDeleteAttachmentRequest) Execute() (*http.Response, error) {
@@ -926,7 +926,7 @@ Permanently deletes the specified attachment.
  @param id Attachment id
  @return ApiDeleteAttachmentRequest
 */
-func (a *AttachmentsAPIService) DeleteAttachment(ctx context.Context, id int64) ApiDeleteAttachmentRequest {
+func (a *AttachmentsAPIService) DeleteAttachment(ctx context.Context, id int) ApiDeleteAttachmentRequest {
 	return ApiDeleteAttachmentRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1045,7 +1045,7 @@ func (a *AttachmentsAPIService) DeleteAttachmentExecute(r ApiDeleteAttachmentReq
 type ApiListAttachmentsByMeetingRequest struct {
 	ctx context.Context
 	ApiService *AttachmentsAPIService
-	id int64
+	id int
 }
 
 func (r ApiListAttachmentsByMeetingRequest) Execute() (*AttachmentsModel, *http.Response, error) {
@@ -1061,7 +1061,7 @@ ListAttachmentsByMeeting List attachments by meeting
  @param id ID of the meeting whose attachments will be listed
  @return ApiListAttachmentsByMeetingRequest
 */
-func (a *AttachmentsAPIService) ListAttachmentsByMeeting(ctx context.Context, id int64) ApiListAttachmentsByMeetingRequest {
+func (a *AttachmentsAPIService) ListAttachmentsByMeeting(ctx context.Context, id int) ApiListAttachmentsByMeetingRequest {
 	return ApiListAttachmentsByMeetingRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1158,7 +1158,7 @@ func (a *AttachmentsAPIService) ListAttachmentsByMeetingExecute(r ApiListAttachm
 type ApiListAttachmentsByPostRequest struct {
 	ctx context.Context
 	ApiService *AttachmentsAPIService
-	id int64
+	id int
 }
 
 func (r ApiListAttachmentsByPostRequest) Execute() (*AttachmentsModel, *http.Response, error) {
@@ -1174,7 +1174,7 @@ ListAttachmentsByPost List attachments by post
  @param id ID of the post whose attachments will be listed
  @return ApiListAttachmentsByPostRequest
 */
-func (a *AttachmentsAPIService) ListAttachmentsByPost(ctx context.Context, id int64) ApiListAttachmentsByPostRequest {
+func (a *AttachmentsAPIService) ListAttachmentsByPost(ctx context.Context, id int) ApiListAttachmentsByPostRequest {
 	return ApiListAttachmentsByPostRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1271,7 +1271,7 @@ func (a *AttachmentsAPIService) ListAttachmentsByPostExecute(r ApiListAttachment
 type ApiListAttachmentsByWikiPageRequest struct {
 	ctx context.Context
 	ApiService *AttachmentsAPIService
-	id int64
+	id int
 }
 
 func (r ApiListAttachmentsByWikiPageRequest) Execute() (*AttachmentsModel, *http.Response, error) {
@@ -1287,7 +1287,7 @@ ListAttachmentsByWikiPage List attachments by wiki page
  @param id ID of the wiki page whose attachments will be listed
  @return ApiListAttachmentsByWikiPageRequest
 */
-func (a *AttachmentsAPIService) ListAttachmentsByWikiPage(ctx context.Context, id int64) ApiListAttachmentsByWikiPageRequest {
+func (a *AttachmentsAPIService) ListAttachmentsByWikiPage(ctx context.Context, id int) ApiListAttachmentsByWikiPageRequest {
 	return ApiListAttachmentsByWikiPageRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1384,7 +1384,7 @@ func (a *AttachmentsAPIService) ListAttachmentsByWikiPageExecute(r ApiListAttach
 type ApiListWorkPackageAttachmentsRequest struct {
 	ctx context.Context
 	ApiService *AttachmentsAPIService
-	id int64
+	id int
 }
 
 func (r ApiListWorkPackageAttachmentsRequest) Execute() (*AttachmentsModel, *http.Response, error) {
@@ -1400,7 +1400,7 @@ ListWorkPackageAttachments List attachments by work package
  @param id ID of the work package whose attachments will be listed
  @return ApiListWorkPackageAttachmentsRequest
 */
-func (a *AttachmentsAPIService) ListWorkPackageAttachments(ctx context.Context, id int64) ApiListWorkPackageAttachmentsRequest {
+func (a *AttachmentsAPIService) ListWorkPackageAttachments(ctx context.Context, id int) ApiListWorkPackageAttachmentsRequest {
 	return ApiListWorkPackageAttachmentsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1497,7 +1497,7 @@ func (a *AttachmentsAPIService) ListWorkPackageAttachmentsExecute(r ApiListWorkP
 type ApiViewAttachmentRequest struct {
 	ctx context.Context
 	ApiService *AttachmentsAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewAttachmentRequest) Execute() (*AttachmentModel, *http.Response, error) {
@@ -1513,7 +1513,7 @@ ViewAttachment View attachment
  @param id Attachment id
  @return ApiViewAttachmentRequest
 */
-func (a *AttachmentsAPIService) ViewAttachment(ctx context.Context, id int64) ApiViewAttachmentRequest {
+func (a *AttachmentsAPIService) ViewAttachment(ctx context.Context, id int) ApiViewAttachmentRequest {
 	return ApiViewAttachmentRequest{
 		ApiService: a,
 		ctx: ctx,

@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/ua-bsky-watch/openproject"
+	openapiclient "bsky.watch/openproject"
 )
 
 func Test_openproject_ProjectsAPIService(t *testing.T) {
@@ -38,7 +38,7 @@ func Test_openproject_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		httpRes, err := apiClient.ProjectsAPI.CreateProjectCopy(context.Background(), id).Execute()
 
@@ -51,7 +51,7 @@ func Test_openproject_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		httpRes, err := apiClient.ProjectsAPI.DeleteProject(context.Background(), id).Execute()
 
@@ -88,7 +88,7 @@ func Test_openproject_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.ProjectsAPI.ListProjectsWithVersion(context.Background(), id).Execute()
 
@@ -102,7 +102,7 @@ func Test_openproject_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		httpRes, err := apiClient.ProjectsAPI.ProjectCopyForm(context.Background(), id).Execute()
 
@@ -127,7 +127,7 @@ func Test_openproject_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		httpRes, err := apiClient.ProjectsAPI.ProjectUpdateForm(context.Background(), id).Execute()
 
@@ -140,7 +140,7 @@ func Test_openproject_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.ProjectsAPI.UpdateProject(context.Background(), id).Execute()
 
@@ -154,7 +154,7 @@ func Test_openproject_ProjectsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.ProjectsAPI.ViewProject(context.Background(), id).Execute()
 

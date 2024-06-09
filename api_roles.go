@@ -135,7 +135,7 @@ func (a *RolesAPIService) ListRolesExecute(r ApiListRolesRequest) (map[string]in
 type ApiViewRoleRequest struct {
 	ctx context.Context
 	ApiService *RolesAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewRoleRequest) Execute() (*RoleModel, *http.Response, error) {
@@ -151,7 +151,7 @@ Fetch an individual role.
  @param id Role id
  @return ApiViewRoleRequest
 */
-func (a *RolesAPIService) ViewRole(ctx context.Context, id int64) ApiViewRoleRequest {
+func (a *RolesAPIService) ViewRole(ctx context.Context, id int) ApiViewRoleRequest {
 	return ApiViewRoleRequest{
 		ApiService: a,
 		ctx: ctx,

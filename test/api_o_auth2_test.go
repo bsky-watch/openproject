@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/ua-bsky-watch/openproject"
+	openapiclient "bsky.watch/openproject"
 )
 
 func Test_openproject_OAuth2APIService(t *testing.T) {
@@ -26,7 +26,7 @@ func Test_openproject_OAuth2APIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.OAuth2API.GetOauthApplication(context.Background(), id).Execute()
 
@@ -40,7 +40,7 @@ func Test_openproject_OAuth2APIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.OAuth2API.GetOauthClientCredentials(context.Background(), id).Execute()
 

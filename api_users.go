@@ -194,7 +194,7 @@ func (a *UsersAPIService) CreateUserExecute(r ApiCreateUserRequest) (*UserModel,
 type ApiDeleteUserRequest struct {
 	ctx context.Context
 	ApiService *UsersAPIService
-	id int64
+	id int
 }
 
 func (r ApiDeleteUserRequest) Execute() (*http.Response, error) {
@@ -210,7 +210,7 @@ Permanently deletes the specified user account.
  @param id User id
  @return ApiDeleteUserRequest
 */
-func (a *UsersAPIService) DeleteUser(ctx context.Context, id int64) ApiDeleteUserRequest {
+func (a *UsersAPIService) DeleteUser(ctx context.Context, id int) ApiDeleteUserRequest {
 	return ApiDeleteUserRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -307,21 +307,21 @@ func (a *UsersAPIService) DeleteUserExecute(r ApiDeleteUserRequest) (*http.Respo
 type ApiListUsersRequest struct {
 	ctx context.Context
 	ApiService *UsersAPIService
-	offset *int64
-	pageSize *int64
+	offset *int
+	pageSize *int
 	filters *string
 	sortBy *string
 	select_ *string
 }
 
 // Page number inside the requested collection.
-func (r ApiListUsersRequest) Offset(offset int64) ApiListUsersRequest {
+func (r ApiListUsersRequest) Offset(offset int) ApiListUsersRequest {
 	r.offset = &offset
 	return r
 }
 
 // Number of elements to display per page.
-func (r ApiListUsersRequest) PageSize(pageSize int64) ApiListUsersRequest {
+func (r ApiListUsersRequest) PageSize(pageSize int) ApiListUsersRequest {
 	r.pageSize = &pageSize
 	return r
 }
@@ -391,7 +391,7 @@ func (a *UsersAPIService) ListUsersExecute(r ApiListUsersRequest) (*UserCollecti
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
 	} else {
-		var defaultValue int64 = 1
+		var defaultValue int = 1
 		r.offset = &defaultValue
 	}
 	if r.pageSize != nil {
@@ -484,7 +484,7 @@ func (a *UsersAPIService) ListUsersExecute(r ApiListUsersRequest) (*UserCollecti
 type ApiLockUserRequest struct {
 	ctx context.Context
 	ApiService *UsersAPIService
-	id int64
+	id int
 }
 
 func (r ApiLockUserRequest) Execute() (*UserModel, *http.Response, error) {
@@ -498,7 +498,7 @@ LockUser Lock user
  @param id User id
  @return ApiLockUserRequest
 */
-func (a *UsersAPIService) LockUser(ctx context.Context, id int64) ApiLockUserRequest {
+func (a *UsersAPIService) LockUser(ctx context.Context, id int) ApiLockUserRequest {
 	return ApiLockUserRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -639,7 +639,7 @@ func (a *UsersAPIService) LockUserExecute(r ApiLockUserRequest) (*UserModel, *ht
 type ApiUnlockUserRequest struct {
 	ctx context.Context
 	ApiService *UsersAPIService
-	id int64
+	id int
 }
 
 func (r ApiUnlockUserRequest) Execute() (*UserModel, *http.Response, error) {
@@ -653,7 +653,7 @@ UnlockUser Unlock user
  @param id User id
  @return ApiUnlockUserRequest
 */
-func (a *UsersAPIService) UnlockUser(ctx context.Context, id int64) ApiUnlockUserRequest {
+func (a *UsersAPIService) UnlockUser(ctx context.Context, id int) ApiUnlockUserRequest {
 	return ApiUnlockUserRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -794,7 +794,7 @@ func (a *UsersAPIService) UnlockUserExecute(r ApiUnlockUserRequest) (*UserModel,
 type ApiUpdateUserRequest struct {
 	ctx context.Context
 	ApiService *UsersAPIService
-	id int64
+	id int
 	userCreateModel *UserCreateModel
 }
 
@@ -817,7 +817,7 @@ When calling this endpoint the client provides a single object, containing at le
  @param id User id
  @return ApiUpdateUserRequest
 */
-func (a *UsersAPIService) UpdateUser(ctx context.Context, id int64) ApiUpdateUserRequest {
+func (a *UsersAPIService) UpdateUser(ctx context.Context, id int) ApiUpdateUserRequest {
 	return ApiUpdateUserRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -971,7 +971,7 @@ func (a *UsersAPIService) UpdateUserExecute(r ApiUpdateUserRequest) (*UserModel,
 type ApiUserUpdateFormRequest struct {
 	ctx context.Context
 	ApiService *UsersAPIService
-	id int64
+	id int
 }
 
 func (r ApiUserUpdateFormRequest) Execute() (*http.Response, error) {
@@ -987,7 +987,7 @@ UserUpdateForm User update form
  @param id User id
  @return ApiUserUpdateFormRequest
 */
-func (a *UsersAPIService) UserUpdateForm(ctx context.Context, id int64) ApiUserUpdateFormRequest {
+func (a *UsersAPIService) UserUpdateForm(ctx context.Context, id int) ApiUserUpdateFormRequest {
 	return ApiUserUpdateFormRequest{
 		ApiService: a,
 		ctx: ctx,

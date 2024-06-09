@@ -187,7 +187,7 @@ func (a *GroupsAPIService) CreateGroupExecute(r ApiCreateGroupRequest) (*GroupMo
 type ApiDeleteGroupRequest struct {
 	ctx context.Context
 	ApiService *GroupsAPIService
-	id int64
+	id int
 }
 
 func (r ApiDeleteGroupRequest) Execute() (*http.Response, error) {
@@ -203,7 +203,7 @@ Deletes the group.
  @param id Group id
  @return ApiDeleteGroupRequest
 */
-func (a *GroupsAPIService) DeleteGroup(ctx context.Context, id int64) ApiDeleteGroupRequest {
+func (a *GroupsAPIService) DeleteGroup(ctx context.Context, id int) ApiDeleteGroupRequest {
 	return ApiDeleteGroupRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -322,7 +322,7 @@ func (a *GroupsAPIService) DeleteGroupExecute(r ApiDeleteGroupRequest) (*http.Re
 type ApiGetGroupRequest struct {
 	ctx context.Context
 	ApiService *GroupsAPIService
-	id int64
+	id int
 }
 
 func (r ApiGetGroupRequest) Execute() (*GroupModel, *http.Response, error) {
@@ -338,7 +338,7 @@ Fetches a group resource.
  @param id Group id
  @return ApiGetGroupRequest
 */
-func (a *GroupsAPIService) GetGroup(ctx context.Context, id int64) ApiGetGroupRequest {
+func (a *GroupsAPIService) GetGroup(ctx context.Context, id int) ApiGetGroupRequest {
 	return ApiGetGroupRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -570,7 +570,7 @@ func (a *GroupsAPIService) ListGroupsExecute(r ApiListGroupsRequest) (*GroupColl
 type ApiUpdateGroupRequest struct {
 	ctx context.Context
 	ApiService *GroupsAPIService
-	id int64
+	id int
 	groupWriteModel *GroupWriteModel
 }
 
@@ -596,7 +596,7 @@ member is to be added.
  @param id Group id
  @return ApiUpdateGroupRequest
 */
-func (a *GroupsAPIService) UpdateGroup(ctx context.Context, id int64) ApiUpdateGroupRequest {
+func (a *GroupsAPIService) UpdateGroup(ctx context.Context, id int) ApiUpdateGroupRequest {
 	return ApiUpdateGroupRequest{
 		ApiService: a,
 		ctx: ctx,

@@ -20,11 +20,11 @@ var _ MappedNullable = &PriorityModel{}
 // PriorityModel struct for PriorityModel
 type PriorityModel struct {
 	// Priority id
-	Id *int64 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	// Priority name
 	Name *string `json:"name,omitempty"`
 	// Sort index of the priority
-	Position *int64 `json:"position,omitempty"`
+	Position *int `json:"position,omitempty"`
 	// Indicates whether this is the default value
 	IsDefault *bool `json:"isDefault,omitempty"`
 	// Indicates whether the priority is available
@@ -53,9 +53,9 @@ func NewPriorityModelWithDefaults() *PriorityModel {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *PriorityModel) GetId() int64 {
+func (o *PriorityModel) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -63,7 +63,7 @@ func (o *PriorityModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PriorityModel) GetIdOk() (*int64, bool) {
+func (o *PriorityModel) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -79,8 +79,8 @@ func (o *PriorityModel) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *PriorityModel) SetId(v int64) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *PriorityModel) SetId(v int) {
 	o.Id = &v
 }
 
@@ -117,9 +117,9 @@ func (o *PriorityModel) SetName(v string) {
 }
 
 // GetPosition returns the Position field value if set, zero value otherwise.
-func (o *PriorityModel) GetPosition() int64 {
+func (o *PriorityModel) GetPosition() int {
 	if o == nil || IsNil(o.Position) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Position
@@ -127,7 +127,7 @@ func (o *PriorityModel) GetPosition() int64 {
 
 // GetPositionOk returns a tuple with the Position field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PriorityModel) GetPositionOk() (*int64, bool) {
+func (o *PriorityModel) GetPositionOk() (*int, bool) {
 	if o == nil || IsNil(o.Position) {
 		return nil, false
 	}
@@ -143,8 +143,8 @@ func (o *PriorityModel) HasPosition() bool {
 	return false
 }
 
-// SetPosition gets a reference to the given int64 and assigns it to the Position field.
-func (o *PriorityModel) SetPosition(v int64) {
+// SetPosition gets a reference to the given int and assigns it to the Position field.
+func (o *PriorityModel) SetPosition(v int) {
 	o.Position = &v
 }
 

@@ -26,19 +26,19 @@ type DocumentsAPIService service
 type ApiListDocumentsRequest struct {
 	ctx context.Context
 	ApiService *DocumentsAPIService
-	offset *int64
-	pageSize *int64
+	offset *int
+	pageSize *int
 	sortBy *string
 }
 
 // Page number inside the requested collection.
-func (r ApiListDocumentsRequest) Offset(offset int64) ApiListDocumentsRequest {
+func (r ApiListDocumentsRequest) Offset(offset int) ApiListDocumentsRequest {
 	r.offset = &offset
 	return r
 }
 
 // Number of elements to display per page.
-func (r ApiListDocumentsRequest) PageSize(pageSize int64) ApiListDocumentsRequest {
+func (r ApiListDocumentsRequest) PageSize(pageSize int) ApiListDocumentsRequest {
 	r.pageSize = &pageSize
 	return r
 }
@@ -92,7 +92,7 @@ func (a *DocumentsAPIService) ListDocumentsExecute(r ApiListDocumentsRequest) (m
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
 	} else {
-		var defaultValue int64 = 1
+		var defaultValue int = 1
 		r.offset = &defaultValue
 	}
 	if r.pageSize != nil {
@@ -179,7 +179,7 @@ func (a *DocumentsAPIService) ListDocumentsExecute(r ApiListDocumentsRequest) (m
 type ApiViewDocumentRequest struct {
 	ctx context.Context
 	ApiService *DocumentsAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewDocumentRequest) Execute() (*DocumentModel, *http.Response, error) {
@@ -195,7 +195,7 @@ ViewDocument View document
  @param id Document id
  @return ApiViewDocumentRequest
 */
-func (a *DocumentsAPIService) ViewDocument(ctx context.Context, id int64) ApiViewDocumentRequest {
+func (a *DocumentsAPIService) ViewDocument(ctx context.Context, id int) ApiViewDocumentRequest {
 	return ApiViewDocumentRequest{
 		ApiService: a,
 		ctx: ctx,

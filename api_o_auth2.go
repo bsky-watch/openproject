@@ -26,7 +26,7 @@ type OAuth2APIService service
 type ApiGetOauthApplicationRequest struct {
 	ctx context.Context
 	ApiService *OAuth2APIService
-	id int64
+	id int
 }
 
 func (r ApiGetOauthApplicationRequest) Execute() (*OAuthApplicationReadModel, *http.Response, error) {
@@ -43,7 +43,7 @@ instead a `confidential` flag is indicating, whether there is a secret or not.
  @param id OAuth application id
  @return ApiGetOauthApplicationRequest
 */
-func (a *OAuth2APIService) GetOauthApplication(ctx context.Context, id int64) ApiGetOauthApplicationRequest {
+func (a *OAuth2APIService) GetOauthApplication(ctx context.Context, id int) ApiGetOauthApplicationRequest {
 	return ApiGetOauthApplicationRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -151,7 +151,7 @@ func (a *OAuth2APIService) GetOauthApplicationExecute(r ApiGetOauthApplicationRe
 type ApiGetOauthClientCredentialsRequest struct {
 	ctx context.Context
 	ApiService *OAuth2APIService
-	id int64
+	id int
 }
 
 func (r ApiGetOauthClientCredentialsRequest) Execute() (*OAuthClientCredentialsReadModel, *http.Response, error) {
@@ -168,7 +168,7 @@ instead a `confidential` flag is indicating, whether there is a secret or not.
  @param id OAuth Client Credentials id
  @return ApiGetOauthClientCredentialsRequest
 */
-func (a *OAuth2APIService) GetOauthClientCredentials(ctx context.Context, id int64) ApiGetOauthClientCredentialsRequest {
+func (a *OAuth2APIService) GetOauthClientCredentials(ctx context.Context, id int) ApiGetOauthClientCredentialsRequest {
 	return ApiGetOauthClientCredentialsRequest{
 		ApiService: a,
 		ctx: ctx,

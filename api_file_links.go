@@ -185,7 +185,7 @@ func (a *FileLinksAPIService) CreateStorageExecute(r ApiCreateStorageRequest) (*
 type ApiCreateStorageOauthCredentialsRequest struct {
 	ctx context.Context
 	ApiService *FileLinksAPIService
-	id int64
+	id int
 	oAuthClientCredentialsWriteModel *OAuthClientCredentialsWriteModel
 }
 
@@ -208,7 +208,7 @@ endpoint on a storage that already contains OAuth 2 client credentials will repl
  @param id Storage id
  @return ApiCreateStorageOauthCredentialsRequest
 */
-func (a *FileLinksAPIService) CreateStorageOauthCredentials(ctx context.Context, id int64) ApiCreateStorageOauthCredentialsRequest {
+func (a *FileLinksAPIService) CreateStorageOauthCredentials(ctx context.Context, id int) ApiCreateStorageOauthCredentialsRequest {
 	return ApiCreateStorageOauthCredentialsRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -318,7 +318,7 @@ func (a *FileLinksAPIService) CreateStorageOauthCredentialsExecute(r ApiCreateSt
 type ApiDeleteFileLinkRequest struct {
 	ctx context.Context
 	ApiService *FileLinksAPIService
-	id int64
+	id int
 }
 
 func (r ApiDeleteFileLinkRequest) Execute() (*http.Response, error) {
@@ -336,7 +336,7 @@ The request contains only the file link identifier as a path parameter. No reque
  @param id File link id
  @return ApiDeleteFileLinkRequest
 */
-func (a *FileLinksAPIService) DeleteFileLink(ctx context.Context, id int64) ApiDeleteFileLinkRequest {
+func (a *FileLinksAPIService) DeleteFileLink(ctx context.Context, id int) ApiDeleteFileLinkRequest {
 	return ApiDeleteFileLinkRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -433,7 +433,7 @@ func (a *FileLinksAPIService) DeleteFileLinkExecute(r ApiDeleteFileLinkRequest) 
 type ApiDeleteStorageRequest struct {
 	ctx context.Context
 	ApiService *FileLinksAPIService
-	id int64
+	id int
 }
 
 func (r ApiDeleteStorageRequest) Execute() (*http.Response, error) {
@@ -450,7 +450,7 @@ any file links created within this storage.
  @param id Storage id
  @return ApiDeleteStorageRequest
 */
-func (a *FileLinksAPIService) DeleteStorage(ctx context.Context, id int64) ApiDeleteStorageRequest {
+func (a *FileLinksAPIService) DeleteStorage(ctx context.Context, id int) ApiDeleteStorageRequest {
 	return ApiDeleteStorageRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -547,7 +547,7 @@ func (a *FileLinksAPIService) DeleteStorageExecute(r ApiDeleteStorageRequest) (*
 type ApiDownloadFileLinkRequest struct {
 	ctx context.Context
 	ApiService *FileLinksAPIService
-	id int64
+	id int
 }
 
 func (r ApiDownloadFileLinkRequest) Execute() (*http.Response, error) {
@@ -564,7 +564,7 @@ is always located on the origin storage itself.
  @param id File link id
  @return ApiDownloadFileLinkRequest
 */
-func (a *FileLinksAPIService) DownloadFileLink(ctx context.Context, id int64) ApiDownloadFileLinkRequest {
+func (a *FileLinksAPIService) DownloadFileLink(ctx context.Context, id int) ApiDownloadFileLinkRequest {
 	return ApiDownloadFileLinkRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -650,7 +650,7 @@ func (a *FileLinksAPIService) DownloadFileLinkExecute(r ApiDownloadFileLinkReque
 type ApiGetProjectStorageRequest struct {
 	ctx context.Context
 	ApiService *FileLinksAPIService
-	id int64
+	id int
 }
 
 func (r ApiGetProjectStorageRequest) Execute() (*ProjectStorageModel, *http.Response, error) {
@@ -667,7 +667,7 @@ storage and a project.
  @param id Project storage id
  @return ApiGetProjectStorageRequest
 */
-func (a *FileLinksAPIService) GetProjectStorage(ctx context.Context, id int64) ApiGetProjectStorageRequest {
+func (a *FileLinksAPIService) GetProjectStorage(ctx context.Context, id int) ApiGetProjectStorageRequest {
 	return ApiGetProjectStorageRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -764,7 +764,7 @@ func (a *FileLinksAPIService) GetProjectStorageExecute(r ApiGetProjectStorageReq
 type ApiGetStorageRequest struct {
 	ctx context.Context
 	ApiService *FileLinksAPIService
-	id int64
+	id int
 }
 
 func (r ApiGetStorageRequest) Execute() (*StorageReadModel, *http.Response, error) {
@@ -781,7 +781,7 @@ connection state data.
  @param id Storage id
  @return ApiGetStorageRequest
 */
-func (a *FileLinksAPIService) GetStorage(ctx context.Context, id int64) ApiGetStorageRequest {
+func (a *FileLinksAPIService) GetStorage(ctx context.Context, id int) ApiGetStorageRequest {
 	return ApiGetStorageRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -878,7 +878,7 @@ func (a *FileLinksAPIService) GetStorageExecute(r ApiGetStorageRequest) (*Storag
 type ApiGetStorageFilesRequest struct {
 	ctx context.Context
 	ApiService *FileLinksAPIService
-	id int64
+	id int
 	parent *string
 }
 
@@ -906,7 +906,7 @@ If given `parent` context is no directory, `400 Bad Request` is returned.
  @param id Storage id
  @return ApiGetStorageFilesRequest
 */
-func (a *FileLinksAPIService) GetStorageFiles(ctx context.Context, id int64) ApiGetStorageFilesRequest {
+func (a *FileLinksAPIService) GetStorageFiles(ctx context.Context, id int) ApiGetStorageFilesRequest {
 	return ApiGetStorageFilesRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1248,7 +1248,7 @@ func (a *FileLinksAPIService) ListStoragesExecute(r ApiListStoragesRequest) (*St
 type ApiOpenFileLinkRequest struct {
 	ctx context.Context
 	ApiService *FileLinksAPIService
-	id int64
+	id int
 	location *bool
 }
 
@@ -1272,7 +1272,7 @@ is always located on the origin storage itself.
  @param id File link id
  @return ApiOpenFileLinkRequest
 */
-func (a *FileLinksAPIService) OpenFileLink(ctx context.Context, id int64) ApiOpenFileLinkRequest {
+func (a *FileLinksAPIService) OpenFileLink(ctx context.Context, id int) ApiOpenFileLinkRequest {
 	return ApiOpenFileLinkRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1361,7 +1361,7 @@ func (a *FileLinksAPIService) OpenFileLinkExecute(r ApiOpenFileLinkRequest) (*ht
 type ApiOpenProjectStorageRequest struct {
 	ctx context.Context
 	ApiService *FileLinksAPIService
-	id int64
+	id int
 }
 
 func (r ApiOpenProjectStorageRequest) Execute() (*http.Response, error) {
@@ -1378,7 +1378,7 @@ folder, it is opened at this location. If not, the storage root is opened.
  @param id Project storage id
  @return ApiOpenProjectStorageRequest
 */
-func (a *FileLinksAPIService) OpenProjectStorage(ctx context.Context, id int64) ApiOpenProjectStorageRequest {
+func (a *FileLinksAPIService) OpenProjectStorage(ctx context.Context, id int) ApiOpenProjectStorageRequest {
 	return ApiOpenProjectStorageRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1475,7 +1475,7 @@ func (a *FileLinksAPIService) OpenProjectStorageExecute(r ApiOpenProjectStorageR
 type ApiOpenStorageRequest struct {
 	ctx context.Context
 	ApiService *FileLinksAPIService
-	id int64
+	id int
 }
 
 func (r ApiOpenStorageRequest) Execute() (*http.Response, error) {
@@ -1492,7 +1492,7 @@ location.
  @param id Storage id
  @return ApiOpenStorageRequest
 */
-func (a *FileLinksAPIService) OpenStorage(ctx context.Context, id int64) ApiOpenStorageRequest {
+func (a *FileLinksAPIService) OpenStorage(ctx context.Context, id int) ApiOpenStorageRequest {
 	return ApiOpenStorageRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1578,7 +1578,7 @@ func (a *FileLinksAPIService) OpenStorageExecute(r ApiOpenStorageRequest) (*http
 type ApiPrepareStorageFileUploadRequest struct {
 	ctx context.Context
 	ApiService *FileLinksAPIService
-	id int64
+	id int
 	storageFileUploadPreparationModel *StorageFileUploadPreparationModel
 }
 
@@ -1604,7 +1604,7 @@ that enables the client to execute a file upload without the real credentials.
  @param id Storage id
  @return ApiPrepareStorageFileUploadRequest
 */
-func (a *FileLinksAPIService) PrepareStorageFileUpload(ctx context.Context, id int64) ApiPrepareStorageFileUploadRequest {
+func (a *FileLinksAPIService) PrepareStorageFileUpload(ctx context.Context, id int) ApiPrepareStorageFileUploadRequest {
 	return ApiPrepareStorageFileUploadRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1736,7 +1736,7 @@ func (a *FileLinksAPIService) PrepareStorageFileUploadExecute(r ApiPrepareStorag
 type ApiUpdateStorageRequest struct {
 	ctx context.Context
 	ApiService *FileLinksAPIService
-	id int64
+	id int
 	storageWriteModel *StorageWriteModel
 }
 
@@ -1759,7 +1759,7 @@ application data.
  @param id Storage id
  @return ApiUpdateStorageRequest
 */
-func (a *FileLinksAPIService) UpdateStorage(ctx context.Context, id int64) ApiUpdateStorageRequest {
+func (a *FileLinksAPIService) UpdateStorage(ctx context.Context, id int) ApiUpdateStorageRequest {
 	return ApiUpdateStorageRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1869,7 +1869,7 @@ func (a *FileLinksAPIService) UpdateStorageExecute(r ApiUpdateStorageRequest) (*
 type ApiViewFileLinkRequest struct {
 	ctx context.Context
 	ApiService *FileLinksAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewFileLinkRequest) Execute() (*FileLinkReadModel, *http.Response, error) {
@@ -1885,7 +1885,7 @@ Gets a single file link resource of a work package.
  @param id File link id
  @return ApiViewFileLinkRequest
 */
-func (a *FileLinksAPIService) ViewFileLink(ctx context.Context, id int64) ApiViewFileLinkRequest {
+func (a *FileLinksAPIService) ViewFileLink(ctx context.Context, id int) ApiViewFileLinkRequest {
 	return ApiViewFileLinkRequest{
 		ApiService: a,
 		ctx: ctx,

@@ -21,7 +21,7 @@ var _ MappedNullable = &StorageFileUploadPreparationModel{}
 // StorageFileUploadPreparationModel struct for StorageFileUploadPreparationModel
 type StorageFileUploadPreparationModel struct {
 	// The project identifier, from where a user starts uploading a file.
-	ProjectId int64 `json:"projectId"`
+	ProjectId int `json:"projectId"`
 	// The file name.
 	FileName string `json:"fileName"`
 	// The directory to which the file is to be uploaded. For root directories, the value `/` must be provided.
@@ -35,7 +35,7 @@ type _StorageFileUploadPreparationModel StorageFileUploadPreparationModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStorageFileUploadPreparationModel(projectId int64, fileName string, parent string) *StorageFileUploadPreparationModel {
+func NewStorageFileUploadPreparationModel(projectId int, fileName string, parent string) *StorageFileUploadPreparationModel {
 	this := StorageFileUploadPreparationModel{}
 	this.ProjectId = projectId
 	this.FileName = fileName
@@ -52,9 +52,9 @@ func NewStorageFileUploadPreparationModelWithDefaults() *StorageFileUploadPrepar
 }
 
 // GetProjectId returns the ProjectId field value
-func (o *StorageFileUploadPreparationModel) GetProjectId() int64 {
+func (o *StorageFileUploadPreparationModel) GetProjectId() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -63,7 +63,7 @@ func (o *StorageFileUploadPreparationModel) GetProjectId() int64 {
 
 // GetProjectIdOk returns a tuple with the ProjectId field value
 // and a boolean to check if the value has been set.
-func (o *StorageFileUploadPreparationModel) GetProjectIdOk() (*int64, bool) {
+func (o *StorageFileUploadPreparationModel) GetProjectIdOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -71,7 +71,7 @@ func (o *StorageFileUploadPreparationModel) GetProjectIdOk() (*int64, bool) {
 }
 
 // SetProjectId sets field value
-func (o *StorageFileUploadPreparationModel) SetProjectId(v int64) {
+func (o *StorageFileUploadPreparationModel) SetProjectId(v int) {
 	o.ProjectId = v
 }
 

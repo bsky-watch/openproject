@@ -23,7 +23,7 @@ var _ MappedNullable = &MembershipReadModel{}
 type MembershipReadModel struct {
 	Type string `json:"_type"`
 	// The membership's id
-	Id int64 `json:"id"`
+	Id int `json:"id"`
 	// The time the membership was created.
 	CreatedAt time.Time `json:"createdAt"`
 	// The time the membership was last updated.
@@ -39,7 +39,7 @@ type _MembershipReadModel MembershipReadModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewMembershipReadModel(type_ string, id int64, createdAt time.Time, updatedAt time.Time, links MembershipReadModelLinks) *MembershipReadModel {
+func NewMembershipReadModel(type_ string, id int, createdAt time.Time, updatedAt time.Time, links MembershipReadModelLinks) *MembershipReadModel {
 	this := MembershipReadModel{}
 	this.Type = type_
 	this.Id = id
@@ -82,9 +82,9 @@ func (o *MembershipReadModel) SetType(v string) {
 }
 
 // GetId returns the Id field value
-func (o *MembershipReadModel) GetId() int64 {
+func (o *MembershipReadModel) GetId() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -93,7 +93,7 @@ func (o *MembershipReadModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *MembershipReadModel) GetIdOk() (*int64, bool) {
+func (o *MembershipReadModel) GetIdOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -101,7 +101,7 @@ func (o *MembershipReadModel) GetIdOk() (*int64, bool) {
 }
 
 // SetId sets field value
-func (o *MembershipReadModel) SetId(v int64) {
+func (o *MembershipReadModel) SetId(v int) {
 	o.Id = v
 }
 

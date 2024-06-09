@@ -22,17 +22,17 @@ var _ MappedNullable = &GridWidgetModel{}
 type GridWidgetModel struct {
 	Type string `json:"_type"`
 	// The grid widget's unique identifier. Can be null, if a new widget is created within a grid.
-	Id int64 `json:"id"`
+	Id int `json:"id"`
 	// An alternative, human legible, and unique identifier.
 	Identifier string `json:"identifier"`
 	// The index of the starting row of the widget. The row is inclusive.
-	StartRow int64 `json:"startRow"`
+	StartRow int `json:"startRow"`
 	// The index of the ending row of the widget. The row is exclusive.
-	EndRow int64 `json:"endRow"`
+	EndRow int `json:"endRow"`
 	// The index of the starting column of the widget. The column is inclusive.
-	StartColumn int64 `json:"startColumn"`
+	StartColumn int `json:"startColumn"`
 	// The index of the ending column of the widget. The column is exclusive.
-	EndColumn int64 `json:"endColumn"`
+	EndColumn int `json:"endColumn"`
 	Options map[string]interface{} `json:"options,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -43,7 +43,7 @@ type _GridWidgetModel GridWidgetModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGridWidgetModel(type_ string, id int64, identifier string, startRow int64, endRow int64, startColumn int64, endColumn int64) *GridWidgetModel {
+func NewGridWidgetModel(type_ string, id int, identifier string, startRow int, endRow int, startColumn int, endColumn int) *GridWidgetModel {
 	this := GridWidgetModel{}
 	this.Type = type_
 	this.Id = id
@@ -88,9 +88,9 @@ func (o *GridWidgetModel) SetType(v string) {
 }
 
 // GetId returns the Id field value
-func (o *GridWidgetModel) GetId() int64 {
+func (o *GridWidgetModel) GetId() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -99,7 +99,7 @@ func (o *GridWidgetModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *GridWidgetModel) GetIdOk() (*int64, bool) {
+func (o *GridWidgetModel) GetIdOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -107,7 +107,7 @@ func (o *GridWidgetModel) GetIdOk() (*int64, bool) {
 }
 
 // SetId sets field value
-func (o *GridWidgetModel) SetId(v int64) {
+func (o *GridWidgetModel) SetId(v int) {
 	o.Id = v
 }
 
@@ -136,9 +136,9 @@ func (o *GridWidgetModel) SetIdentifier(v string) {
 }
 
 // GetStartRow returns the StartRow field value
-func (o *GridWidgetModel) GetStartRow() int64 {
+func (o *GridWidgetModel) GetStartRow() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -147,7 +147,7 @@ func (o *GridWidgetModel) GetStartRow() int64 {
 
 // GetStartRowOk returns a tuple with the StartRow field value
 // and a boolean to check if the value has been set.
-func (o *GridWidgetModel) GetStartRowOk() (*int64, bool) {
+func (o *GridWidgetModel) GetStartRowOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -155,14 +155,14 @@ func (o *GridWidgetModel) GetStartRowOk() (*int64, bool) {
 }
 
 // SetStartRow sets field value
-func (o *GridWidgetModel) SetStartRow(v int64) {
+func (o *GridWidgetModel) SetStartRow(v int) {
 	o.StartRow = v
 }
 
 // GetEndRow returns the EndRow field value
-func (o *GridWidgetModel) GetEndRow() int64 {
+func (o *GridWidgetModel) GetEndRow() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -171,7 +171,7 @@ func (o *GridWidgetModel) GetEndRow() int64 {
 
 // GetEndRowOk returns a tuple with the EndRow field value
 // and a boolean to check if the value has been set.
-func (o *GridWidgetModel) GetEndRowOk() (*int64, bool) {
+func (o *GridWidgetModel) GetEndRowOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -179,14 +179,14 @@ func (o *GridWidgetModel) GetEndRowOk() (*int64, bool) {
 }
 
 // SetEndRow sets field value
-func (o *GridWidgetModel) SetEndRow(v int64) {
+func (o *GridWidgetModel) SetEndRow(v int) {
 	o.EndRow = v
 }
 
 // GetStartColumn returns the StartColumn field value
-func (o *GridWidgetModel) GetStartColumn() int64 {
+func (o *GridWidgetModel) GetStartColumn() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -195,7 +195,7 @@ func (o *GridWidgetModel) GetStartColumn() int64 {
 
 // GetStartColumnOk returns a tuple with the StartColumn field value
 // and a boolean to check if the value has been set.
-func (o *GridWidgetModel) GetStartColumnOk() (*int64, bool) {
+func (o *GridWidgetModel) GetStartColumnOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -203,14 +203,14 @@ func (o *GridWidgetModel) GetStartColumnOk() (*int64, bool) {
 }
 
 // SetStartColumn sets field value
-func (o *GridWidgetModel) SetStartColumn(v int64) {
+func (o *GridWidgetModel) SetStartColumn(v int) {
 	o.StartColumn = v
 }
 
 // GetEndColumn returns the EndColumn field value
-func (o *GridWidgetModel) GetEndColumn() int64 {
+func (o *GridWidgetModel) GetEndColumn() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -219,7 +219,7 @@ func (o *GridWidgetModel) GetEndColumn() int64 {
 
 // GetEndColumnOk returns a tuple with the EndColumn field value
 // and a boolean to check if the value has been set.
-func (o *GridWidgetModel) GetEndColumnOk() (*int64, bool) {
+func (o *GridWidgetModel) GetEndColumnOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -227,7 +227,7 @@ func (o *GridWidgetModel) GetEndColumnOk() (*int64, bool) {
 }
 
 // SetEndColumn sets field value
-func (o *GridWidgetModel) SetEndColumn(v int64) {
+func (o *GridWidgetModel) SetEndColumn(v int) {
 	o.EndColumn = v
 }
 

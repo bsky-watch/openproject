@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/ua-bsky-watch/openproject"
+	openapiclient "bsky.watch/openproject"
 )
 
 func Test_openproject_AttachmentsAPIService(t *testing.T) {
@@ -26,7 +26,7 @@ func Test_openproject_AttachmentsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		httpRes, err := apiClient.AttachmentsAPI.AddAttachmentToMeeting(context.Background(), id).Execute()
 
@@ -39,7 +39,7 @@ func Test_openproject_AttachmentsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		httpRes, err := apiClient.AttachmentsAPI.AddAttachmentToPost(context.Background(), id).Execute()
 
@@ -52,7 +52,7 @@ func Test_openproject_AttachmentsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		httpRes, err := apiClient.AttachmentsAPI.AddAttachmentToWikiPage(context.Background(), id).Execute()
 
@@ -77,7 +77,7 @@ func Test_openproject_AttachmentsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.AttachmentsAPI.CreateWorkPackageAttachment(context.Background(), id).Execute()
 
@@ -91,7 +91,7 @@ func Test_openproject_AttachmentsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		httpRes, err := apiClient.AttachmentsAPI.DeleteAttachment(context.Background(), id).Execute()
 
@@ -104,7 +104,7 @@ func Test_openproject_AttachmentsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.AttachmentsAPI.ListAttachmentsByMeeting(context.Background(), id).Execute()
 
@@ -118,7 +118,7 @@ func Test_openproject_AttachmentsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.AttachmentsAPI.ListAttachmentsByPost(context.Background(), id).Execute()
 
@@ -132,7 +132,7 @@ func Test_openproject_AttachmentsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.AttachmentsAPI.ListAttachmentsByWikiPage(context.Background(), id).Execute()
 
@@ -146,7 +146,7 @@ func Test_openproject_AttachmentsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.AttachmentsAPI.ListWorkPackageAttachments(context.Background(), id).Execute()
 
@@ -160,7 +160,7 @@ func Test_openproject_AttachmentsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.AttachmentsAPI.ViewAttachment(context.Background(), id).Execute()
 

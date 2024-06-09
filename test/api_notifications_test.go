@@ -14,7 +14,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/ua-bsky-watch/openproject"
+	openapiclient "bsky.watch/openproject"
 )
 
 func Test_openproject_NotificationsAPIService(t *testing.T) {
@@ -38,7 +38,7 @@ func Test_openproject_NotificationsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		httpRes, err := apiClient.NotificationsAPI.ReadNotification(context.Background(), id).Execute()
 
@@ -62,7 +62,7 @@ func Test_openproject_NotificationsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		httpRes, err := apiClient.NotificationsAPI.UnreadNotification(context.Background(), id).Execute()
 
@@ -86,7 +86,7 @@ func Test_openproject_NotificationsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var id int64
+		var id int
 
 		resp, httpRes, err := apiClient.NotificationsAPI.ViewNotification(context.Background(), id).Execute()
 
@@ -100,8 +100,8 @@ func Test_openproject_NotificationsAPIService(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
-		var notificationId int64
-		var id int64
+		var notificationId int
+		var id int
 
 		resp, httpRes, err := apiClient.NotificationsAPI.ViewNotificationDetail(context.Background(), notificationId, id).Execute()
 

@@ -20,7 +20,7 @@ var _ MappedNullable = &CustomOptionModel{}
 // CustomOptionModel struct for CustomOptionModel
 type CustomOptionModel struct {
 	// The identifier
-	Id *int64 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	// The value defined for this custom option
 	Value *string `json:"value,omitempty"`
 	Links *CustomOptionModelLinks `json:"_links,omitempty"`
@@ -47,9 +47,9 @@ func NewCustomOptionModelWithDefaults() *CustomOptionModel {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *CustomOptionModel) GetId() int64 {
+func (o *CustomOptionModel) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -57,7 +57,7 @@ func (o *CustomOptionModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CustomOptionModel) GetIdOk() (*int64, bool) {
+func (o *CustomOptionModel) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -73,8 +73,8 @@ func (o *CustomOptionModel) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *CustomOptionModel) SetId(v int64) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *CustomOptionModel) SetId(v int) {
 	o.Id = &v
 }
 

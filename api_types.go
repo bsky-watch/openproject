@@ -135,7 +135,7 @@ func (a *TypesAPIService) ListAllTypesExecute(r ApiListAllTypesRequest) (map[str
 type ApiListTypesAvailableInAProjectRequest struct {
 	ctx context.Context
 	ApiService *TypesAPIService
-	id int64
+	id int
 }
 
 func (r ApiListTypesAvailableInAProjectRequest) Execute() (*TypesByProjectModel, *http.Response, error) {
@@ -151,7 +151,7 @@ This endpoint lists the types that are *available* in a given project.
  @param id ID of the project whose types will be listed
  @return ApiListTypesAvailableInAProjectRequest
 */
-func (a *TypesAPIService) ListTypesAvailableInAProject(ctx context.Context, id int64) ApiListTypesAvailableInAProjectRequest {
+func (a *TypesAPIService) ListTypesAvailableInAProject(ctx context.Context, id int) ApiListTypesAvailableInAProjectRequest {
 	return ApiListTypesAvailableInAProjectRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -248,7 +248,7 @@ func (a *TypesAPIService) ListTypesAvailableInAProjectExecute(r ApiListTypesAvai
 type ApiViewTypeRequest struct {
 	ctx context.Context
 	ApiService *TypesAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewTypeRequest) Execute() (*TypeModel, *http.Response, error) {
@@ -264,7 +264,7 @@ ViewType View Type
  @param id Type id
  @return ApiViewTypeRequest
 */
-func (a *TypesAPIService) ViewType(ctx context.Context, id int64) ApiViewTypeRequest {
+func (a *TypesAPIService) ViewType(ctx context.Context, id int) ApiViewTypeRequest {
 	return ApiViewTypeRequest{
 		ApiService: a,
 		ctx: ctx,

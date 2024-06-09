@@ -287,7 +287,7 @@ func (a *QueriesAPIService) CreateQueryExecute(r ApiCreateQueryRequest) (*QueryM
 type ApiDeleteQueryRequest struct {
 	ctx context.Context
 	ApiService *QueriesAPIService
-	id int64
+	id int
 }
 
 func (r ApiDeleteQueryRequest) Execute() (*http.Response, error) {
@@ -303,7 +303,7 @@ Delete the query identified by the id parameter
  @param id Query id
  @return ApiDeleteQueryRequest
 */
-func (a *QueriesAPIService) DeleteQuery(ctx context.Context, id int64) ApiDeleteQueryRequest {
+func (a *QueriesAPIService) DeleteQuery(ctx context.Context, id int) ApiDeleteQueryRequest {
 	return ApiDeleteQueryRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -400,7 +400,7 @@ func (a *QueriesAPIService) DeleteQueryExecute(r ApiDeleteQueryRequest) (*http.R
 type ApiEditQueryRequest struct {
 	ctx context.Context
 	ApiService *QueriesAPIService
-	id int64
+	id int
 	queryUpdateForm *QueryUpdateForm
 }
 
@@ -423,7 +423,7 @@ Note that it is only allowed to provide properties or links supporting the **wri
  @param id Query id
  @return ApiEditQueryRequest
 */
-func (a *QueriesAPIService) EditQuery(ctx context.Context, id int64) ApiEditQueryRequest {
+func (a *QueriesAPIService) EditQuery(ctx context.Context, id int) ApiEditQueryRequest {
 	return ApiEditQueryRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -792,7 +792,7 @@ func (a *QueriesAPIService) QueryCreateFormExecute(r ApiQueryCreateFormRequest) 
 type ApiQueryUpdateFormRequest struct {
 	ctx context.Context
 	ApiService *QueriesAPIService
-	id int64
+	id int
 	queryUpdateForm *QueryUpdateForm
 }
 
@@ -814,7 +814,7 @@ QueryUpdateForm Query Update Form
  @param id Query id
  @return ApiQueryUpdateFormRequest
 */
-func (a *QueriesAPIService) QueryUpdateForm(ctx context.Context, id int64) ApiQueryUpdateFormRequest {
+func (a *QueriesAPIService) QueryUpdateForm(ctx context.Context, id int) ApiQueryUpdateFormRequest {
 	return ApiQueryUpdateFormRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -892,7 +892,7 @@ func (a *QueriesAPIService) QueryUpdateFormExecute(r ApiQueryUpdateFormRequest) 
 type ApiStarQueryRequest struct {
 	ctx context.Context
 	ApiService *QueriesAPIService
-	id int64
+	id int
 }
 
 func (r ApiStarQueryRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -908,7 +908,7 @@ StarQuery Star query
  @param id Query id
  @return ApiStarQueryRequest
 */
-func (a *QueriesAPIService) StarQuery(ctx context.Context, id int64) ApiStarQueryRequest {
+func (a *QueriesAPIService) StarQuery(ctx context.Context, id int) ApiStarQueryRequest {
 	return ApiStarQueryRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1027,7 +1027,7 @@ func (a *QueriesAPIService) StarQueryExecute(r ApiStarQueryRequest) (map[string]
 type ApiUnstarQueryRequest struct {
 	ctx context.Context
 	ApiService *QueriesAPIService
-	id int64
+	id int
 }
 
 func (r ApiUnstarQueryRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -1043,7 +1043,7 @@ UnstarQuery Unstar query
  @param id Query id
  @return ApiUnstarQueryRequest
 */
-func (a *QueriesAPIService) UnstarQuery(ctx context.Context, id int64) ApiUnstarQueryRequest {
+func (a *QueriesAPIService) UnstarQuery(ctx context.Context, id int) ApiUnstarQueryRequest {
 	return ApiUnstarQueryRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1185,8 +1185,8 @@ type ApiViewDefaultQueryRequest struct {
 	ctx context.Context
 	ApiService *QueriesAPIService
 	filters *string
-	offset *int64
-	pageSize *int64
+	offset *int
+	pageSize *int
 	sortBy *string
 	groupBy *string
 	showSums *bool
@@ -1203,13 +1203,13 @@ func (r ApiViewDefaultQueryRequest) Filters(filters string) ApiViewDefaultQueryR
 }
 
 // Page number inside the queries&#39; result collection of work packages.
-func (r ApiViewDefaultQueryRequest) Offset(offset int64) ApiViewDefaultQueryRequest {
+func (r ApiViewDefaultQueryRequest) Offset(offset int) ApiViewDefaultQueryRequest {
 	r.offset = &offset
 	return r
 }
 
 // Number of elements to display per page for the queries&#39; result collection of work packages.
-func (r ApiViewDefaultQueryRequest) PageSize(pageSize int64) ApiViewDefaultQueryRequest {
+func (r ApiViewDefaultQueryRequest) PageSize(pageSize int) ApiViewDefaultQueryRequest {
 	r.pageSize = &pageSize
 	return r
 }
@@ -1305,7 +1305,7 @@ func (a *QueriesAPIService) ViewDefaultQueryExecute(r ApiViewDefaultQueryRequest
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
 	} else {
-		var defaultValue int64 = 1
+		var defaultValue int = 1
 		r.offset = &defaultValue
 	}
 	if r.pageSize != nil {
@@ -1417,10 +1417,10 @@ func (a *QueriesAPIService) ViewDefaultQueryExecute(r ApiViewDefaultQueryRequest
 type ApiViewDefaultQueryForProjectRequest struct {
 	ctx context.Context
 	ApiService *QueriesAPIService
-	id int64
+	id int
 	filters *string
-	offset *int64
-	pageSize *int64
+	offset *int
+	pageSize *int
 	sortBy *string
 	groupBy *string
 	showSums *bool
@@ -1436,13 +1436,13 @@ func (r ApiViewDefaultQueryForProjectRequest) Filters(filters string) ApiViewDef
 }
 
 // Page number inside the queries&#39; result collection of work packages.
-func (r ApiViewDefaultQueryForProjectRequest) Offset(offset int64) ApiViewDefaultQueryForProjectRequest {
+func (r ApiViewDefaultQueryForProjectRequest) Offset(offset int) ApiViewDefaultQueryForProjectRequest {
 	r.offset = &offset
 	return r
 }
 
 // Number of elements to display per page for the queries&#39; result collection of work packages.
-func (r ApiViewDefaultQueryForProjectRequest) PageSize(pageSize int64) ApiViewDefaultQueryForProjectRequest {
+func (r ApiViewDefaultQueryForProjectRequest) PageSize(pageSize int) ApiViewDefaultQueryForProjectRequest {
 	r.pageSize = &pageSize
 	return r
 }
@@ -1496,7 +1496,7 @@ Same as [viewing an existing, persisted Query](https://www.openproject.org/docs/
  @param id Id of the project the default query is requested for
  @return ApiViewDefaultQueryForProjectRequest
 */
-func (a *QueriesAPIService) ViewDefaultQueryForProject(ctx context.Context, id int64) ApiViewDefaultQueryForProjectRequest {
+func (a *QueriesAPIService) ViewDefaultQueryForProject(ctx context.Context, id int) ApiViewDefaultQueryForProjectRequest {
 	return ApiViewDefaultQueryForProjectRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1535,7 +1535,7 @@ func (a *QueriesAPIService) ViewDefaultQueryForProjectExecute(r ApiViewDefaultQu
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
 	} else {
-		var defaultValue int64 = 1
+		var defaultValue int = 1
 		r.offset = &defaultValue
 	}
 	if r.pageSize != nil {
@@ -1652,10 +1652,10 @@ func (a *QueriesAPIService) ViewDefaultQueryForProjectExecute(r ApiViewDefaultQu
 type ApiViewQueryRequest struct {
 	ctx context.Context
 	ApiService *QueriesAPIService
-	id int64
+	id int
 	filters *string
-	offset *int64
-	pageSize *int64
+	offset *int
+	pageSize *int
 	columns *string
 	sortBy *string
 	groupBy *string
@@ -1675,13 +1675,13 @@ func (r ApiViewQueryRequest) Filters(filters string) ApiViewQueryRequest {
 }
 
 // Page number inside the queries&#39; result collection of work packages.
-func (r ApiViewQueryRequest) Offset(offset int64) ApiViewQueryRequest {
+func (r ApiViewQueryRequest) Offset(offset int) ApiViewQueryRequest {
 	r.offset = &offset
 	return r
 }
 
 // Number of elements to display per page for the queries&#39; result collection of work packages.
-func (r ApiViewQueryRequest) PageSize(pageSize int64) ApiViewQueryRequest {
+func (r ApiViewQueryRequest) PageSize(pageSize int) ApiViewQueryRequest {
 	r.pageSize = &pageSize
 	return r
 }
@@ -1759,7 +1759,7 @@ Retrieve an individual query as identified by the id parameter. Then end point a
  @param id Query id
  @return ApiViewQueryRequest
 */
-func (a *QueriesAPIService) ViewQuery(ctx context.Context, id int64) ApiViewQueryRequest {
+func (a *QueriesAPIService) ViewQuery(ctx context.Context, id int) ApiViewQueryRequest {
 	return ApiViewQueryRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -1798,7 +1798,7 @@ func (a *QueriesAPIService) ViewQueryExecute(r ApiViewQueryRequest) (*QueryModel
 	if r.offset != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "offset", r.offset, "")
 	} else {
-		var defaultValue int64 = 1
+		var defaultValue int = 1
 		r.offset = &defaultValue
 	}
 	if r.pageSize != nil {
@@ -2037,7 +2037,7 @@ func (a *QueriesAPIService) ViewSchemaForGlobalQueriesExecute(r ApiViewSchemaFor
 type ApiViewSchemaForProjectQueriesRequest struct {
 	ctx context.Context
 	ApiService *QueriesAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewSchemaForProjectQueriesRequest) Execute() (map[string]interface{}, *http.Response, error) {
@@ -2053,7 +2053,7 @@ Retrieve the schema for project queries.
  @param id Project id
  @return ApiViewSchemaForProjectQueriesRequest
 */
-func (a *QueriesAPIService) ViewSchemaForProjectQueries(ctx context.Context, id int64) ApiViewSchemaForProjectQueriesRequest {
+func (a *QueriesAPIService) ViewSchemaForProjectQueries(ctx context.Context, id int) ApiViewSchemaForProjectQueriesRequest {
 	return ApiViewSchemaForProjectQueriesRequest{
 		ApiService: a,
 		ctx: ctx,

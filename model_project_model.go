@@ -22,7 +22,7 @@ var _ MappedNullable = &ProjectModel{}
 type ProjectModel struct {
 	Type *string `json:"_type,omitempty"`
 	// Projects' id
-	Id *int64 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	Identifier *string `json:"identifier,omitempty"`
 	Name *string `json:"name,omitempty"`
 	// Indicates whether the project is currently active or already archived
@@ -91,9 +91,9 @@ func (o *ProjectModel) SetType(v string) {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *ProjectModel) GetId() int64 {
+func (o *ProjectModel) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -101,7 +101,7 @@ func (o *ProjectModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ProjectModel) GetIdOk() (*int64, bool) {
+func (o *ProjectModel) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -117,8 +117,8 @@ func (o *ProjectModel) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *ProjectModel) SetId(v int64) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *ProjectModel) SetId(v int) {
 	o.Id = &v
 }
 

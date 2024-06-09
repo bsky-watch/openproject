@@ -26,7 +26,7 @@ type CustomActionsAPIService service
 type ApiExecuteCustomActionRequest struct {
 	ctx context.Context
 	ApiService *CustomActionsAPIService
-	id int64
+	id int
 	executeCustomActionRequest *ExecuteCustomActionRequest
 }
 
@@ -49,7 +49,7 @@ A POST to this end point executes the custom action on the work package provided
  @param id The id of the custom action to execute
  @return ApiExecuteCustomActionRequest
 */
-func (a *CustomActionsAPIService) ExecuteCustomAction(ctx context.Context, id int64) ApiExecuteCustomActionRequest {
+func (a *CustomActionsAPIService) ExecuteCustomAction(ctx context.Context, id int) ApiExecuteCustomActionRequest {
 	return ApiExecuteCustomActionRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -203,7 +203,7 @@ func (a *CustomActionsAPIService) ExecuteCustomActionExecute(r ApiExecuteCustomA
 type ApiGetCustomActionRequest struct {
 	ctx context.Context
 	ApiService *CustomActionsAPIService
-	id int64
+	id int
 }
 
 func (r ApiGetCustomActionRequest) Execute() (*CustomActionModel, *http.Response, error) {
@@ -219,7 +219,7 @@ Retrieves a custom action by id.
  @param id The id of the custom action to fetch
  @return ApiGetCustomActionRequest
 */
-func (a *CustomActionsAPIService) GetCustomAction(ctx context.Context, id int64) ApiGetCustomActionRequest {
+func (a *CustomActionsAPIService) GetCustomAction(ctx context.Context, id int) ApiGetCustomActionRequest {
 	return ApiGetCustomActionRequest{
 		ApiService: a,
 		ctx: ctx,

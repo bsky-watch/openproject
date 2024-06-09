@@ -22,13 +22,13 @@ var _ MappedNullable = &AttachmentModel{}
 // AttachmentModel struct for AttachmentModel
 type AttachmentModel struct {
 	// Attachment's id
-	Id *int64 `json:"id,omitempty"`
+	Id *int `json:"id,omitempty"`
 	// The name of the file
 	Title *string `json:"title,omitempty"`
 	// The name of the uploaded file
 	FileName string `json:"fileName"`
 	// The size of the uploaded file in Bytes
-	FileSize *int64 `json:"fileSize,omitempty"`
+	FileSize *int `json:"fileSize,omitempty"`
 	Description AttachmentModelDescription `json:"description"`
 	// The files MIME-Type as determined by the server
 	ContentType string `json:"contentType"`
@@ -64,9 +64,9 @@ func NewAttachmentModelWithDefaults() *AttachmentModel {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *AttachmentModel) GetId() int64 {
+func (o *AttachmentModel) GetId() int {
 	if o == nil || IsNil(o.Id) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.Id
@@ -74,7 +74,7 @@ func (o *AttachmentModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AttachmentModel) GetIdOk() (*int64, bool) {
+func (o *AttachmentModel) GetIdOk() (*int, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
 	}
@@ -90,8 +90,8 @@ func (o *AttachmentModel) HasId() bool {
 	return false
 }
 
-// SetId gets a reference to the given int64 and assigns it to the Id field.
-func (o *AttachmentModel) SetId(v int64) {
+// SetId gets a reference to the given int and assigns it to the Id field.
+func (o *AttachmentModel) SetId(v int) {
 	o.Id = &v
 }
 
@@ -152,9 +152,9 @@ func (o *AttachmentModel) SetFileName(v string) {
 }
 
 // GetFileSize returns the FileSize field value if set, zero value otherwise.
-func (o *AttachmentModel) GetFileSize() int64 {
+func (o *AttachmentModel) GetFileSize() int {
 	if o == nil || IsNil(o.FileSize) {
-		var ret int64
+		var ret int
 		return ret
 	}
 	return *o.FileSize
@@ -162,7 +162,7 @@ func (o *AttachmentModel) GetFileSize() int64 {
 
 // GetFileSizeOk returns a tuple with the FileSize field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AttachmentModel) GetFileSizeOk() (*int64, bool) {
+func (o *AttachmentModel) GetFileSizeOk() (*int, bool) {
 	if o == nil || IsNil(o.FileSize) {
 		return nil, false
 	}
@@ -178,8 +178,8 @@ func (o *AttachmentModel) HasFileSize() bool {
 	return false
 }
 
-// SetFileSize gets a reference to the given int64 and assigns it to the FileSize field.
-func (o *AttachmentModel) SetFileSize(v int64) {
+// SetFileSize gets a reference to the given int and assigns it to the FileSize field.
+func (o *AttachmentModel) SetFileSize(v int) {
 	o.FileSize = &v
 }
 

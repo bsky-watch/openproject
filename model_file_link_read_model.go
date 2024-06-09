@@ -22,7 +22,7 @@ var _ MappedNullable = &FileLinkReadModel{}
 // FileLinkReadModel struct for FileLinkReadModel
 type FileLinkReadModel struct {
 	// File link id
-	Id int64 `json:"id"`
+	Id int `json:"id"`
 	Type string `json:"_type"`
 	// Time of creation
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
@@ -40,7 +40,7 @@ type _FileLinkReadModel FileLinkReadModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewFileLinkReadModel(id int64, type_ string, originData FileLinkOriginDataModel, links FileLinkReadModelLinks) *FileLinkReadModel {
+func NewFileLinkReadModel(id int, type_ string, originData FileLinkOriginDataModel, links FileLinkReadModelLinks) *FileLinkReadModel {
 	this := FileLinkReadModel{}
 	this.Id = id
 	this.Type = type_
@@ -58,9 +58,9 @@ func NewFileLinkReadModelWithDefaults() *FileLinkReadModel {
 }
 
 // GetId returns the Id field value
-func (o *FileLinkReadModel) GetId() int64 {
+func (o *FileLinkReadModel) GetId() int {
 	if o == nil {
-		var ret int64
+		var ret int
 		return ret
 	}
 
@@ -69,7 +69,7 @@ func (o *FileLinkReadModel) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
-func (o *FileLinkReadModel) GetIdOk() (*int64, bool) {
+func (o *FileLinkReadModel) GetIdOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -77,7 +77,7 @@ func (o *FileLinkReadModel) GetIdOk() (*int64, bool) {
 }
 
 // SetId sets field value
-func (o *FileLinkReadModel) SetId(v int64) {
+func (o *FileLinkReadModel) SetId(v int) {
 	o.Id = v
 }
 

@@ -135,7 +135,7 @@ func (a *StatusesAPIService) ListAllStatusesExecute(r ApiListAllStatusesRequest)
 type ApiViewStatusRequest struct {
 	ctx context.Context
 	ApiService *StatusesAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewStatusRequest) Execute() (*StatusModel, *http.Response, error) {
@@ -151,7 +151,7 @@ ViewStatus View Status
  @param id Status id
  @return ApiViewStatusRequest
 */
-func (a *StatusesAPIService) ViewStatus(ctx context.Context, id int64) ApiViewStatusRequest {
+func (a *StatusesAPIService) ViewStatus(ctx context.Context, id int) ApiViewStatusRequest {
 	return ApiViewStatusRequest{
 		ApiService: a,
 		ctx: ctx,

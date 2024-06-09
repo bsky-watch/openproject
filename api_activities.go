@@ -26,7 +26,7 @@ type ActivitiesAPIService service
 type ApiUpdateActivityRequest struct {
 	ctx context.Context
 	ApiService *ActivitiesAPIService
-	id int64
+	id int
 	updateActivityRequest *UpdateActivityRequest
 }
 
@@ -48,7 +48,7 @@ Updates an activity's comment and, on success, returns the updated activity.
  @param id Activity id
  @return ApiUpdateActivityRequest
 */
-func (a *ActivitiesAPIService) UpdateActivity(ctx context.Context, id int64) ApiUpdateActivityRequest {
+func (a *ActivitiesAPIService) UpdateActivity(ctx context.Context, id int) ApiUpdateActivityRequest {
 	return ApiUpdateActivityRequest{
 		ApiService: a,
 		ctx: ctx,
@@ -191,7 +191,7 @@ func (a *ActivitiesAPIService) UpdateActivityExecute(r ApiUpdateActivityRequest)
 type ApiViewActivityRequest struct {
 	ctx context.Context
 	ApiService *ActivitiesAPIService
-	id int64
+	id int
 }
 
 func (r ApiViewActivityRequest) Execute() (*ActivityModel, *http.Response, error) {
@@ -207,7 +207,7 @@ ViewActivity View activity
  @param id Activity id
  @return ApiViewActivityRequest
 */
-func (a *ActivitiesAPIService) ViewActivity(ctx context.Context, id int64) ApiViewActivityRequest {
+func (a *ActivitiesAPIService) ViewActivity(ctx context.Context, id int) ApiViewActivityRequest {
 	return ApiViewActivityRequest{
 		ApiService: a,
 		ctx: ctx,
