@@ -4,7 +4,7 @@ generate:
 	GO_POST_PROCESS_FILE="/usr/bin/sed -i -e s,place/holder,bsky.watch,g" \
 	./openapi-generator-cli generate \
 		--enable-post-process-file \
-		-i api/openapi.yaml \
+		-i _spec.yaml \
 		-g go \
 		--skip-validate-spec \
 		-c generator-config.yml \
