@@ -9,7 +9,7 @@ generate:
 		--skip-validate-spec \
 		-c generator-config.yml \
 		--global-property modelDocs=false,apiDocs=false \
-		--type-mappings=integer=int
+		--type-mappings=integer=int,string+byte=[]byte
 	sed -i -e s,place/holder,bsky.watch,g go.mod
 	go mod tidy
 	go test ./...

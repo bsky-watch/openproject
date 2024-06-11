@@ -33,7 +33,7 @@ type WorkPackageModelLinks struct {
 	Self *WorkPackageModelLinksSelf `json:"self,omitempty"`
 	Schema *WorkPackageModelLinksSchema `json:"schema,omitempty"`
 	Ancestors []WorkPackageModelLinksAncestorsInner `json:"ancestors,omitempty"`
-	Attachments *Link `json:"attachments,omitempty"`
+	Attachments *WorkPackageModelLinksAttachments `json:"attachments,omitempty"`
 	Author *WorkPackageModelLinksAuthor `json:"author,omitempty"`
 	Assignee *WorkPackageModelLinksAssignee `json:"assignee,omitempty"`
 	AvailableWatchers *WorkPackageModelLinksAvailableWatchers `json:"availableWatchers,omitempty"`
@@ -524,9 +524,9 @@ func (o *WorkPackageModelLinks) SetAncestors(v []WorkPackageModelLinksAncestorsI
 }
 
 // GetAttachments returns the Attachments field value if set, zero value otherwise.
-func (o *WorkPackageModelLinks) GetAttachments() Link {
+func (o *WorkPackageModelLinks) GetAttachments() WorkPackageModelLinksAttachments {
 	if o == nil || IsNil(o.Attachments) {
-		var ret Link
+		var ret WorkPackageModelLinksAttachments
 		return ret
 	}
 	return *o.Attachments
@@ -534,7 +534,7 @@ func (o *WorkPackageModelLinks) GetAttachments() Link {
 
 // GetAttachmentsOk returns a tuple with the Attachments field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *WorkPackageModelLinks) GetAttachmentsOk() (*Link, bool) {
+func (o *WorkPackageModelLinks) GetAttachmentsOk() (*WorkPackageModelLinksAttachments, bool) {
 	if o == nil || IsNil(o.Attachments) {
 		return nil, false
 	}
@@ -550,8 +550,8 @@ func (o *WorkPackageModelLinks) HasAttachments() bool {
 	return false
 }
 
-// SetAttachments gets a reference to the given Link and assigns it to the Attachments field.
-func (o *WorkPackageModelLinks) SetAttachments(v Link) {
+// SetAttachments gets a reference to the given WorkPackageModelLinksAttachments and assigns it to the Attachments field.
+func (o *WorkPackageModelLinks) SetAttachments(v WorkPackageModelLinksAttachments) {
 	o.Attachments = &v
 }
 

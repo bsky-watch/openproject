@@ -892,6 +892,7 @@ Class | Method | HTTP request | Description
  - [WorkPackageModelLinksAddWatcher](docs/WorkPackageModelLinksAddWatcher.md)
  - [WorkPackageModelLinksAncestorsInner](docs/WorkPackageModelLinksAncestorsInner.md)
  - [WorkPackageModelLinksAssignee](docs/WorkPackageModelLinksAssignee.md)
+ - [WorkPackageModelLinksAttachments](docs/WorkPackageModelLinksAttachments.md)
  - [WorkPackageModelLinksAuthor](docs/WorkPackageModelLinksAuthor.md)
  - [WorkPackageModelLinksAvailableWatchers](docs/WorkPackageModelLinksAvailableWatchers.md)
  - [WorkPackageModelLinksBudget](docs/WorkPackageModelLinksBudget.md)

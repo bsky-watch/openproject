@@ -29034,7 +29034,11 @@ components:
           **Permission** view work packages
         readOnly: true
     Work_PackageModel__links_attachments:
-      $ref: '#/components/schemas/Link'
+      oneOf:
+      - $ref: '#/components/schemas/Link'
+      - type: array
+        items:
+          $ref: '#/components/schemas/Link'
     Work_PackageModel__links_author:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -29242,7 +29246,7 @@ components:
             $ref: '#/components/schemas/Work_PackageModel__links_ancestors_inner'
           type: array
         attachments:
-          $ref: '#/components/schemas/Link'
+          $ref: '#/components/schemas/Work_PackageModel__links_attachments'
         author:
           $ref: '#/components/schemas/Work_PackageModel__links_author'
         assignee:
