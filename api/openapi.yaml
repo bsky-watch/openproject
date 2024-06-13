@@ -24657,7 +24657,9 @@ components:
           _links:
             project:
               href: null
-      type: object
+      properties:
+        _links:
+          $ref: '#/components/schemas/UserPreferencesModel__links'
     ValuesPropertyModel:
       properties:
         _type:
@@ -29036,8 +29038,7 @@ components:
     Work_PackageModel__links_attachments:
       oneOf:
       - $ref: '#/components/schemas/Link'
-      - type: array
-        items:
+      - items:
           $ref: '#/components/schemas/Link'
     Work_PackageModel__links_author:
       allOf:
@@ -29337,6 +29338,14 @@ components:
           $ref: '#/components/schemas/Work_PackageModel__links_type'
         version:
           $ref: '#/components/schemas/Work_PackageModel__links_version'
+    UserPreferencesModel__links:
+      properties:
+        self:
+          $ref: '#/components/schemas/Link'
+        user:
+          $ref: '#/components/schemas/Link'
+        updateImmediately:
+          $ref: '#/components/schemas/Link'
   securitySchemes:
     BasicAuth:
       scheme: basic

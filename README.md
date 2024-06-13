@@ -845,6 +845,8 @@ Class | Method | HTTP request | Description
  - [UserModelAllOfLinksShowUser](docs/UserModelAllOfLinksShowUser.md)
  - [UserModelAllOfLinksUnlock](docs/UserModelAllOfLinksUnlock.md)
  - [UserModelAllOfLinksUpdateImmediately](docs/UserModelAllOfLinksUpdateImmediately.md)
+ - [UserPreferencesModel](docs/UserPreferencesModel.md)
+ - [UserPreferencesModelLinks](docs/UserPreferencesModelLinks.md)
  - [ValuesPropertyModel](docs/ValuesPropertyModel.md)
  - [ValuesPropertyModelLinks](docs/ValuesPropertyModelLinks.md)
  - [ValuesPropertyModelLinksSchema](docs/ValuesPropertyModelLinksSchema.md)

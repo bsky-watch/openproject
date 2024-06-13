@@ -27,7 +27,7 @@ type ApiShowMyPreferencesRequest struct {
 	ApiService *UserPreferencesAPIService
 }
 
-func (r ApiShowMyPreferencesRequest) Execute() (map[string]interface{}, *http.Response, error) {
+func (r ApiShowMyPreferencesRequest) Execute() (*UserPreferencesModel, *http.Response, error) {
 	return r.ApiService.ShowMyPreferencesExecute(r)
 }
 
@@ -47,13 +47,13 @@ func (a *UserPreferencesAPIService) ShowMyPreferences(ctx context.Context) ApiSh
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
-func (a *UserPreferencesAPIService) ShowMyPreferencesExecute(r ApiShowMyPreferencesRequest) (map[string]interface{}, *http.Response, error) {
+//  @return UserPreferencesModel
+func (a *UserPreferencesAPIService) ShowMyPreferencesExecute(r ApiShowMyPreferencesRequest) (*UserPreferencesModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarReturnValue  *UserPreferencesModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserPreferencesAPIService.ShowMyPreferences")
@@ -142,7 +142,7 @@ func (r ApiUpdateUserPreferencesRequest) UpdateUserPreferencesRequest(updateUser
 	return r
 }
 
-func (r ApiUpdateUserPreferencesRequest) Execute() (map[string]interface{}, *http.Response, error) {
+func (r ApiUpdateUserPreferencesRequest) Execute() (*UserPreferencesModel, *http.Response, error) {
 	return r.ApiService.UpdateUserPreferencesExecute(r)
 }
 
@@ -162,13 +162,13 @@ func (a *UserPreferencesAPIService) UpdateUserPreferences(ctx context.Context) A
 }
 
 // Execute executes the request
-//  @return map[string]interface{}
-func (a *UserPreferencesAPIService) UpdateUserPreferencesExecute(r ApiUpdateUserPreferencesRequest) (map[string]interface{}, *http.Response, error) {
+//  @return UserPreferencesModel
+func (a *UserPreferencesAPIService) UpdateUserPreferencesExecute(r ApiUpdateUserPreferencesRequest) (*UserPreferencesModel, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPatch
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  map[string]interface{}
+		localVarReturnValue  *UserPreferencesModel
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UserPreferencesAPIService.UpdateUserPreferences")

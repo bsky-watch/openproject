@@ -24658,6 +24658,16 @@ components:
             project:
               href: null
       type: object
+      properties:
+        _links:
+          type: object
+          properties:
+            self:
+              "$ref": "#/components/schemas/Link"
+            user:
+              "$ref": "#/components/schemas/Link"
+            updateImmediately:
+              "$ref": "#/components/schemas/Link"
     ValuesPropertyModel:
       properties:
         _type:
