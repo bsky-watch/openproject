@@ -19430,6 +19430,15 @@ components:
         updatedAt: 2014-05-21T09:14:02.929Z
         version: 31
       properties:
+        _links:
+          type: object
+          properties:
+            self:
+              $ref: "#/components/schemas/Link"
+            workPackage:
+              $ref: "#/components/schemas/Link"
+            user:
+              $ref: "#/components/schemas/Link"
         id:
           description: Activity id
           readOnly: true

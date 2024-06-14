@@ -12,272 +12,135 @@ package openproject
 
 import (
 	"encoding/json"
-	"time"
 )
 
-// checks if the ActivityModel type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ActivityModel{}
+// checks if the ActivityModelLinks type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &ActivityModelLinks{}
 
-// ActivityModel struct for ActivityModel
-type ActivityModel struct {
-	Links *ActivityModelLinks `json:"_links,omitempty"`
-	// Activity id
-	Id *int `json:"id,omitempty"`
-	// Activity version
-	Version *int `json:"version,omitempty"`
-	Comment *ActivityModelComment `json:"comment,omitempty"`
-	Details []Formattable `json:"details,omitempty"`
-	// Time of creation
-	CreatedAt *time.Time `json:"createdAt,omitempty"`
-	// Time of update
-	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+// ActivityModelLinks struct for ActivityModelLinks
+type ActivityModelLinks struct {
+	Self *Link `json:"self,omitempty"`
+	WorkPackage *Link `json:"workPackage,omitempty"`
+	User *Link `json:"user,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _ActivityModel ActivityModel
+type _ActivityModelLinks ActivityModelLinks
 
-// NewActivityModel instantiates a new ActivityModel object
+// NewActivityModelLinks instantiates a new ActivityModelLinks object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewActivityModel() *ActivityModel {
-	this := ActivityModel{}
+func NewActivityModelLinks() *ActivityModelLinks {
+	this := ActivityModelLinks{}
 	return &this
 }
 
-// NewActivityModelWithDefaults instantiates a new ActivityModel object
+// NewActivityModelLinksWithDefaults instantiates a new ActivityModelLinks object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewActivityModelWithDefaults() *ActivityModel {
-	this := ActivityModel{}
+func NewActivityModelLinksWithDefaults() *ActivityModelLinks {
+	this := ActivityModelLinks{}
 	return &this
 }
 
-// GetLinks returns the Links field value if set, zero value otherwise.
-func (o *ActivityModel) GetLinks() ActivityModelLinks {
-	if o == nil || IsNil(o.Links) {
-		var ret ActivityModelLinks
+// GetSelf returns the Self field value if set, zero value otherwise.
+func (o *ActivityModelLinks) GetSelf() Link {
+	if o == nil || IsNil(o.Self) {
+		var ret Link
 		return ret
 	}
-	return *o.Links
+	return *o.Self
 }
 
-// GetLinksOk returns a tuple with the Links field value if set, nil otherwise
+// GetSelfOk returns a tuple with the Self field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ActivityModel) GetLinksOk() (*ActivityModelLinks, bool) {
-	if o == nil || IsNil(o.Links) {
+func (o *ActivityModelLinks) GetSelfOk() (*Link, bool) {
+	if o == nil || IsNil(o.Self) {
 		return nil, false
 	}
-	return o.Links, true
+	return o.Self, true
 }
 
-// HasLinks returns a boolean if a field has been set.
-func (o *ActivityModel) HasLinks() bool {
-	if o != nil && !IsNil(o.Links) {
+// HasSelf returns a boolean if a field has been set.
+func (o *ActivityModelLinks) HasSelf() bool {
+	if o != nil && !IsNil(o.Self) {
 		return true
 	}
 
 	return false
 }
 
-// SetLinks gets a reference to the given ActivityModelLinks and assigns it to the Links field.
-func (o *ActivityModel) SetLinks(v ActivityModelLinks) {
-	o.Links = &v
+// SetSelf gets a reference to the given Link and assigns it to the Self field.
+func (o *ActivityModelLinks) SetSelf(v Link) {
+	o.Self = &v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *ActivityModel) GetId() int {
-	if o == nil || IsNil(o.Id) {
-		var ret int
+// GetWorkPackage returns the WorkPackage field value if set, zero value otherwise.
+func (o *ActivityModelLinks) GetWorkPackage() Link {
+	if o == nil || IsNil(o.WorkPackage) {
+		var ret Link
 		return ret
 	}
-	return *o.Id
+	return *o.WorkPackage
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetWorkPackageOk returns a tuple with the WorkPackage field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ActivityModel) GetIdOk() (*int, bool) {
-	if o == nil || IsNil(o.Id) {
+func (o *ActivityModelLinks) GetWorkPackageOk() (*Link, bool) {
+	if o == nil || IsNil(o.WorkPackage) {
 		return nil, false
 	}
-	return o.Id, true
+	return o.WorkPackage, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *ActivityModel) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
+// HasWorkPackage returns a boolean if a field has been set.
+func (o *ActivityModelLinks) HasWorkPackage() bool {
+	if o != nil && !IsNil(o.WorkPackage) {
 		return true
 	}
 
 	return false
 }
 
-// SetId gets a reference to the given int and assigns it to the Id field.
-func (o *ActivityModel) SetId(v int) {
-	o.Id = &v
+// SetWorkPackage gets a reference to the given Link and assigns it to the WorkPackage field.
+func (o *ActivityModelLinks) SetWorkPackage(v Link) {
+	o.WorkPackage = &v
 }
 
-// GetVersion returns the Version field value if set, zero value otherwise.
-func (o *ActivityModel) GetVersion() int {
-	if o == nil || IsNil(o.Version) {
-		var ret int
+// GetUser returns the User field value if set, zero value otherwise.
+func (o *ActivityModelLinks) GetUser() Link {
+	if o == nil || IsNil(o.User) {
+		var ret Link
 		return ret
 	}
-	return *o.Version
+	return *o.User
 }
 
-// GetVersionOk returns a tuple with the Version field value if set, nil otherwise
+// GetUserOk returns a tuple with the User field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ActivityModel) GetVersionOk() (*int, bool) {
-	if o == nil || IsNil(o.Version) {
+func (o *ActivityModelLinks) GetUserOk() (*Link, bool) {
+	if o == nil || IsNil(o.User) {
 		return nil, false
 	}
-	return o.Version, true
+	return o.User, true
 }
 
-// HasVersion returns a boolean if a field has been set.
-func (o *ActivityModel) HasVersion() bool {
-	if o != nil && !IsNil(o.Version) {
+// HasUser returns a boolean if a field has been set.
+func (o *ActivityModelLinks) HasUser() bool {
+	if o != nil && !IsNil(o.User) {
 		return true
 	}
 
 	return false
 }
 
-// SetVersion gets a reference to the given int and assigns it to the Version field.
-func (o *ActivityModel) SetVersion(v int) {
-	o.Version = &v
+// SetUser gets a reference to the given Link and assigns it to the User field.
+func (o *ActivityModelLinks) SetUser(v Link) {
+	o.User = &v
 }
 
-// GetComment returns the Comment field value if set, zero value otherwise.
-func (o *ActivityModel) GetComment() ActivityModelComment {
-	if o == nil || IsNil(o.Comment) {
-		var ret ActivityModelComment
-		return ret
-	}
-	return *o.Comment
-}
-
-// GetCommentOk returns a tuple with the Comment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ActivityModel) GetCommentOk() (*ActivityModelComment, bool) {
-	if o == nil || IsNil(o.Comment) {
-		return nil, false
-	}
-	return o.Comment, true
-}
-
-// HasComment returns a boolean if a field has been set.
-func (o *ActivityModel) HasComment() bool {
-	if o != nil && !IsNil(o.Comment) {
-		return true
-	}
-
-	return false
-}
-
-// SetComment gets a reference to the given ActivityModelComment and assigns it to the Comment field.
-func (o *ActivityModel) SetComment(v ActivityModelComment) {
-	o.Comment = &v
-}
-
-// GetDetails returns the Details field value if set, zero value otherwise.
-func (o *ActivityModel) GetDetails() []Formattable {
-	if o == nil || IsNil(o.Details) {
-		var ret []Formattable
-		return ret
-	}
-	return o.Details
-}
-
-// GetDetailsOk returns a tuple with the Details field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ActivityModel) GetDetailsOk() ([]Formattable, bool) {
-	if o == nil || IsNil(o.Details) {
-		return nil, false
-	}
-	return o.Details, true
-}
-
-// HasDetails returns a boolean if a field has been set.
-func (o *ActivityModel) HasDetails() bool {
-	if o != nil && !IsNil(o.Details) {
-		return true
-	}
-
-	return false
-}
-
-// SetDetails gets a reference to the given []Formattable and assigns it to the Details field.
-func (o *ActivityModel) SetDetails(v []Formattable) {
-	o.Details = v
-}
-
-// GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *ActivityModel) GetCreatedAt() time.Time {
-	if o == nil || IsNil(o.CreatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.CreatedAt
-}
-
-// GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ActivityModel) GetCreatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.CreatedAt) {
-		return nil, false
-	}
-	return o.CreatedAt, true
-}
-
-// HasCreatedAt returns a boolean if a field has been set.
-func (o *ActivityModel) HasCreatedAt() bool {
-	if o != nil && !IsNil(o.CreatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *ActivityModel) SetCreatedAt(v time.Time) {
-	o.CreatedAt = &v
-}
-
-// GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *ActivityModel) GetUpdatedAt() time.Time {
-	if o == nil || IsNil(o.UpdatedAt) {
-		var ret time.Time
-		return ret
-	}
-	return *o.UpdatedAt
-}
-
-// GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ActivityModel) GetUpdatedAtOk() (*time.Time, bool) {
-	if o == nil || IsNil(o.UpdatedAt) {
-		return nil, false
-	}
-	return o.UpdatedAt, true
-}
-
-// HasUpdatedAt returns a boolean if a field has been set.
-func (o *ActivityModel) HasUpdatedAt() bool {
-	if o != nil && !IsNil(o.UpdatedAt) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *ActivityModel) SetUpdatedAt(v time.Time) {
-	o.UpdatedAt = &v
-}
-
-func (o ActivityModel) MarshalJSON() ([]byte, error) {
+func (o ActivityModelLinks) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -285,28 +148,16 @@ func (o ActivityModel) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o ActivityModel) ToMap() (map[string]interface{}, error) {
+func (o ActivityModelLinks) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Links) {
-		toSerialize["_links"] = o.Links
+	if !IsNil(o.Self) {
+		toSerialize["self"] = o.Self
 	}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
+	if !IsNil(o.WorkPackage) {
+		toSerialize["workPackage"] = o.WorkPackage
 	}
-	if !IsNil(o.Version) {
-		toSerialize["version"] = o.Version
-	}
-	if !IsNil(o.Comment) {
-		toSerialize["comment"] = o.Comment
-	}
-	if !IsNil(o.Details) {
-		toSerialize["details"] = o.Details
-	}
-	if !IsNil(o.CreatedAt) {
-		toSerialize["createdAt"] = o.CreatedAt
-	}
-	if !IsNil(o.UpdatedAt) {
-		toSerialize["updatedAt"] = o.UpdatedAt
+	if !IsNil(o.User) {
+		toSerialize["user"] = o.User
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -316,65 +167,61 @@ func (o ActivityModel) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *ActivityModel) UnmarshalJSON(data []byte) (err error) {
-	varActivityModel := _ActivityModel{}
+func (o *ActivityModelLinks) UnmarshalJSON(data []byte) (err error) {
+	varActivityModelLinks := _ActivityModelLinks{}
 
-	err = json.Unmarshal(data, &varActivityModel)
+	err = json.Unmarshal(data, &varActivityModelLinks)
 
 	if err != nil {
 		return err
 	}
 
-	*o = ActivityModel(varActivityModel)
+	*o = ActivityModelLinks(varActivityModelLinks)
 
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "_links")
-		delete(additionalProperties, "id")
-		delete(additionalProperties, "version")
-		delete(additionalProperties, "comment")
-		delete(additionalProperties, "details")
-		delete(additionalProperties, "createdAt")
-		delete(additionalProperties, "updatedAt")
+		delete(additionalProperties, "self")
+		delete(additionalProperties, "workPackage")
+		delete(additionalProperties, "user")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableActivityModel struct {
-	value *ActivityModel
+type NullableActivityModelLinks struct {
+	value *ActivityModelLinks
 	isSet bool
 }
 
-func (v NullableActivityModel) Get() *ActivityModel {
+func (v NullableActivityModelLinks) Get() *ActivityModelLinks {
 	return v.value
 }
 
-func (v *NullableActivityModel) Set(val *ActivityModel) {
+func (v *NullableActivityModelLinks) Set(val *ActivityModelLinks) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableActivityModel) IsSet() bool {
+func (v NullableActivityModelLinks) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableActivityModel) Unset() {
+func (v *NullableActivityModelLinks) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableActivityModel(val *ActivityModel) *NullableActivityModel {
-	return &NullableActivityModel{value: val, isSet: true}
+func NewNullableActivityModelLinks(val *ActivityModelLinks) *NullableActivityModelLinks {
+	return &NullableActivityModelLinks{value: val, isSet: true}
 }
 
-func (v NullableActivityModel) MarshalJSON() ([]byte, error) {
+func (v NullableActivityModelLinks) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableActivityModel) UnmarshalJSON(src []byte) error {
+func (v *NullableActivityModelLinks) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

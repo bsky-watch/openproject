@@ -55,6 +55,7 @@ git_push.sh
 go.mod
 go.sum
 model_activity_model.go
+model_activity_model__links.go
 model_activity_model_comment.go
 model_add_watcher_request.go
 model_attachment_model.go

@@ -19430,6 +19430,8 @@ components:
         updatedAt: 2014-05-21T09:14:02.929Z
         version: 31
       properties:
+        _links:
+          $ref: '#/components/schemas/ActivityModel__links'
         id:
           description: Activity id
           readOnly: true
@@ -29338,6 +29340,14 @@ components:
           $ref: '#/components/schemas/Work_PackageModel__links_type'
         version:
           $ref: '#/components/schemas/Work_PackageModel__links_version'
+    ActivityModel__links:
+      properties:
+        self:
+          $ref: '#/components/schemas/Link'
+        workPackage:
+          $ref: '#/components/schemas/Link'
+        user:
+          $ref: '#/components/schemas/Link'
     UserPreferencesModel__links:
       properties:
         self:

@@ -424,6 +424,7 @@ Class | Method | HTTP request | Description
 
  - [ActivityModel](docs/ActivityModel.md)
  - [ActivityModelComment](docs/ActivityModelComment.md)
+ - [ActivityModelLinks](docs/ActivityModelLinks.md)
  - [AddWatcherRequest](docs/AddWatcherRequest.md)
  - [AttachmentModel](docs/AttachmentModel.md)
  - [AttachmentModelDescription](docs/AttachmentModelDescription.md)
