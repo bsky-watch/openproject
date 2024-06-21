@@ -23,7 +23,7 @@ type OAuthApplicationReadModelLinks struct {
 	Self OAuthApplicationReadModelLinksSelf `json:"self"`
 	Owner OAuthApplicationReadModelLinksOwner `json:"owner"`
 	Integration *OAuthApplicationReadModelLinksIntegration `json:"integration,omitempty"`
-	RedirectUri OAuthApplicationReadModelLinksRedirectUri `json:"redirectUri"`
+	RedirectUri []OAuthApplicationReadModelLinksRedirectUriInner `json:"redirectUri"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -33,7 +33,7 @@ type _OAuthApplicationReadModelLinks OAuthApplicationReadModelLinks
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOAuthApplicationReadModelLinks(self OAuthApplicationReadModelLinksSelf, owner OAuthApplicationReadModelLinksOwner, redirectUri OAuthApplicationReadModelLinksRedirectUri) *OAuthApplicationReadModelLinks {
+func NewOAuthApplicationReadModelLinks(self OAuthApplicationReadModelLinksSelf, owner OAuthApplicationReadModelLinksOwner, redirectUri []OAuthApplicationReadModelLinksRedirectUriInner) *OAuthApplicationReadModelLinks {
 	this := OAuthApplicationReadModelLinks{}
 	this.Self = self
 	this.Owner = owner
@@ -130,9 +130,9 @@ func (o *OAuthApplicationReadModelLinks) SetIntegration(v OAuthApplicationReadMo
 }
 
 // GetRedirectUri returns the RedirectUri field value
-func (o *OAuthApplicationReadModelLinks) GetRedirectUri() OAuthApplicationReadModelLinksRedirectUri {
+func (o *OAuthApplicationReadModelLinks) GetRedirectUri() []OAuthApplicationReadModelLinksRedirectUriInner {
 	if o == nil {
-		var ret OAuthApplicationReadModelLinksRedirectUri
+		var ret []OAuthApplicationReadModelLinksRedirectUriInner
 		return ret
 	}
 
@@ -141,15 +141,15 @@ func (o *OAuthApplicationReadModelLinks) GetRedirectUri() OAuthApplicationReadMo
 
 // GetRedirectUriOk returns a tuple with the RedirectUri field value
 // and a boolean to check if the value has been set.
-func (o *OAuthApplicationReadModelLinks) GetRedirectUriOk() (*OAuthApplicationReadModelLinksRedirectUri, bool) {
+func (o *OAuthApplicationReadModelLinks) GetRedirectUriOk() ([]OAuthApplicationReadModelLinksRedirectUriInner, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.RedirectUri, true
+	return o.RedirectUri, true
 }
 
 // SetRedirectUri sets field value
-func (o *OAuthApplicationReadModelLinks) SetRedirectUri(v OAuthApplicationReadModelLinksRedirectUri) {
+func (o *OAuthApplicationReadModelLinks) SetRedirectUri(v []OAuthApplicationReadModelLinksRedirectUriInner) {
 	o.RedirectUri = v
 }
 

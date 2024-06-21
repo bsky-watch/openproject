@@ -22,7 +22,7 @@ var _ MappedNullable = &GridWidgetModel{}
 type GridWidgetModel struct {
 	Type string `json:"_type"`
 	// The grid widget's unique identifier. Can be null, if a new widget is created within a grid.
-	Id int `json:"id"`
+	Id NullableInt `json:"id"`
 	// An alternative, human legible, and unique identifier.
 	Identifier string `json:"identifier"`
 	// The index of the starting row of the widget. The row is inclusive.
@@ -43,7 +43,7 @@ type _GridWidgetModel GridWidgetModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGridWidgetModel(type_ string, id int, identifier string, startRow int, endRow int, startColumn int, endColumn int) *GridWidgetModel {
+func NewGridWidgetModel(type_ string, id NullableInt, identifier string, startRow int, endRow int, startColumn int, endColumn int) *GridWidgetModel {
 	this := GridWidgetModel{}
 	this.Type = type_
 	this.Id = id
@@ -88,27 +88,29 @@ func (o *GridWidgetModel) SetType(v string) {
 }
 
 // GetId returns the Id field value
+// If the value is explicit nil, the zero value for int will be returned
 func (o *GridWidgetModel) GetId() int {
-	if o == nil {
+	if o == nil || o.Id.Get() == nil {
 		var ret int
 		return ret
 	}
 
-	return o.Id
+	return *o.Id.Get()
 }
 
 // GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GridWidgetModel) GetIdOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Id, true
+	return o.Id.Get(), o.Id.IsSet()
 }
 
 // SetId sets field value
 func (o *GridWidgetModel) SetId(v int) {
-	o.Id = v
+	o.Id.Set(&v)
 }
 
 // GetIdentifier returns the Identifier field value
@@ -274,7 +276,7 @@ func (o GridWidgetModel) MarshalJSON() ([]byte, error) {
 func (o GridWidgetModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["_type"] = o.Type
-	toSerialize["id"] = o.Id
+	toSerialize["id"] = o.Id.Get()
 	toSerialize["identifier"] = o.Identifier
 	toSerialize["startRow"] = o.StartRow
 	toSerialize["endRow"] = o.EndRow

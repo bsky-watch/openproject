@@ -26,11 +26,11 @@ type ProjectsAPIService service
 type ApiCreateProjectRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
-	body *map[string]interface{}
+	projectModel *ProjectModel
 }
 
-func (r ApiCreateProjectRequest) Body(body map[string]interface{}) ApiCreateProjectRequest {
-	r.body = &body
+func (r ApiCreateProjectRequest) ProjectModel(projectModel ProjectModel) ApiCreateProjectRequest {
+	r.projectModel = &projectModel
 	return r
 }
 
@@ -94,7 +94,7 @@ func (a *ProjectsAPIService) CreateProjectExecute(r ApiCreateProjectRequest) (*P
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.projectModel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -641,7 +641,7 @@ type ApiListProjectsRequest struct {
 	select_ *string
 }
 
-// JSON specifying filter conditions. Accepts the same format as returned by the [queries](https://www.openproject.org/docs/api/endpoints/queries/) endpoint. Currently supported filters are:  + active: based on the active property of the project + ancestor: filters projects by their ancestor. A project is not considered to be it&#39;s own ancestor. + created_at: based on the time the project was created + latest_activity_at: based on the time the last activity was registered on a project. + name_and_identifier: based on both the name and the identifier. + parent_id: filters projects by their parent. + principal: based on members of the project. + storage_id: filters projects by linked storages + storage_url: filters projects by linked storages identified by the host url + type_id: based on the types active in a project. + user_action: based on the actions the current user has in the project. + id: based on projects&#39; id. + visible: based on the visibility for the user (id) provided as the filter value. This filter is useful for admins to identify the projects visible to a user.  There might also be additional filters based on the custom fields that have been configured.
+// JSON specifying filter conditions. Accepts the same format as returned by the [queries](https://www.openproject.org/docs/api/endpoints/queries/) endpoint. Currently supported filters are:  + active: based on the active property of the project + ancestor: filters projects by their ancestor. A project is not considered to be it&#39;s own ancestor. + available_project_attributes: filters projects based on the activated project project attributes. + created_at: based on the time the project was created + latest_activity_at: based on the time the last activity was registered on a project. + name_and_identifier: based on both the name and the identifier. + parent_id: filters projects by their parent. + principal: based on members of the project. + storage_id: filters projects by linked storages + storage_url: filters projects by linked storages identified by the host url + type_id: based on the types active in a project. + user_action: based on the actions the current user has in the project. + id: based on projects&#39; id. + visible: based on the visibility for the user (id) provided as the filter value. This filter is useful for admins to identify the projects visible to a user.  There might also be additional filters based on the custom fields that have been configured.
 func (r ApiListProjectsRequest) Filters(filters string) ApiListProjectsRequest {
 	r.filters = &filters
 	return r
@@ -1310,11 +1310,11 @@ type ApiUpdateProjectRequest struct {
 	ctx context.Context
 	ApiService *ProjectsAPIService
 	id int
-	body *map[string]interface{}
+	projectModel *ProjectModel
 }
 
-func (r ApiUpdateProjectRequest) Body(body map[string]interface{}) ApiUpdateProjectRequest {
-	r.body = &body
+func (r ApiUpdateProjectRequest) ProjectModel(projectModel ProjectModel) ApiUpdateProjectRequest {
+	r.projectModel = &projectModel
 	return r
 }
 
@@ -1379,7 +1379,7 @@ func (a *ProjectsAPIService) UpdateProjectExecute(r ApiUpdateProjectRequest) (*P
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.body
+	localVarPostBody = r.projectModel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

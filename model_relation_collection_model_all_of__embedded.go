@@ -15,273 +15,60 @@ import (
 	"fmt"
 )
 
-// checks if the RelationModelLinksUpdate type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &RelationModelLinksUpdate{}
+// checks if the RelationCollectionModelAllOfEmbedded type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RelationCollectionModelAllOfEmbedded{}
 
-// RelationModelLinksUpdate struct for RelationModelLinksUpdate
-type RelationModelLinksUpdate struct {
-	// URL to the referenced resource (might be relative)
-	Href string `json:"href"`
-	// Representative label for the resource
-	Title *string `json:"title,omitempty"`
-	// If true the href contains parts that need to be replaced by the client
-	Templated *bool `json:"templated,omitempty"`
-	// The HTTP verb to use when requesting the resource
-	Method *string `json:"method,omitempty"`
-	// The payload to send in the request to achieve the desired result
-	Payload map[string]interface{} `json:"payload,omitempty"`
-	// An optional unique identifier to the link object
-	Identifier *string `json:"identifier,omitempty"`
-	// The MIME-Type of the returned resource.
-	Type *string `json:"type,omitempty"`
+// RelationCollectionModelAllOfEmbedded struct for RelationCollectionModelAllOfEmbedded
+type RelationCollectionModelAllOfEmbedded struct {
+	Elements []RelationModel `json:"elements"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _RelationModelLinksUpdate RelationModelLinksUpdate
+type _RelationCollectionModelAllOfEmbedded RelationCollectionModelAllOfEmbedded
 
-// NewRelationModelLinksUpdate instantiates a new RelationModelLinksUpdate object
+// NewRelationCollectionModelAllOfEmbedded instantiates a new RelationCollectionModelAllOfEmbedded object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRelationModelLinksUpdate(href string) *RelationModelLinksUpdate {
-	this := RelationModelLinksUpdate{}
-	this.Href = href
-	var templated bool = false
-	this.Templated = &templated
-	var method string = "GET"
-	this.Method = &method
+func NewRelationCollectionModelAllOfEmbedded(elements []RelationModel) *RelationCollectionModelAllOfEmbedded {
+	this := RelationCollectionModelAllOfEmbedded{}
+	this.Elements = elements
 	return &this
 }
 
-// NewRelationModelLinksUpdateWithDefaults instantiates a new RelationModelLinksUpdate object
+// NewRelationCollectionModelAllOfEmbeddedWithDefaults instantiates a new RelationCollectionModelAllOfEmbedded object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewRelationModelLinksUpdateWithDefaults() *RelationModelLinksUpdate {
-	this := RelationModelLinksUpdate{}
-	var templated bool = false
-	this.Templated = &templated
-	var method string = "GET"
-	this.Method = &method
+func NewRelationCollectionModelAllOfEmbeddedWithDefaults() *RelationCollectionModelAllOfEmbedded {
+	this := RelationCollectionModelAllOfEmbedded{}
 	return &this
 }
 
-// GetHref returns the Href field value
-func (o *RelationModelLinksUpdate) GetHref() string {
+// GetElements returns the Elements field value
+func (o *RelationCollectionModelAllOfEmbedded) GetElements() []RelationModel {
 	if o == nil {
-		var ret string
+		var ret []RelationModel
 		return ret
 	}
 
-	return o.Href
+	return o.Elements
 }
 
-// GetHrefOk returns a tuple with the Href field value
+// GetElementsOk returns a tuple with the Elements field value
 // and a boolean to check if the value has been set.
-func (o *RelationModelLinksUpdate) GetHrefOk() (*string, bool) {
+func (o *RelationCollectionModelAllOfEmbedded) GetElementsOk() ([]RelationModel, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Href, true
+	return o.Elements, true
 }
 
-// SetHref sets field value
-func (o *RelationModelLinksUpdate) SetHref(v string) {
-	o.Href = v
+// SetElements sets field value
+func (o *RelationCollectionModelAllOfEmbedded) SetElements(v []RelationModel) {
+	o.Elements = v
 }
 
-// GetTitle returns the Title field value if set, zero value otherwise.
-func (o *RelationModelLinksUpdate) GetTitle() string {
-	if o == nil || IsNil(o.Title) {
-		var ret string
-		return ret
-	}
-	return *o.Title
-}
-
-// GetTitleOk returns a tuple with the Title field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RelationModelLinksUpdate) GetTitleOk() (*string, bool) {
-	if o == nil || IsNil(o.Title) {
-		return nil, false
-	}
-	return o.Title, true
-}
-
-// HasTitle returns a boolean if a field has been set.
-func (o *RelationModelLinksUpdate) HasTitle() bool {
-	if o != nil && !IsNil(o.Title) {
-		return true
-	}
-
-	return false
-}
-
-// SetTitle gets a reference to the given string and assigns it to the Title field.
-func (o *RelationModelLinksUpdate) SetTitle(v string) {
-	o.Title = &v
-}
-
-// GetTemplated returns the Templated field value if set, zero value otherwise.
-func (o *RelationModelLinksUpdate) GetTemplated() bool {
-	if o == nil || IsNil(o.Templated) {
-		var ret bool
-		return ret
-	}
-	return *o.Templated
-}
-
-// GetTemplatedOk returns a tuple with the Templated field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RelationModelLinksUpdate) GetTemplatedOk() (*bool, bool) {
-	if o == nil || IsNil(o.Templated) {
-		return nil, false
-	}
-	return o.Templated, true
-}
-
-// HasTemplated returns a boolean if a field has been set.
-func (o *RelationModelLinksUpdate) HasTemplated() bool {
-	if o != nil && !IsNil(o.Templated) {
-		return true
-	}
-
-	return false
-}
-
-// SetTemplated gets a reference to the given bool and assigns it to the Templated field.
-func (o *RelationModelLinksUpdate) SetTemplated(v bool) {
-	o.Templated = &v
-}
-
-// GetMethod returns the Method field value if set, zero value otherwise.
-func (o *RelationModelLinksUpdate) GetMethod() string {
-	if o == nil || IsNil(o.Method) {
-		var ret string
-		return ret
-	}
-	return *o.Method
-}
-
-// GetMethodOk returns a tuple with the Method field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RelationModelLinksUpdate) GetMethodOk() (*string, bool) {
-	if o == nil || IsNil(o.Method) {
-		return nil, false
-	}
-	return o.Method, true
-}
-
-// HasMethod returns a boolean if a field has been set.
-func (o *RelationModelLinksUpdate) HasMethod() bool {
-	if o != nil && !IsNil(o.Method) {
-		return true
-	}
-
-	return false
-}
-
-// SetMethod gets a reference to the given string and assigns it to the Method field.
-func (o *RelationModelLinksUpdate) SetMethod(v string) {
-	o.Method = &v
-}
-
-// GetPayload returns the Payload field value if set, zero value otherwise.
-func (o *RelationModelLinksUpdate) GetPayload() map[string]interface{} {
-	if o == nil || IsNil(o.Payload) {
-		var ret map[string]interface{}
-		return ret
-	}
-	return o.Payload
-}
-
-// GetPayloadOk returns a tuple with the Payload field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RelationModelLinksUpdate) GetPayloadOk() (map[string]interface{}, bool) {
-	if o == nil || IsNil(o.Payload) {
-		return map[string]interface{}{}, false
-	}
-	return o.Payload, true
-}
-
-// HasPayload returns a boolean if a field has been set.
-func (o *RelationModelLinksUpdate) HasPayload() bool {
-	if o != nil && !IsNil(o.Payload) {
-		return true
-	}
-
-	return false
-}
-
-// SetPayload gets a reference to the given map[string]interface{} and assigns it to the Payload field.
-func (o *RelationModelLinksUpdate) SetPayload(v map[string]interface{}) {
-	o.Payload = v
-}
-
-// GetIdentifier returns the Identifier field value if set, zero value otherwise.
-func (o *RelationModelLinksUpdate) GetIdentifier() string {
-	if o == nil || IsNil(o.Identifier) {
-		var ret string
-		return ret
-	}
-	return *o.Identifier
-}
-
-// GetIdentifierOk returns a tuple with the Identifier field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RelationModelLinksUpdate) GetIdentifierOk() (*string, bool) {
-	if o == nil || IsNil(o.Identifier) {
-		return nil, false
-	}
-	return o.Identifier, true
-}
-
-// HasIdentifier returns a boolean if a field has been set.
-func (o *RelationModelLinksUpdate) HasIdentifier() bool {
-	if o != nil && !IsNil(o.Identifier) {
-		return true
-	}
-
-	return false
-}
-
-// SetIdentifier gets a reference to the given string and assigns it to the Identifier field.
-func (o *RelationModelLinksUpdate) SetIdentifier(v string) {
-	o.Identifier = &v
-}
-
-// GetType returns the Type field value if set, zero value otherwise.
-func (o *RelationModelLinksUpdate) GetType() string {
-	if o == nil || IsNil(o.Type) {
-		var ret string
-		return ret
-	}
-	return *o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RelationModelLinksUpdate) GetTypeOk() (*string, bool) {
-	if o == nil || IsNil(o.Type) {
-		return nil, false
-	}
-	return o.Type, true
-}
-
-// HasType returns a boolean if a field has been set.
-func (o *RelationModelLinksUpdate) HasType() bool {
-	if o != nil && !IsNil(o.Type) {
-		return true
-	}
-
-	return false
-}
-
-// SetType gets a reference to the given string and assigns it to the Type field.
-func (o *RelationModelLinksUpdate) SetType(v string) {
-	o.Type = &v
-}
-
-func (o RelationModelLinksUpdate) MarshalJSON() ([]byte, error) {
+func (o RelationCollectionModelAllOfEmbedded) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -289,27 +76,9 @@ func (o RelationModelLinksUpdate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RelationModelLinksUpdate) ToMap() (map[string]interface{}, error) {
+func (o RelationCollectionModelAllOfEmbedded) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["href"] = o.Href
-	if !IsNil(o.Title) {
-		toSerialize["title"] = o.Title
-	}
-	if !IsNil(o.Templated) {
-		toSerialize["templated"] = o.Templated
-	}
-	if !IsNil(o.Method) {
-		toSerialize["method"] = o.Method
-	}
-	if !IsNil(o.Payload) {
-		toSerialize["payload"] = o.Payload
-	}
-	if !IsNil(o.Identifier) {
-		toSerialize["identifier"] = o.Identifier
-	}
-	if !IsNil(o.Type) {
-		toSerialize["type"] = o.Type
-	}
+	toSerialize["elements"] = o.Elements
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -318,12 +87,12 @@ func (o RelationModelLinksUpdate) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *RelationModelLinksUpdate) UnmarshalJSON(data []byte) (err error) {
+func (o *RelationCollectionModelAllOfEmbedded) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"href",
+		"elements",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -340,64 +109,58 @@ func (o *RelationModelLinksUpdate) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varRelationModelLinksUpdate := _RelationModelLinksUpdate{}
+	varRelationCollectionModelAllOfEmbedded := _RelationCollectionModelAllOfEmbedded{}
 
-	err = json.Unmarshal(data, &varRelationModelLinksUpdate)
+	err = json.Unmarshal(data, &varRelationCollectionModelAllOfEmbedded)
 
 	if err != nil {
 		return err
 	}
 
-	*o = RelationModelLinksUpdate(varRelationModelLinksUpdate)
+	*o = RelationCollectionModelAllOfEmbedded(varRelationCollectionModelAllOfEmbedded)
 
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "href")
-		delete(additionalProperties, "title")
-		delete(additionalProperties, "templated")
-		delete(additionalProperties, "method")
-		delete(additionalProperties, "payload")
-		delete(additionalProperties, "identifier")
-		delete(additionalProperties, "type")
+		delete(additionalProperties, "elements")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableRelationModelLinksUpdate struct {
-	value *RelationModelLinksUpdate
+type NullableRelationCollectionModelAllOfEmbedded struct {
+	value *RelationCollectionModelAllOfEmbedded
 	isSet bool
 }
 
-func (v NullableRelationModelLinksUpdate) Get() *RelationModelLinksUpdate {
+func (v NullableRelationCollectionModelAllOfEmbedded) Get() *RelationCollectionModelAllOfEmbedded {
 	return v.value
 }
 
-func (v *NullableRelationModelLinksUpdate) Set(val *RelationModelLinksUpdate) {
+func (v *NullableRelationCollectionModelAllOfEmbedded) Set(val *RelationCollectionModelAllOfEmbedded) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableRelationModelLinksUpdate) IsSet() bool {
+func (v NullableRelationCollectionModelAllOfEmbedded) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableRelationModelLinksUpdate) Unset() {
+func (v *NullableRelationCollectionModelAllOfEmbedded) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableRelationModelLinksUpdate(val *RelationModelLinksUpdate) *NullableRelationModelLinksUpdate {
-	return &NullableRelationModelLinksUpdate{value: val, isSet: true}
+func NewNullableRelationCollectionModelAllOfEmbedded(val *RelationCollectionModelAllOfEmbedded) *NullableRelationCollectionModelAllOfEmbedded {
+	return &NullableRelationCollectionModelAllOfEmbedded{value: val, isSet: true}
 }
 
-func (v NullableRelationModelLinksUpdate) MarshalJSON() ([]byte, error) {
+func (v NullableRelationCollectionModelAllOfEmbedded) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableRelationModelLinksUpdate) UnmarshalJSON(src []byte) error {
+func (v *NullableRelationCollectionModelAllOfEmbedded) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

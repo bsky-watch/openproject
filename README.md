@@ -235,7 +235,6 @@ Class | Method | HTTP request | Description
 *CustomActionsAPI* | [**ExecuteCustomAction**](docs/CustomActionsAPI.md#executecustomaction) | **Post** /api/v3/custom_actions/{id}/execute | Execute custom action
 *CustomActionsAPI* | [**GetCustomAction**](docs/CustomActionsAPI.md#getcustomaction) | **Get** /api/v3/custom_actions/{id} | Get a custom action
 *CustomOptionsAPI* | [**ViewCustomOption**](docs/CustomOptionsAPI.md#viewcustomoption) | **Get** /api/v3/custom_options/{id} | View Custom Option
-*DefaultAPI* | [**ViewValuesSchema**](docs/DefaultAPI.md#viewvaluesschema) | **Get** /api/v3/values/schema/{id} | View Values schema
 *DocumentsAPI* | [**ListDocuments**](docs/DocumentsAPI.md#listdocuments) | **Get** /api/v3/documents | List Documents
 *DocumentsAPI* | [**ViewDocument**](docs/DocumentsAPI.md#viewdocument) | **Get** /api/v3/documents/{id} | View document
 *FileLinksAPI* | [**CreateStorage**](docs/FileLinksAPI.md#createstorage) | **Post** /api/v3/storages | Creates a storage.
@@ -292,6 +291,12 @@ Class | Method | HTTP request | Description
 *PostsAPI* | [**ViewPost**](docs/PostsAPI.md#viewpost) | **Get** /api/v3/posts/{id} | View Post
 *PreviewingAPI* | [**PreviewMarkdownDocument**](docs/PreviewingAPI.md#previewmarkdowndocument) | **Post** /api/v3/render/markdown | Preview Markdown document
 *PreviewingAPI* | [**PreviewPlainDocument**](docs/PreviewingAPI.md#previewplaindocument) | **Post** /api/v3/render/plain | Preview plain document
+*PrincipalsAPI* | [**CreatePlaceholderUser**](docs/PrincipalsAPI.md#createplaceholderuser) | **Post** /api/v3/placeholder_users | Create placeholder user
+*PrincipalsAPI* | [**DeletePlaceholderUser**](docs/PrincipalsAPI.md#deleteplaceholderuser) | **Delete** /api/v3/placeholder_users/{id} | Delete placeholder user
+*PrincipalsAPI* | [**ListPlaceholderUsers**](docs/PrincipalsAPI.md#listplaceholderusers) | **Get** /api/v3/placeholder_users | List placehoder users
+*PrincipalsAPI* | [**ListPrincipals**](docs/PrincipalsAPI.md#listprincipals) | **Get** /api/v3/principals | List principals
+*PrincipalsAPI* | [**UpdatePlaceholderUser**](docs/PrincipalsAPI.md#updateplaceholderuser) | **Patch** /api/v3/placeholder_users/{id} | Update placeholder user
+*PrincipalsAPI* | [**ViewPlaceholderUser**](docs/PrincipalsAPI.md#viewplaceholderuser) | **Get** /api/v3/placeholder_users/{id} | View placeholder user
 *PrioritiesAPI* | [**ListAllPriorities**](docs/PrioritiesAPI.md#listallpriorities) | **Get** /api/v3/priorities | List all Priorities
 *PrioritiesAPI* | [**ViewPriority**](docs/PrioritiesAPI.md#viewpriority) | **Get** /api/v3/priorities/{id} | View Priority
 *ProjectsAPI* | [**CreateProject**](docs/ProjectsAPI.md#createproject) | **Post** /api/v3/projects | Create project
@@ -329,12 +334,9 @@ Class | Method | HTTP request | Description
 *QueryOperatorsAPI* | [**ViewQueryOperator**](docs/QueryOperatorsAPI.md#viewqueryoperator) | **Get** /api/v3/queries/operators/{id} | View Query Operator
 *QuerySortBysAPI* | [**ViewQuerySortBy**](docs/QuerySortBysAPI.md#viewquerysortby) | **Get** /api/v3/queries/sort_bys/{id} | View Query Sort By
 *RelationsAPI* | [**DeleteRelation**](docs/RelationsAPI.md#deleterelation) | **Delete** /api/v3/relations/{id} | Delete Relation
-*RelationsAPI* | [**EditRelation**](docs/RelationsAPI.md#editrelation) | **Patch** /api/v3/relations/{id} | Edit Relation
+*RelationsAPI* | [**GetRelation**](docs/RelationsAPI.md#getrelation) | **Get** /api/v3/relations/{id} | Get Relation
 *RelationsAPI* | [**ListRelations**](docs/RelationsAPI.md#listrelations) | **Get** /api/v3/relations | List Relations
-*RelationsAPI* | [**RelationEditForm**](docs/RelationsAPI.md#relationeditform) | **Post** /api/v3/relations/{id}/form | Relation edit form
-*RelationsAPI* | [**ViewRelation**](docs/RelationsAPI.md#viewrelation) | **Get** /api/v3/relations/{id} | View Relation
-*RelationsAPI* | [**ViewRelationSchema**](docs/RelationsAPI.md#viewrelationschema) | **Get** /api/v3/relations/schema | View relation schema
-*RelationsAPI* | [**ViewRelationSchemaForType**](docs/RelationsAPI.md#viewrelationschemafortype) | **Get** /api/v3/relations/schema/{type} | View relation schema for type
+*RelationsAPI* | [**UpdateRelation**](docs/RelationsAPI.md#updaterelation) | **Patch** /api/v3/relations/{id} | Update Relation
 *RevisionsAPI* | [**ViewRevision**](docs/RevisionsAPI.md#viewrevision) | **Get** /api/v3/revisions/{id} | View revision
 *RolesAPI* | [**ListRoles**](docs/RolesAPI.md#listroles) | **Get** /api/v3/roles | List roles
 *RolesAPI* | [**ViewRole**](docs/RolesAPI.md#viewrole) | **Get** /api/v3/roles/{id} | View role
@@ -366,6 +368,7 @@ Class | Method | HTTP request | Description
 *UsersAPI* | [**UserUpdateForm**](docs/UsersAPI.md#userupdateform) | **Post** /api/v3/users/{id}/form | User update form
 *UsersAPI* | [**ViewUser**](docs/UsersAPI.md#viewuser) | **Get** /api/v3/users/{id} | View user
 *UsersAPI* | [**ViewUserSchema**](docs/UsersAPI.md#viewuserschema) | **Get** /api/v3/users/schema | View user schema
+*ValuesPropertyAPI* | [**ViewValuesSchema**](docs/ValuesPropertyAPI.md#viewvaluesschema) | **Get** /api/v3/values/schema/{id} | View Values schema
 *VersionsAPI* | [**AvailableProjectsForVersions**](docs/VersionsAPI.md#availableprojectsforversions) | **Get** /api/v3/versions/available_projects | Available projects for versions
 *VersionsAPI* | [**CreateVersion**](docs/VersionsAPI.md#createversion) | **Post** /api/v3/versions | Create version
 *VersionsAPI* | [**DeleteVersion**](docs/VersionsAPI.md#deleteversion) | **Delete** /api/v3/versions/{id} | Delete version
@@ -634,7 +637,7 @@ Class | Method | HTTP request | Description
  - [OAuthApplicationReadModelLinks](docs/OAuthApplicationReadModelLinks.md)
  - [OAuthApplicationReadModelLinksIntegration](docs/OAuthApplicationReadModelLinksIntegration.md)
  - [OAuthApplicationReadModelLinksOwner](docs/OAuthApplicationReadModelLinksOwner.md)
- - [OAuthApplicationReadModelLinksRedirectUri](docs/OAuthApplicationReadModelLinksRedirectUri.md)
+ - [OAuthApplicationReadModelLinksRedirectUriInner](docs/OAuthApplicationReadModelLinksRedirectUriInner.md)
  - [OAuthApplicationReadModelLinksSelf](docs/OAuthApplicationReadModelLinksSelf.md)
  - [OAuthClientCredentialsReadModel](docs/OAuthClientCredentialsReadModel.md)
  - [OAuthClientCredentialsReadModelLinks](docs/OAuthClientCredentialsReadModelLinks.md)
@@ -728,14 +731,17 @@ Class | Method | HTTP request | Description
  - [QueryOperatorModel](docs/QueryOperatorModel.md)
  - [QuerySortByModel](docs/QuerySortByModel.md)
  - [QueryUpdateForm](docs/QueryUpdateForm.md)
+ - [RelationCollectionModel](docs/RelationCollectionModel.md)
+ - [RelationCollectionModelAllOfEmbedded](docs/RelationCollectionModelAllOfEmbedded.md)
+ - [RelationCollectionModelAllOfLinks](docs/RelationCollectionModelAllOfLinks.md)
+ - [RelationCollectionModelAllOfLinksSelf](docs/RelationCollectionModelAllOfLinksSelf.md)
  - [RelationModel](docs/RelationModel.md)
+ - [RelationModelEmbedded](docs/RelationModelEmbedded.md)
  - [RelationModelLinks](docs/RelationModelLinks.md)
  - [RelationModelLinksDelete](docs/RelationModelLinksDelete.md)
  - [RelationModelLinksFrom](docs/RelationModelLinksFrom.md)
- - [RelationModelLinksSchema](docs/RelationModelLinksSchema.md)
  - [RelationModelLinksSelf](docs/RelationModelLinksSelf.md)
  - [RelationModelLinksTo](docs/RelationModelLinksTo.md)
- - [RelationModelLinksUpdate](docs/RelationModelLinksUpdate.md)
  - [RelationModelLinksUpdateImmediately](docs/RelationModelLinksUpdateImmediately.md)
  - [RevisionModel](docs/RevisionModel.md)
  - [RevisionModelLinks](docs/RevisionModelLinks.md)

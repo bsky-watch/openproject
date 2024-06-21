@@ -24,7 +24,7 @@ type AttachmentsModelAllOfEmbeddedElements struct {
 	// Attachment's id
 	Id *int `json:"id,omitempty"`
 	// The name of the file
-	Title *string `json:"title,omitempty"`
+	Title string `json:"title"`
 	// The name of the uploaded file
 	FileName string `json:"fileName"`
 	// The size of the uploaded file in Bytes
@@ -45,8 +45,9 @@ type _AttachmentsModelAllOfEmbeddedElements AttachmentsModelAllOfEmbeddedElement
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAttachmentsModelAllOfEmbeddedElements(fileName string, description AttachmentModelDescription, contentType string, digest AttachmentModelDigest, createdAt time.Time) *AttachmentsModelAllOfEmbeddedElements {
+func NewAttachmentsModelAllOfEmbeddedElements(title string, fileName string, description AttachmentModelDescription, contentType string, digest AttachmentModelDigest, createdAt time.Time) *AttachmentsModelAllOfEmbeddedElements {
 	this := AttachmentsModelAllOfEmbeddedElements{}
+	this.Title = title
 	this.FileName = fileName
 	this.Description = description
 	this.ContentType = contentType
@@ -95,36 +96,28 @@ func (o *AttachmentsModelAllOfEmbeddedElements) SetId(v int) {
 	o.Id = &v
 }
 
-// GetTitle returns the Title field value if set, zero value otherwise.
+// GetTitle returns the Title field value
 func (o *AttachmentsModelAllOfEmbeddedElements) GetTitle() string {
-	if o == nil || IsNil(o.Title) {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Title
+
+	return o.Title
 }
 
-// GetTitleOk returns a tuple with the Title field value if set, nil otherwise
+// GetTitleOk returns a tuple with the Title field value
 // and a boolean to check if the value has been set.
 func (o *AttachmentsModelAllOfEmbeddedElements) GetTitleOk() (*string, bool) {
-	if o == nil || IsNil(o.Title) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Title, true
+	return &o.Title, true
 }
 
-// HasTitle returns a boolean if a field has been set.
-func (o *AttachmentsModelAllOfEmbeddedElements) HasTitle() bool {
-	if o != nil && !IsNil(o.Title) {
-		return true
-	}
-
-	return false
-}
-
-// SetTitle gets a reference to the given string and assigns it to the Title field.
+// SetTitle sets field value
 func (o *AttachmentsModelAllOfEmbeddedElements) SetTitle(v string) {
-	o.Title = &v
+	o.Title = v
 }
 
 // GetFileName returns the FileName field value
@@ -324,9 +317,7 @@ func (o AttachmentsModelAllOfEmbeddedElements) ToMap() (map[string]interface{}, 
 	if !IsNil(o.Id) {
 		toSerialize["id"] = o.Id
 	}
-	if !IsNil(o.Title) {
-		toSerialize["title"] = o.Title
-	}
+	toSerialize["title"] = o.Title
 	toSerialize["fileName"] = o.FileName
 	if !IsNil(o.FileSize) {
 		toSerialize["fileSize"] = o.FileSize
@@ -351,6 +342,7 @@ func (o *AttachmentsModelAllOfEmbeddedElements) UnmarshalJSON(data []byte) (err 
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"title",
 		"fileName",
 		"description",
 		"contentType",

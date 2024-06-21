@@ -15,178 +15,166 @@ import (
 	"fmt"
 )
 
-// checks if the RelationModelLinks type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &RelationModelLinks{}
+// checks if the RelationCollectionModel type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RelationCollectionModel{}
 
-// RelationModelLinks struct for RelationModelLinks
-type RelationModelLinks struct {
-	Self RelationModelLinksSelf `json:"self"`
-	UpdateImmediately *RelationModelLinksUpdateImmediately `json:"updateImmediately,omitempty"`
-	Delete *RelationModelLinksDelete `json:"delete,omitempty"`
-	From RelationModelLinksFrom `json:"from"`
-	To RelationModelLinksTo `json:"to"`
+// RelationCollectionModel struct for RelationCollectionModel
+type RelationCollectionModel struct {
+	Type string `json:"_type"`
+	// The total amount of elements available in the collection.
+	Total int `json:"total"`
+	// Actual amount of elements in this response.
+	Count int `json:"count"`
+	Links RelationCollectionModelAllOfLinks `json:"_links"`
+	Embedded RelationCollectionModelAllOfEmbedded `json:"_embedded"`
 	AdditionalProperties map[string]interface{}
 }
 
-type _RelationModelLinks RelationModelLinks
+type _RelationCollectionModel RelationCollectionModel
 
-// NewRelationModelLinks instantiates a new RelationModelLinks object
+// NewRelationCollectionModel instantiates a new RelationCollectionModel object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRelationModelLinks(self RelationModelLinksSelf, from RelationModelLinksFrom, to RelationModelLinksTo) *RelationModelLinks {
-	this := RelationModelLinks{}
-	this.Self = self
-	this.From = from
-	this.To = to
+func NewRelationCollectionModel(type_ string, total int, count int, links RelationCollectionModelAllOfLinks, embedded RelationCollectionModelAllOfEmbedded) *RelationCollectionModel {
+	this := RelationCollectionModel{}
+	this.Type = type_
+	this.Total = total
+	this.Count = count
+	this.Links = links
+	this.Embedded = embedded
 	return &this
 }
 
-// NewRelationModelLinksWithDefaults instantiates a new RelationModelLinks object
+// NewRelationCollectionModelWithDefaults instantiates a new RelationCollectionModel object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewRelationModelLinksWithDefaults() *RelationModelLinks {
-	this := RelationModelLinks{}
+func NewRelationCollectionModelWithDefaults() *RelationCollectionModel {
+	this := RelationCollectionModel{}
 	return &this
 }
 
-// GetSelf returns the Self field value
-func (o *RelationModelLinks) GetSelf() RelationModelLinksSelf {
+// GetType returns the Type field value
+func (o *RelationCollectionModel) GetType() string {
 	if o == nil {
-		var ret RelationModelLinksSelf
+		var ret string
 		return ret
 	}
 
-	return o.Self
+	return o.Type
 }
 
-// GetSelfOk returns a tuple with the Self field value
+// GetTypeOk returns a tuple with the Type field value
 // and a boolean to check if the value has been set.
-func (o *RelationModelLinks) GetSelfOk() (*RelationModelLinksSelf, bool) {
+func (o *RelationCollectionModel) GetTypeOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.Self, true
+	return &o.Type, true
 }
 
-// SetSelf sets field value
-func (o *RelationModelLinks) SetSelf(v RelationModelLinksSelf) {
-	o.Self = v
+// SetType sets field value
+func (o *RelationCollectionModel) SetType(v string) {
+	o.Type = v
 }
 
-// GetUpdateImmediately returns the UpdateImmediately field value if set, zero value otherwise.
-func (o *RelationModelLinks) GetUpdateImmediately() RelationModelLinksUpdateImmediately {
-	if o == nil || IsNil(o.UpdateImmediately) {
-		var ret RelationModelLinksUpdateImmediately
-		return ret
-	}
-	return *o.UpdateImmediately
-}
-
-// GetUpdateImmediatelyOk returns a tuple with the UpdateImmediately field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RelationModelLinks) GetUpdateImmediatelyOk() (*RelationModelLinksUpdateImmediately, bool) {
-	if o == nil || IsNil(o.UpdateImmediately) {
-		return nil, false
-	}
-	return o.UpdateImmediately, true
-}
-
-// HasUpdateImmediately returns a boolean if a field has been set.
-func (o *RelationModelLinks) HasUpdateImmediately() bool {
-	if o != nil && !IsNil(o.UpdateImmediately) {
-		return true
-	}
-
-	return false
-}
-
-// SetUpdateImmediately gets a reference to the given RelationModelLinksUpdateImmediately and assigns it to the UpdateImmediately field.
-func (o *RelationModelLinks) SetUpdateImmediately(v RelationModelLinksUpdateImmediately) {
-	o.UpdateImmediately = &v
-}
-
-// GetDelete returns the Delete field value if set, zero value otherwise.
-func (o *RelationModelLinks) GetDelete() RelationModelLinksDelete {
-	if o == nil || IsNil(o.Delete) {
-		var ret RelationModelLinksDelete
-		return ret
-	}
-	return *o.Delete
-}
-
-// GetDeleteOk returns a tuple with the Delete field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RelationModelLinks) GetDeleteOk() (*RelationModelLinksDelete, bool) {
-	if o == nil || IsNil(o.Delete) {
-		return nil, false
-	}
-	return o.Delete, true
-}
-
-// HasDelete returns a boolean if a field has been set.
-func (o *RelationModelLinks) HasDelete() bool {
-	if o != nil && !IsNil(o.Delete) {
-		return true
-	}
-
-	return false
-}
-
-// SetDelete gets a reference to the given RelationModelLinksDelete and assigns it to the Delete field.
-func (o *RelationModelLinks) SetDelete(v RelationModelLinksDelete) {
-	o.Delete = &v
-}
-
-// GetFrom returns the From field value
-func (o *RelationModelLinks) GetFrom() RelationModelLinksFrom {
+// GetTotal returns the Total field value
+func (o *RelationCollectionModel) GetTotal() int {
 	if o == nil {
-		var ret RelationModelLinksFrom
+		var ret int
 		return ret
 	}
 
-	return o.From
+	return o.Total
 }
 
-// GetFromOk returns a tuple with the From field value
+// GetTotalOk returns a tuple with the Total field value
 // and a boolean to check if the value has been set.
-func (o *RelationModelLinks) GetFromOk() (*RelationModelLinksFrom, bool) {
+func (o *RelationCollectionModel) GetTotalOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.From, true
+	return &o.Total, true
 }
 
-// SetFrom sets field value
-func (o *RelationModelLinks) SetFrom(v RelationModelLinksFrom) {
-	o.From = v
+// SetTotal sets field value
+func (o *RelationCollectionModel) SetTotal(v int) {
+	o.Total = v
 }
 
-// GetTo returns the To field value
-func (o *RelationModelLinks) GetTo() RelationModelLinksTo {
+// GetCount returns the Count field value
+func (o *RelationCollectionModel) GetCount() int {
 	if o == nil {
-		var ret RelationModelLinksTo
+		var ret int
 		return ret
 	}
 
-	return o.To
+	return o.Count
 }
 
-// GetToOk returns a tuple with the To field value
+// GetCountOk returns a tuple with the Count field value
 // and a boolean to check if the value has been set.
-func (o *RelationModelLinks) GetToOk() (*RelationModelLinksTo, bool) {
+func (o *RelationCollectionModel) GetCountOk() (*int, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.To, true
+	return &o.Count, true
 }
 
-// SetTo sets field value
-func (o *RelationModelLinks) SetTo(v RelationModelLinksTo) {
-	o.To = v
+// SetCount sets field value
+func (o *RelationCollectionModel) SetCount(v int) {
+	o.Count = v
 }
 
-func (o RelationModelLinks) MarshalJSON() ([]byte, error) {
+// GetLinks returns the Links field value
+func (o *RelationCollectionModel) GetLinks() RelationCollectionModelAllOfLinks {
+	if o == nil {
+		var ret RelationCollectionModelAllOfLinks
+		return ret
+	}
+
+	return o.Links
+}
+
+// GetLinksOk returns a tuple with the Links field value
+// and a boolean to check if the value has been set.
+func (o *RelationCollectionModel) GetLinksOk() (*RelationCollectionModelAllOfLinks, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Links, true
+}
+
+// SetLinks sets field value
+func (o *RelationCollectionModel) SetLinks(v RelationCollectionModelAllOfLinks) {
+	o.Links = v
+}
+
+// GetEmbedded returns the Embedded field value
+func (o *RelationCollectionModel) GetEmbedded() RelationCollectionModelAllOfEmbedded {
+	if o == nil {
+		var ret RelationCollectionModelAllOfEmbedded
+		return ret
+	}
+
+	return o.Embedded
+}
+
+// GetEmbeddedOk returns a tuple with the Embedded field value
+// and a boolean to check if the value has been set.
+func (o *RelationCollectionModel) GetEmbeddedOk() (*RelationCollectionModelAllOfEmbedded, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Embedded, true
+}
+
+// SetEmbedded sets field value
+func (o *RelationCollectionModel) SetEmbedded(v RelationCollectionModelAllOfEmbedded) {
+	o.Embedded = v
+}
+
+func (o RelationCollectionModel) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -194,17 +182,13 @@ func (o RelationModelLinks) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RelationModelLinks) ToMap() (map[string]interface{}, error) {
+func (o RelationCollectionModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["self"] = o.Self
-	if !IsNil(o.UpdateImmediately) {
-		toSerialize["updateImmediately"] = o.UpdateImmediately
-	}
-	if !IsNil(o.Delete) {
-		toSerialize["delete"] = o.Delete
-	}
-	toSerialize["from"] = o.From
-	toSerialize["to"] = o.To
+	toSerialize["_type"] = o.Type
+	toSerialize["total"] = o.Total
+	toSerialize["count"] = o.Count
+	toSerialize["_links"] = o.Links
+	toSerialize["_embedded"] = o.Embedded
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -213,14 +197,16 @@ func (o RelationModelLinks) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *RelationModelLinks) UnmarshalJSON(data []byte) (err error) {
+func (o *RelationCollectionModel) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"self",
-		"from",
-		"to",
+		"_type",
+		"total",
+		"count",
+		"_links",
+		"_embedded",
 	}
 
 	allProperties := make(map[string]interface{})
@@ -237,62 +223,62 @@ func (o *RelationModelLinks) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varRelationModelLinks := _RelationModelLinks{}
+	varRelationCollectionModel := _RelationCollectionModel{}
 
-	err = json.Unmarshal(data, &varRelationModelLinks)
+	err = json.Unmarshal(data, &varRelationCollectionModel)
 
 	if err != nil {
 		return err
 	}
 
-	*o = RelationModelLinks(varRelationModelLinks)
+	*o = RelationCollectionModel(varRelationCollectionModel)
 
 	additionalProperties := make(map[string]interface{})
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "self")
-		delete(additionalProperties, "updateImmediately")
-		delete(additionalProperties, "delete")
-		delete(additionalProperties, "from")
-		delete(additionalProperties, "to")
+		delete(additionalProperties, "_type")
+		delete(additionalProperties, "total")
+		delete(additionalProperties, "count")
+		delete(additionalProperties, "_links")
+		delete(additionalProperties, "_embedded")
 		o.AdditionalProperties = additionalProperties
 	}
 
 	return err
 }
 
-type NullableRelationModelLinks struct {
-	value *RelationModelLinks
+type NullableRelationCollectionModel struct {
+	value *RelationCollectionModel
 	isSet bool
 }
 
-func (v NullableRelationModelLinks) Get() *RelationModelLinks {
+func (v NullableRelationCollectionModel) Get() *RelationCollectionModel {
 	return v.value
 }
 
-func (v *NullableRelationModelLinks) Set(val *RelationModelLinks) {
+func (v *NullableRelationCollectionModel) Set(val *RelationCollectionModel) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableRelationModelLinks) IsSet() bool {
+func (v NullableRelationCollectionModel) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableRelationModelLinks) Unset() {
+func (v *NullableRelationCollectionModel) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableRelationModelLinks(val *RelationModelLinks) *NullableRelationModelLinks {
-	return &NullableRelationModelLinks{value: val, isSet: true}
+func NewNullableRelationCollectionModel(val *RelationCollectionModel) *NullableRelationCollectionModel {
+	return &NullableRelationCollectionModel{value: val, isSet: true}
 }
 
-func (v NullableRelationModelLinks) MarshalJSON() ([]byte, error) {
+func (v NullableRelationCollectionModel) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableRelationModelLinks) UnmarshalJSON(src []byte) error {
+func (v *NullableRelationCollectionModel) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

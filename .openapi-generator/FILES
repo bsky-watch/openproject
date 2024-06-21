@@ -11,7 +11,6 @@ api_collections.go
 api_configuration.go
 api_custom_actions.go
 api_custom_options.go
-api_default.go
 api_documents.go
 api_file_links.go
 api_forms.go
@@ -25,6 +24,7 @@ api_notifications.go
 api_o_auth2.go
 api_posts.go
 api_previewing.go
+api_principals.go
 api_priorities.go
 api_projects.go
 api_queries.go
@@ -44,6 +44,7 @@ api_time_entry_activities.go
 api_types.go
 api_user_preferences.go
 api_users.go
+api_values_property.go
 api_versions.go
 api_views.go
 api_wiki_pages.go
@@ -266,7 +267,7 @@ model_o_auth_application_read_model.go
 model_o_auth_application_read_model__links.go
 model_o_auth_application_read_model__links_integration.go
 model_o_auth_application_read_model__links_owner.go
-model_o_auth_application_read_model__links_redirect_uri.go
+model_o_auth_application_read_model__links_redirect_uri_inner.go
 model_o_auth_application_read_model__links_self.go
 model_o_auth_client_credentials_read_model.go
 model_o_auth_client_credentials_read_model__links.go
@@ -360,14 +361,17 @@ model_query_model__links_update_immediately.go
 model_query_operator_model.go
 model_query_sort_by_model.go
 model_query_update_form.go
+model_relation_collection_model.go
+model_relation_collection_model_all_of__embedded.go
+model_relation_collection_model_all_of__links.go
+model_relation_collection_model_all_of__links_self.go
 model_relation_model.go
+model_relation_model__embedded.go
 model_relation_model__links.go
 model_relation_model__links_delete.go
 model_relation_model__links_from.go
-model_relation_model__links_schema.go
 model_relation_model__links_self.go
 model_relation_model__links_to.go
-model_relation_model__links_update.go
 model_relation_model__links_update_immediately.go
 model_revision_model.go
 model_revision_model__links.go
@@ -570,7 +574,6 @@ test/api_collections_test.go
 test/api_configuration_test.go
 test/api_custom_actions_test.go
 test/api_custom_options_test.go
-test/api_default_test.go
 test/api_documents_test.go
 test/api_file_links_test.go
 test/api_forms_test.go
@@ -584,6 +587,7 @@ test/api_notifications_test.go
 test/api_o_auth2_test.go
 test/api_posts_test.go
 test/api_previewing_test.go
+test/api_principals_test.go
 test/api_priorities_test.go
 test/api_projects_test.go
 test/api_queries_test.go
@@ -603,6 +607,7 @@ test/api_time_entry_activities_test.go
 test/api_types_test.go
 test/api_user_preferences_test.go
 test/api_users_test.go
+test/api_values_property_test.go
 test/api_versions_test.go
 test/api_views_test.go
 test/api_wiki_pages_test.go

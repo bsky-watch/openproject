@@ -1,7 +1,7 @@
 /*
 OpenProject API V3 (Stable)
 
-Testing DefaultAPIService
+Testing ValuesPropertyAPIService
 
 */
 
@@ -17,18 +17,18 @@ import (
 	openapiclient "bsky.watch/openproject"
 )
 
-func Test_openproject_DefaultAPIService(t *testing.T) {
+func Test_openproject_ValuesPropertyAPIService(t *testing.T) {
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
 
-	t.Run("Test DefaultAPIService ViewValuesSchema", func(t *testing.T) {
+	t.Run("Test ValuesPropertyAPIService ViewValuesSchema", func(t *testing.T) {
 
 		t.Skip("skip test")  // remove to run test
 
 		var id string
 
-		resp, httpRes, err := apiClient.DefaultAPI.ViewValuesSchema(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.ValuesPropertyAPI.ViewValuesSchema(context.Background(), id).Execute()
 
 		require.Nil(t, err)
 		require.NotNil(t, resp)

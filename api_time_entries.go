@@ -135,6 +135,12 @@ func (a *TimeEntriesAPIService) AvailableProjectsForTimeEntriesExecute(r ApiAvai
 type ApiCreateTimeEntryRequest struct {
 	ctx context.Context
 	ApiService *TimeEntriesAPIService
+	timeEntryModel *TimeEntryModel
+}
+
+func (r ApiCreateTimeEntryRequest) TimeEntryModel(timeEntryModel TimeEntryModel) ApiCreateTimeEntryRequest {
+	r.timeEntryModel = &timeEntryModel
+	return r
 }
 
 func (r ApiCreateTimeEntryRequest) Execute() (*TimeEntryModel, *http.Response, error) {
@@ -180,7 +186,7 @@ func (a *TimeEntriesAPIService) CreateTimeEntryExecute(r ApiCreateTimeEntryReque
 	localVarFormParams := url.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -196,6 +202,8 @@ func (a *TimeEntriesAPIService) CreateTimeEntryExecute(r ApiCreateTimeEntryReque
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.timeEntryModel
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -26,12 +26,18 @@ type StorageReadModel struct {
 	Type string `json:"_type"`
 	// Storage name
 	Name string `json:"name"`
-	// Whether the storage has the application password to use for the Nextcloud storage.  Ignored if the provider type is not Nextcloud
+	// The tenant id of a file storage of type OneDrive/SharePoint.  Ignored if the provider type is not OneDrive/SharePoint.
+	TenantId *string `json:"tenantId,omitempty"`
+	// The drive id of a file storage of type OneDrive/SharePoint.  Ignored if the provider type is not OneDrive/SharePoint.
+	DriveId *string `json:"driveId,omitempty"`
+	// Whether the storage has the application password to use for the Nextcloud storage.  Ignored if the provider type is not Nextcloud.
 	HasApplicationPassword *bool `json:"hasApplicationPassword,omitempty"`
 	// Time of creation
 	CreatedAt *time.Time `json:"createdAt,omitempty"`
 	// Time of the most recent change to the storage
 	UpdatedAt *time.Time `json:"updatedAt,omitempty"`
+	// Indication, if the storage is fully configured
+	Configured *bool `json:"configured,omitempty"`
 	Embedded *StorageReadModelEmbedded `json:"_embedded,omitempty"`
 	Links StorageReadModelLinks `json:"_links"`
 	AdditionalProperties map[string]interface{}
@@ -132,6 +138,70 @@ func (o *StorageReadModel) SetName(v string) {
 	o.Name = v
 }
 
+// GetTenantId returns the TenantId field value if set, zero value otherwise.
+func (o *StorageReadModel) GetTenantId() string {
+	if o == nil || IsNil(o.TenantId) {
+		var ret string
+		return ret
+	}
+	return *o.TenantId
+}
+
+// GetTenantIdOk returns a tuple with the TenantId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageReadModel) GetTenantIdOk() (*string, bool) {
+	if o == nil || IsNil(o.TenantId) {
+		return nil, false
+	}
+	return o.TenantId, true
+}
+
+// HasTenantId returns a boolean if a field has been set.
+func (o *StorageReadModel) HasTenantId() bool {
+	if o != nil && !IsNil(o.TenantId) {
+		return true
+	}
+
+	return false
+}
+
+// SetTenantId gets a reference to the given string and assigns it to the TenantId field.
+func (o *StorageReadModel) SetTenantId(v string) {
+	o.TenantId = &v
+}
+
+// GetDriveId returns the DriveId field value if set, zero value otherwise.
+func (o *StorageReadModel) GetDriveId() string {
+	if o == nil || IsNil(o.DriveId) {
+		var ret string
+		return ret
+	}
+	return *o.DriveId
+}
+
+// GetDriveIdOk returns a tuple with the DriveId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageReadModel) GetDriveIdOk() (*string, bool) {
+	if o == nil || IsNil(o.DriveId) {
+		return nil, false
+	}
+	return o.DriveId, true
+}
+
+// HasDriveId returns a boolean if a field has been set.
+func (o *StorageReadModel) HasDriveId() bool {
+	if o != nil && !IsNil(o.DriveId) {
+		return true
+	}
+
+	return false
+}
+
+// SetDriveId gets a reference to the given string and assigns it to the DriveId field.
+func (o *StorageReadModel) SetDriveId(v string) {
+	o.DriveId = &v
+}
+
 // GetHasApplicationPassword returns the HasApplicationPassword field value if set, zero value otherwise.
 func (o *StorageReadModel) GetHasApplicationPassword() bool {
 	if o == nil || IsNil(o.HasApplicationPassword) {
@@ -228,6 +298,38 @@ func (o *StorageReadModel) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = &v
 }
 
+// GetConfigured returns the Configured field value if set, zero value otherwise.
+func (o *StorageReadModel) GetConfigured() bool {
+	if o == nil || IsNil(o.Configured) {
+		var ret bool
+		return ret
+	}
+	return *o.Configured
+}
+
+// GetConfiguredOk returns a tuple with the Configured field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *StorageReadModel) GetConfiguredOk() (*bool, bool) {
+	if o == nil || IsNil(o.Configured) {
+		return nil, false
+	}
+	return o.Configured, true
+}
+
+// HasConfigured returns a boolean if a field has been set.
+func (o *StorageReadModel) HasConfigured() bool {
+	if o != nil && !IsNil(o.Configured) {
+		return true
+	}
+
+	return false
+}
+
+// SetConfigured gets a reference to the given bool and assigns it to the Configured field.
+func (o *StorageReadModel) SetConfigured(v bool) {
+	o.Configured = &v
+}
+
 // GetEmbedded returns the Embedded field value if set, zero value otherwise.
 func (o *StorageReadModel) GetEmbedded() StorageReadModelEmbedded {
 	if o == nil || IsNil(o.Embedded) {
@@ -297,6 +399,12 @@ func (o StorageReadModel) ToMap() (map[string]interface{}, error) {
 	toSerialize["id"] = o.Id
 	toSerialize["_type"] = o.Type
 	toSerialize["name"] = o.Name
+	if !IsNil(o.TenantId) {
+		toSerialize["tenantId"] = o.TenantId
+	}
+	if !IsNil(o.DriveId) {
+		toSerialize["driveId"] = o.DriveId
+	}
 	if !IsNil(o.HasApplicationPassword) {
 		toSerialize["hasApplicationPassword"] = o.HasApplicationPassword
 	}
@@ -305,6 +413,9 @@ func (o StorageReadModel) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.UpdatedAt) {
 		toSerialize["updatedAt"] = o.UpdatedAt
+	}
+	if !IsNil(o.Configured) {
+		toSerialize["configured"] = o.Configured
 	}
 	if !IsNil(o.Embedded) {
 		toSerialize["_embedded"] = o.Embedded
@@ -359,9 +470,12 @@ func (o *StorageReadModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "id")
 		delete(additionalProperties, "_type")
 		delete(additionalProperties, "name")
+		delete(additionalProperties, "tenantId")
+		delete(additionalProperties, "driveId")
 		delete(additionalProperties, "hasApplicationPassword")
 		delete(additionalProperties, "createdAt")
 		delete(additionalProperties, "updatedAt")
+		delete(additionalProperties, "configured")
 		delete(additionalProperties, "_embedded")
 		delete(additionalProperties, "_links")
 		o.AdditionalProperties = additionalProperties

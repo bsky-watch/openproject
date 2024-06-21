@@ -67,8 +67,6 @@ type APIClient struct {
 
 	CustomOptionsAPI *CustomOptionsAPIService
 
-	DefaultAPI *DefaultAPIService
-
 	DocumentsAPI *DocumentsAPIService
 
 	FileLinksAPI *FileLinksAPIService
@@ -94,6 +92,8 @@ type APIClient struct {
 	PostsAPI *PostsAPIService
 
 	PreviewingAPI *PreviewingAPIService
+
+	PrincipalsAPI *PrincipalsAPIService
 
 	PrioritiesAPI *PrioritiesAPIService
 
@@ -133,6 +133,8 @@ type APIClient struct {
 
 	UsersAPI *UsersAPIService
 
+	ValuesPropertyAPI *ValuesPropertyAPIService
+
 	VersionsAPI *VersionsAPIService
 
 	ViewsAPI *ViewsAPIService
@@ -169,7 +171,6 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ConfigurationAPI = (*ConfigurationAPIService)(&c.common)
 	c.CustomActionsAPI = (*CustomActionsAPIService)(&c.common)
 	c.CustomOptionsAPI = (*CustomOptionsAPIService)(&c.common)
-	c.DefaultAPI = (*DefaultAPIService)(&c.common)
 	c.DocumentsAPI = (*DocumentsAPIService)(&c.common)
 	c.FileLinksAPI = (*FileLinksAPIService)(&c.common)
 	c.FormsAPI = (*FormsAPIService)(&c.common)
@@ -183,6 +184,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.OAuth2API = (*OAuth2APIService)(&c.common)
 	c.PostsAPI = (*PostsAPIService)(&c.common)
 	c.PreviewingAPI = (*PreviewingAPIService)(&c.common)
+	c.PrincipalsAPI = (*PrincipalsAPIService)(&c.common)
 	c.PrioritiesAPI = (*PrioritiesAPIService)(&c.common)
 	c.ProjectsAPI = (*ProjectsAPIService)(&c.common)
 	c.QueriesAPI = (*QueriesAPIService)(&c.common)
@@ -202,6 +204,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.TypesAPI = (*TypesAPIService)(&c.common)
 	c.UserPreferencesAPI = (*UserPreferencesAPIService)(&c.common)
 	c.UsersAPI = (*UsersAPIService)(&c.common)
+	c.ValuesPropertyAPI = (*ValuesPropertyAPIService)(&c.common)
 	c.VersionsAPI = (*VersionsAPIService)(&c.common)
 	c.ViewsAPI = (*ViewsAPIService)(&c.common)
 	c.WikiPagesAPI = (*WikiPagesAPIService)(&c.common)

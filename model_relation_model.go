@@ -12,6 +12,7 @@ package openproject
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the RelationModel type satisfies the MappedNullable interface at compile time
@@ -20,17 +21,18 @@ var _ MappedNullable = &RelationModel{}
 // RelationModel struct for RelationModel
 type RelationModel struct {
 	// Relation ID
-	Id *int `json:"id,omitempty"`
-	// The internationalized name of this kind of relation
+	Id int `json:"id"`
+	// The internationalized name of this type of relation
 	Name *string `json:"name,omitempty"`
-	// Which kind of relation (blocks, precedes, etc.)
+	// The relation type.
 	Type *string `json:"type,omitempty"`
-	// The kind of relation from the other WP's perspective
+	// The type of relation from the perspective of the related work package.
 	ReverseType *string `json:"reverseType,omitempty"`
-	// Short text further describing the relation
-	Description *string `json:"description,omitempty"`
+	// A descriptive text for the relation.
+	Description NullableString `json:"description,omitempty"`
 	// The lag in days between closing of `from` and start of `to`
-	Lag *int `json:"lag*,omitempty"`
+	Lag NullableInt `json:"lag,omitempty"`
+	Embedded *RelationModelEmbedded `json:"_embedded,omitempty"`
 	Links *RelationModelLinks `json:"_links,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
@@ -41,8 +43,9 @@ type _RelationModel RelationModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRelationModel() *RelationModel {
+func NewRelationModel(id int) *RelationModel {
 	this := RelationModel{}
+	this.Id = id
 	return &this
 }
 
@@ -54,36 +57,28 @@ func NewRelationModelWithDefaults() *RelationModel {
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value
 func (o *RelationModel) GetId() int {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		var ret int
 		return ret
 	}
-	return *o.Id
+
+	return o.Id
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value
 // and a boolean to check if the value has been set.
 func (o *RelationModel) GetIdOk() (*int, bool) {
-	if o == nil || IsNil(o.Id) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Id, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *RelationModel) HasId() bool {
-	if o != nil && !IsNil(o.Id) {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given int and assigns it to the Id field.
+// SetId sets field value
 func (o *RelationModel) SetId(v int) {
-	o.Id = &v
+	o.Id = v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
@@ -182,68 +177,120 @@ func (o *RelationModel) SetReverseType(v string) {
 	o.ReverseType = &v
 }
 
-// GetDescription returns the Description field value if set, zero value otherwise.
+// GetDescription returns the Description field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RelationModel) GetDescription() string {
-	if o == nil || IsNil(o.Description) {
+	if o == nil || IsNil(o.Description.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.Description
+	return *o.Description.Get()
 }
 
 // GetDescriptionOk returns a tuple with the Description field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RelationModel) GetDescriptionOk() (*string, bool) {
-	if o == nil || IsNil(o.Description) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Description, true
+	return o.Description.Get(), o.Description.IsSet()
 }
 
 // HasDescription returns a boolean if a field has been set.
 func (o *RelationModel) HasDescription() bool {
-	if o != nil && !IsNil(o.Description) {
+	if o != nil && o.Description.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDescription gets a reference to the given string and assigns it to the Description field.
+// SetDescription gets a reference to the given NullableString and assigns it to the Description field.
 func (o *RelationModel) SetDescription(v string) {
-	o.Description = &v
+	o.Description.Set(&v)
+}
+// SetDescriptionNil sets the value for Description to be an explicit nil
+func (o *RelationModel) SetDescriptionNil() {
+	o.Description.Set(nil)
 }
 
-// GetLag returns the Lag field value if set, zero value otherwise.
+// UnsetDescription ensures that no value is present for Description, not even an explicit nil
+func (o *RelationModel) UnsetDescription() {
+	o.Description.Unset()
+}
+
+// GetLag returns the Lag field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *RelationModel) GetLag() int {
-	if o == nil || IsNil(o.Lag) {
+	if o == nil || IsNil(o.Lag.Get()) {
 		var ret int
 		return ret
 	}
-	return *o.Lag
+	return *o.Lag.Get()
 }
 
 // GetLagOk returns a tuple with the Lag field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *RelationModel) GetLagOk() (*int, bool) {
-	if o == nil || IsNil(o.Lag) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Lag, true
+	return o.Lag.Get(), o.Lag.IsSet()
 }
 
 // HasLag returns a boolean if a field has been set.
 func (o *RelationModel) HasLag() bool {
-	if o != nil && !IsNil(o.Lag) {
+	if o != nil && o.Lag.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLag gets a reference to the given int and assigns it to the Lag field.
+// SetLag gets a reference to the given NullableInt and assigns it to the Lag field.
 func (o *RelationModel) SetLag(v int) {
-	o.Lag = &v
+	o.Lag.Set(&v)
+}
+// SetLagNil sets the value for Lag to be an explicit nil
+func (o *RelationModel) SetLagNil() {
+	o.Lag.Set(nil)
+}
+
+// UnsetLag ensures that no value is present for Lag, not even an explicit nil
+func (o *RelationModel) UnsetLag() {
+	o.Lag.Unset()
+}
+
+// GetEmbedded returns the Embedded field value if set, zero value otherwise.
+func (o *RelationModel) GetEmbedded() RelationModelEmbedded {
+	if o == nil || IsNil(o.Embedded) {
+		var ret RelationModelEmbedded
+		return ret
+	}
+	return *o.Embedded
+}
+
+// GetEmbeddedOk returns a tuple with the Embedded field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RelationModel) GetEmbeddedOk() (*RelationModelEmbedded, bool) {
+	if o == nil || IsNil(o.Embedded) {
+		return nil, false
+	}
+	return o.Embedded, true
+}
+
+// HasEmbedded returns a boolean if a field has been set.
+func (o *RelationModel) HasEmbedded() bool {
+	if o != nil && !IsNil(o.Embedded) {
+		return true
+	}
+
+	return false
+}
+
+// SetEmbedded gets a reference to the given RelationModelEmbedded and assigns it to the Embedded field.
+func (o *RelationModel) SetEmbedded(v RelationModelEmbedded) {
+	o.Embedded = &v
 }
 
 // GetLinks returns the Links field value if set, zero value otherwise.
@@ -288,9 +335,7 @@ func (o RelationModel) MarshalJSON() ([]byte, error) {
 
 func (o RelationModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Id) {
-		toSerialize["id"] = o.Id
-	}
+	toSerialize["id"] = o.Id
 	if !IsNil(o.Name) {
 		toSerialize["name"] = o.Name
 	}
@@ -300,11 +345,14 @@ func (o RelationModel) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ReverseType) {
 		toSerialize["reverseType"] = o.ReverseType
 	}
-	if !IsNil(o.Description) {
-		toSerialize["description"] = o.Description
+	if o.Description.IsSet() {
+		toSerialize["description"] = o.Description.Get()
 	}
-	if !IsNil(o.Lag) {
-		toSerialize["lag*"] = o.Lag
+	if o.Lag.IsSet() {
+		toSerialize["lag"] = o.Lag.Get()
+	}
+	if !IsNil(o.Embedded) {
+		toSerialize["_embedded"] = o.Embedded
 	}
 	if !IsNil(o.Links) {
 		toSerialize["_links"] = o.Links
@@ -318,6 +366,27 @@ func (o RelationModel) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *RelationModel) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"id",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err;
+	}
+
+	for _, requiredProperty := range(requiredProperties) {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
 	varRelationModel := _RelationModel{}
 
 	err = json.Unmarshal(data, &varRelationModel)
@@ -336,7 +405,8 @@ func (o *RelationModel) UnmarshalJSON(data []byte) (err error) {
 		delete(additionalProperties, "type")
 		delete(additionalProperties, "reverseType")
 		delete(additionalProperties, "description")
-		delete(additionalProperties, "lag*")
+		delete(additionalProperties, "lag")
+		delete(additionalProperties, "_embedded")
 		delete(additionalProperties, "_links")
 		o.AdditionalProperties = additionalProperties
 	}

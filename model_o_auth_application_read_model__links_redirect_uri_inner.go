@@ -15,11 +15,11 @@ import (
 	"fmt"
 )
 
-// checks if the RelationModelLinksSchema type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &RelationModelLinksSchema{}
+// checks if the OAuthApplicationReadModelLinksRedirectUriInner type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &OAuthApplicationReadModelLinksRedirectUriInner{}
 
-// RelationModelLinksSchema struct for RelationModelLinksSchema
-type RelationModelLinksSchema struct {
+// OAuthApplicationReadModelLinksRedirectUriInner struct for OAuthApplicationReadModelLinksRedirectUriInner
+type OAuthApplicationReadModelLinksRedirectUriInner struct {
 	// URL to the referenced resource (might be relative)
 	Href string `json:"href"`
 	// Representative label for the resource
@@ -37,14 +37,14 @@ type RelationModelLinksSchema struct {
 	AdditionalProperties map[string]interface{}
 }
 
-type _RelationModelLinksSchema RelationModelLinksSchema
+type _OAuthApplicationReadModelLinksRedirectUriInner OAuthApplicationReadModelLinksRedirectUriInner
 
-// NewRelationModelLinksSchema instantiates a new RelationModelLinksSchema object
+// NewOAuthApplicationReadModelLinksRedirectUriInner instantiates a new OAuthApplicationReadModelLinksRedirectUriInner object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRelationModelLinksSchema(href string) *RelationModelLinksSchema {
-	this := RelationModelLinksSchema{}
+func NewOAuthApplicationReadModelLinksRedirectUriInner(href string) *OAuthApplicationReadModelLinksRedirectUriInner {
+	this := OAuthApplicationReadModelLinksRedirectUriInner{}
 	this.Href = href
 	var templated bool = false
 	this.Templated = &templated
@@ -53,11 +53,11 @@ func NewRelationModelLinksSchema(href string) *RelationModelLinksSchema {
 	return &this
 }
 
-// NewRelationModelLinksSchemaWithDefaults instantiates a new RelationModelLinksSchema object
+// NewOAuthApplicationReadModelLinksRedirectUriInnerWithDefaults instantiates a new OAuthApplicationReadModelLinksRedirectUriInner object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewRelationModelLinksSchemaWithDefaults() *RelationModelLinksSchema {
-	this := RelationModelLinksSchema{}
+func NewOAuthApplicationReadModelLinksRedirectUriInnerWithDefaults() *OAuthApplicationReadModelLinksRedirectUriInner {
+	this := OAuthApplicationReadModelLinksRedirectUriInner{}
 	var templated bool = false
 	this.Templated = &templated
 	var method string = "GET"
@@ -66,7 +66,7 @@ func NewRelationModelLinksSchemaWithDefaults() *RelationModelLinksSchema {
 }
 
 // GetHref returns the Href field value
-func (o *RelationModelLinksSchema) GetHref() string {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) GetHref() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -77,7 +77,7 @@ func (o *RelationModelLinksSchema) GetHref() string {
 
 // GetHrefOk returns a tuple with the Href field value
 // and a boolean to check if the value has been set.
-func (o *RelationModelLinksSchema) GetHrefOk() (*string, bool) {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) GetHrefOk() (*string, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -85,12 +85,12 @@ func (o *RelationModelLinksSchema) GetHrefOk() (*string, bool) {
 }
 
 // SetHref sets field value
-func (o *RelationModelLinksSchema) SetHref(v string) {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) SetHref(v string) {
 	o.Href = v
 }
 
 // GetTitle returns the Title field value if set, zero value otherwise.
-func (o *RelationModelLinksSchema) GetTitle() string {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) GetTitle() string {
 	if o == nil || IsNil(o.Title) {
 		var ret string
 		return ret
@@ -100,7 +100,7 @@ func (o *RelationModelLinksSchema) GetTitle() string {
 
 // GetTitleOk returns a tuple with the Title field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RelationModelLinksSchema) GetTitleOk() (*string, bool) {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) GetTitleOk() (*string, bool) {
 	if o == nil || IsNil(o.Title) {
 		return nil, false
 	}
@@ -108,7 +108,7 @@ func (o *RelationModelLinksSchema) GetTitleOk() (*string, bool) {
 }
 
 // HasTitle returns a boolean if a field has been set.
-func (o *RelationModelLinksSchema) HasTitle() bool {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) HasTitle() bool {
 	if o != nil && !IsNil(o.Title) {
 		return true
 	}
@@ -117,12 +117,12 @@ func (o *RelationModelLinksSchema) HasTitle() bool {
 }
 
 // SetTitle gets a reference to the given string and assigns it to the Title field.
-func (o *RelationModelLinksSchema) SetTitle(v string) {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) SetTitle(v string) {
 	o.Title = &v
 }
 
 // GetTemplated returns the Templated field value if set, zero value otherwise.
-func (o *RelationModelLinksSchema) GetTemplated() bool {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) GetTemplated() bool {
 	if o == nil || IsNil(o.Templated) {
 		var ret bool
 		return ret
@@ -132,7 +132,7 @@ func (o *RelationModelLinksSchema) GetTemplated() bool {
 
 // GetTemplatedOk returns a tuple with the Templated field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RelationModelLinksSchema) GetTemplatedOk() (*bool, bool) {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) GetTemplatedOk() (*bool, bool) {
 	if o == nil || IsNil(o.Templated) {
 		return nil, false
 	}
@@ -140,7 +140,7 @@ func (o *RelationModelLinksSchema) GetTemplatedOk() (*bool, bool) {
 }
 
 // HasTemplated returns a boolean if a field has been set.
-func (o *RelationModelLinksSchema) HasTemplated() bool {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) HasTemplated() bool {
 	if o != nil && !IsNil(o.Templated) {
 		return true
 	}
@@ -149,12 +149,12 @@ func (o *RelationModelLinksSchema) HasTemplated() bool {
 }
 
 // SetTemplated gets a reference to the given bool and assigns it to the Templated field.
-func (o *RelationModelLinksSchema) SetTemplated(v bool) {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) SetTemplated(v bool) {
 	o.Templated = &v
 }
 
 // GetMethod returns the Method field value if set, zero value otherwise.
-func (o *RelationModelLinksSchema) GetMethod() string {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) GetMethod() string {
 	if o == nil || IsNil(o.Method) {
 		var ret string
 		return ret
@@ -164,7 +164,7 @@ func (o *RelationModelLinksSchema) GetMethod() string {
 
 // GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RelationModelLinksSchema) GetMethodOk() (*string, bool) {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) GetMethodOk() (*string, bool) {
 	if o == nil || IsNil(o.Method) {
 		return nil, false
 	}
@@ -172,7 +172,7 @@ func (o *RelationModelLinksSchema) GetMethodOk() (*string, bool) {
 }
 
 // HasMethod returns a boolean if a field has been set.
-func (o *RelationModelLinksSchema) HasMethod() bool {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) HasMethod() bool {
 	if o != nil && !IsNil(o.Method) {
 		return true
 	}
@@ -181,12 +181,12 @@ func (o *RelationModelLinksSchema) HasMethod() bool {
 }
 
 // SetMethod gets a reference to the given string and assigns it to the Method field.
-func (o *RelationModelLinksSchema) SetMethod(v string) {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) SetMethod(v string) {
 	o.Method = &v
 }
 
 // GetPayload returns the Payload field value if set, zero value otherwise.
-func (o *RelationModelLinksSchema) GetPayload() map[string]interface{} {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) GetPayload() map[string]interface{} {
 	if o == nil || IsNil(o.Payload) {
 		var ret map[string]interface{}
 		return ret
@@ -196,7 +196,7 @@ func (o *RelationModelLinksSchema) GetPayload() map[string]interface{} {
 
 // GetPayloadOk returns a tuple with the Payload field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RelationModelLinksSchema) GetPayloadOk() (map[string]interface{}, bool) {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) GetPayloadOk() (map[string]interface{}, bool) {
 	if o == nil || IsNil(o.Payload) {
 		return map[string]interface{}{}, false
 	}
@@ -204,7 +204,7 @@ func (o *RelationModelLinksSchema) GetPayloadOk() (map[string]interface{}, bool)
 }
 
 // HasPayload returns a boolean if a field has been set.
-func (o *RelationModelLinksSchema) HasPayload() bool {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) HasPayload() bool {
 	if o != nil && !IsNil(o.Payload) {
 		return true
 	}
@@ -213,12 +213,12 @@ func (o *RelationModelLinksSchema) HasPayload() bool {
 }
 
 // SetPayload gets a reference to the given map[string]interface{} and assigns it to the Payload field.
-func (o *RelationModelLinksSchema) SetPayload(v map[string]interface{}) {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) SetPayload(v map[string]interface{}) {
 	o.Payload = v
 }
 
 // GetIdentifier returns the Identifier field value if set, zero value otherwise.
-func (o *RelationModelLinksSchema) GetIdentifier() string {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) GetIdentifier() string {
 	if o == nil || IsNil(o.Identifier) {
 		var ret string
 		return ret
@@ -228,7 +228,7 @@ func (o *RelationModelLinksSchema) GetIdentifier() string {
 
 // GetIdentifierOk returns a tuple with the Identifier field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RelationModelLinksSchema) GetIdentifierOk() (*string, bool) {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) GetIdentifierOk() (*string, bool) {
 	if o == nil || IsNil(o.Identifier) {
 		return nil, false
 	}
@@ -236,7 +236,7 @@ func (o *RelationModelLinksSchema) GetIdentifierOk() (*string, bool) {
 }
 
 // HasIdentifier returns a boolean if a field has been set.
-func (o *RelationModelLinksSchema) HasIdentifier() bool {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) HasIdentifier() bool {
 	if o != nil && !IsNil(o.Identifier) {
 		return true
 	}
@@ -245,12 +245,12 @@ func (o *RelationModelLinksSchema) HasIdentifier() bool {
 }
 
 // SetIdentifier gets a reference to the given string and assigns it to the Identifier field.
-func (o *RelationModelLinksSchema) SetIdentifier(v string) {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) SetIdentifier(v string) {
 	o.Identifier = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *RelationModelLinksSchema) GetType() string {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) GetType() string {
 	if o == nil || IsNil(o.Type) {
 		var ret string
 		return ret
@@ -260,7 +260,7 @@ func (o *RelationModelLinksSchema) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *RelationModelLinksSchema) GetTypeOk() (*string, bool) {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) GetTypeOk() (*string, bool) {
 	if o == nil || IsNil(o.Type) {
 		return nil, false
 	}
@@ -268,7 +268,7 @@ func (o *RelationModelLinksSchema) GetTypeOk() (*string, bool) {
 }
 
 // HasType returns a boolean if a field has been set.
-func (o *RelationModelLinksSchema) HasType() bool {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) HasType() bool {
 	if o != nil && !IsNil(o.Type) {
 		return true
 	}
@@ -277,11 +277,11 @@ func (o *RelationModelLinksSchema) HasType() bool {
 }
 
 // SetType gets a reference to the given string and assigns it to the Type field.
-func (o *RelationModelLinksSchema) SetType(v string) {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) SetType(v string) {
 	o.Type = &v
 }
 
-func (o RelationModelLinksSchema) MarshalJSON() ([]byte, error) {
+func (o OAuthApplicationReadModelLinksRedirectUriInner) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
@@ -289,7 +289,7 @@ func (o RelationModelLinksSchema) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-func (o RelationModelLinksSchema) ToMap() (map[string]interface{}, error) {
+func (o OAuthApplicationReadModelLinksRedirectUriInner) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["href"] = o.Href
 	if !IsNil(o.Title) {
@@ -318,7 +318,7 @@ func (o RelationModelLinksSchema) ToMap() (map[string]interface{}, error) {
 	return toSerialize, nil
 }
 
-func (o *RelationModelLinksSchema) UnmarshalJSON(data []byte) (err error) {
+func (o *OAuthApplicationReadModelLinksRedirectUriInner) UnmarshalJSON(data []byte) (err error) {
 	// This validates that all required properties are included in the JSON object
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
@@ -340,15 +340,15 @@ func (o *RelationModelLinksSchema) UnmarshalJSON(data []byte) (err error) {
 		}
 	}
 
-	varRelationModelLinksSchema := _RelationModelLinksSchema{}
+	varOAuthApplicationReadModelLinksRedirectUriInner := _OAuthApplicationReadModelLinksRedirectUriInner{}
 
-	err = json.Unmarshal(data, &varRelationModelLinksSchema)
+	err = json.Unmarshal(data, &varOAuthApplicationReadModelLinksRedirectUriInner)
 
 	if err != nil {
 		return err
 	}
 
-	*o = RelationModelLinksSchema(varRelationModelLinksSchema)
+	*o = OAuthApplicationReadModelLinksRedirectUriInner(varOAuthApplicationReadModelLinksRedirectUriInner)
 
 	additionalProperties := make(map[string]interface{})
 
@@ -366,38 +366,38 @@ func (o *RelationModelLinksSchema) UnmarshalJSON(data []byte) (err error) {
 	return err
 }
 
-type NullableRelationModelLinksSchema struct {
-	value *RelationModelLinksSchema
+type NullableOAuthApplicationReadModelLinksRedirectUriInner struct {
+	value *OAuthApplicationReadModelLinksRedirectUriInner
 	isSet bool
 }
 
-func (v NullableRelationModelLinksSchema) Get() *RelationModelLinksSchema {
+func (v NullableOAuthApplicationReadModelLinksRedirectUriInner) Get() *OAuthApplicationReadModelLinksRedirectUriInner {
 	return v.value
 }
 
-func (v *NullableRelationModelLinksSchema) Set(val *RelationModelLinksSchema) {
+func (v *NullableOAuthApplicationReadModelLinksRedirectUriInner) Set(val *OAuthApplicationReadModelLinksRedirectUriInner) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableRelationModelLinksSchema) IsSet() bool {
+func (v NullableOAuthApplicationReadModelLinksRedirectUriInner) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableRelationModelLinksSchema) Unset() {
+func (v *NullableOAuthApplicationReadModelLinksRedirectUriInner) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableRelationModelLinksSchema(val *RelationModelLinksSchema) *NullableRelationModelLinksSchema {
-	return &NullableRelationModelLinksSchema{value: val, isSet: true}
+func NewNullableOAuthApplicationReadModelLinksRedirectUriInner(val *OAuthApplicationReadModelLinksRedirectUriInner) *NullableOAuthApplicationReadModelLinksRedirectUriInner {
+	return &NullableOAuthApplicationReadModelLinksRedirectUriInner{value: val, isSet: true}
 }
 
-func (v NullableRelationModelLinksSchema) MarshalJSON() ([]byte, error) {
+func (v NullableOAuthApplicationReadModelLinksRedirectUriInner) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableRelationModelLinksSchema) UnmarshalJSON(src []byte) error {
+func (v *NullableOAuthApplicationReadModelLinksRedirectUriInner) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

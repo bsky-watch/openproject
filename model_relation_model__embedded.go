@@ -11,138 +11,182 @@ API version: 3
 package openproject
 
 import (
-	"bytes"
-	"context"
-	"io"
-	"net/http"
-	"net/url"
-	"strings"
+	"encoding/json"
 )
 
+// checks if the RelationModelEmbedded type satisfies the MappedNullable interface at compile time
+var _ MappedNullable = &RelationModelEmbedded{}
 
-// DefaultAPIService DefaultAPI service
-type DefaultAPIService service
-
-type ApiViewValuesSchemaRequest struct {
-	ctx context.Context
-	ApiService *DefaultAPIService
-	id string
+// RelationModelEmbedded struct for RelationModelEmbedded
+type RelationModelEmbedded struct {
+	From *WorkPackageModel `json:"from,omitempty"`
+	To *WorkPackageModel `json:"to,omitempty"`
+	AdditionalProperties map[string]interface{}
 }
 
-func (r ApiViewValuesSchemaRequest) Execute() (*SchemaModel, *http.Response, error) {
-	return r.ApiService.ViewValuesSchemaExecute(r)
+type _RelationModelEmbedded RelationModelEmbedded
+
+// NewRelationModelEmbedded instantiates a new RelationModelEmbedded object
+// This constructor will assign default values to properties that have it defined,
+// and makes sure properties required by API are set, but the set of arguments
+// will change when the set of required properties is changed
+func NewRelationModelEmbedded() *RelationModelEmbedded {
+	this := RelationModelEmbedded{}
+	return &this
 }
 
-/*
-ViewValuesSchema View Values schema
-
-The schema of a `Values` resource.
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param id The identifier of the value. This is typically the value of the `property` property of the `Values` resource. It should be in lower camelcase format.
- @return ApiViewValuesSchemaRequest
-*/
-func (a *DefaultAPIService) ViewValuesSchema(ctx context.Context, id string) ApiViewValuesSchemaRequest {
-	return ApiViewValuesSchemaRequest{
-		ApiService: a,
-		ctx: ctx,
-		id: id,
-	}
+// NewRelationModelEmbeddedWithDefaults instantiates a new RelationModelEmbedded object
+// This constructor will only assign default values to properties that have it defined,
+// but it doesn't guarantee that properties required by API are set
+func NewRelationModelEmbeddedWithDefaults() *RelationModelEmbedded {
+	this := RelationModelEmbedded{}
+	return &this
 }
 
-// Execute executes the request
-//  @return SchemaModel
-func (a *DefaultAPIService) ViewValuesSchemaExecute(r ApiViewValuesSchemaRequest) (*SchemaModel, *http.Response, error) {
-	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SchemaModel
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DefaultAPIService.ViewValuesSchema")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+// GetFrom returns the From field value if set, zero value otherwise.
+func (o *RelationModelEmbedded) GetFrom() WorkPackageModel {
+	if o == nil || IsNil(o.From) {
+		var ret WorkPackageModel
+		return ret
 	}
-
-	localVarPath := localBasePath + "/api/v3/values/schema/{id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/hal+json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
+	return *o.From
 }
+
+// GetFromOk returns a tuple with the From field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RelationModelEmbedded) GetFromOk() (*WorkPackageModel, bool) {
+	if o == nil || IsNil(o.From) {
+		return nil, false
+	}
+	return o.From, true
+}
+
+// HasFrom returns a boolean if a field has been set.
+func (o *RelationModelEmbedded) HasFrom() bool {
+	if o != nil && !IsNil(o.From) {
+		return true
+	}
+
+	return false
+}
+
+// SetFrom gets a reference to the given WorkPackageModel and assigns it to the From field.
+func (o *RelationModelEmbedded) SetFrom(v WorkPackageModel) {
+	o.From = &v
+}
+
+// GetTo returns the To field value if set, zero value otherwise.
+func (o *RelationModelEmbedded) GetTo() WorkPackageModel {
+	if o == nil || IsNil(o.To) {
+		var ret WorkPackageModel
+		return ret
+	}
+	return *o.To
+}
+
+// GetToOk returns a tuple with the To field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RelationModelEmbedded) GetToOk() (*WorkPackageModel, bool) {
+	if o == nil || IsNil(o.To) {
+		return nil, false
+	}
+	return o.To, true
+}
+
+// HasTo returns a boolean if a field has been set.
+func (o *RelationModelEmbedded) HasTo() bool {
+	if o != nil && !IsNil(o.To) {
+		return true
+	}
+
+	return false
+}
+
+// SetTo gets a reference to the given WorkPackageModel and assigns it to the To field.
+func (o *RelationModelEmbedded) SetTo(v WorkPackageModel) {
+	o.To = &v
+}
+
+func (o RelationModelEmbedded) MarshalJSON() ([]byte, error) {
+	toSerialize,err := o.ToMap()
+	if err != nil {
+		return []byte{}, err
+	}
+	return json.Marshal(toSerialize)
+}
+
+func (o RelationModelEmbedded) ToMap() (map[string]interface{}, error) {
+	toSerialize := map[string]interface{}{}
+	if !IsNil(o.From) {
+		toSerialize["from"] = o.From
+	}
+	if !IsNil(o.To) {
+		toSerialize["to"] = o.To
+	}
+
+	for key, value := range o.AdditionalProperties {
+		toSerialize[key] = value
+	}
+
+	return toSerialize, nil
+}
+
+func (o *RelationModelEmbedded) UnmarshalJSON(data []byte) (err error) {
+	varRelationModelEmbedded := _RelationModelEmbedded{}
+
+	err = json.Unmarshal(data, &varRelationModelEmbedded)
+
+	if err != nil {
+		return err
+	}
+
+	*o = RelationModelEmbedded(varRelationModelEmbedded)
+
+	additionalProperties := make(map[string]interface{})
+
+	if err = json.Unmarshal(data, &additionalProperties); err == nil {
+		delete(additionalProperties, "from")
+		delete(additionalProperties, "to")
+		o.AdditionalProperties = additionalProperties
+	}
+
+	return err
+}
+
+type NullableRelationModelEmbedded struct {
+	value *RelationModelEmbedded
+	isSet bool
+}
+
+func (v NullableRelationModelEmbedded) Get() *RelationModelEmbedded {
+	return v.value
+}
+
+func (v *NullableRelationModelEmbedded) Set(val *RelationModelEmbedded) {
+	v.value = val
+	v.isSet = true
+}
+
+func (v NullableRelationModelEmbedded) IsSet() bool {
+	return v.isSet
+}
+
+func (v *NullableRelationModelEmbedded) Unset() {
+	v.value = nil
+	v.isSet = false
+}
+
+func NewNullableRelationModelEmbedded(val *RelationModelEmbedded) *NullableRelationModelEmbedded {
+	return &NullableRelationModelEmbedded{value: val, isSet: true}
+}
+
+func (v NullableRelationModelEmbedded) MarshalJSON() ([]byte, error) {
+	return json.Marshal(v.value)
+}
+
+func (v *NullableRelationModelEmbedded) UnmarshalJSON(src []byte) error {
+	v.isSet = true
+	return json.Unmarshal(src, &v.value)
+}
+
+

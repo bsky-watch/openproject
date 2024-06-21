@@ -20,8 +20,9 @@ var _ MappedNullable = &ValuesPropertyModel{}
 
 // ValuesPropertyModel struct for ValuesPropertyModel
 type ValuesPropertyModel struct {
-	// The key of the key - value pair represented by the Values::Property
 	Type string `json:"_type"`
+	// The key of the key - value pair represented by the Values::Property
+	Property string `json:"property"`
 	// The value of the key - value pair represented by the Values::Property
 	Value string `json:"value"`
 	Links ValuesPropertyModelLinks `json:"_links"`
@@ -34,9 +35,10 @@ type _ValuesPropertyModel ValuesPropertyModel
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewValuesPropertyModel(type_ string, value string, links ValuesPropertyModelLinks) *ValuesPropertyModel {
+func NewValuesPropertyModel(type_ string, property string, value string, links ValuesPropertyModelLinks) *ValuesPropertyModel {
 	this := ValuesPropertyModel{}
 	this.Type = type_
+	this.Property = property
 	this.Value = value
 	this.Links = links
 	return &this
@@ -72,6 +74,30 @@ func (o *ValuesPropertyModel) GetTypeOk() (*string, bool) {
 // SetType sets field value
 func (o *ValuesPropertyModel) SetType(v string) {
 	o.Type = v
+}
+
+// GetProperty returns the Property field value
+func (o *ValuesPropertyModel) GetProperty() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Property
+}
+
+// GetPropertyOk returns a tuple with the Property field value
+// and a boolean to check if the value has been set.
+func (o *ValuesPropertyModel) GetPropertyOk() (*string, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Property, true
+}
+
+// SetProperty sets field value
+func (o *ValuesPropertyModel) SetProperty(v string) {
+	o.Property = v
 }
 
 // GetValue returns the Value field value
@@ -133,6 +159,7 @@ func (o ValuesPropertyModel) MarshalJSON() ([]byte, error) {
 func (o ValuesPropertyModel) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["_type"] = o.Type
+	toSerialize["property"] = o.Property
 	toSerialize["value"] = o.Value
 	toSerialize["_links"] = o.Links
 
@@ -149,6 +176,7 @@ func (o *ValuesPropertyModel) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"_type",
+		"property",
 		"value",
 		"_links",
 	}
@@ -181,6 +209,7 @@ func (o *ValuesPropertyModel) UnmarshalJSON(data []byte) (err error) {
 
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "_type")
+		delete(additionalProperties, "property")
 		delete(additionalProperties, "value")
 		delete(additionalProperties, "_links")
 		o.AdditionalProperties = additionalProperties

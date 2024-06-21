@@ -1514,6 +1514,10 @@ tags:
     | subject          | The post's subject                          | String                | not null                             | READ                 |
   name: Posts
 - description: |-
+    Principals are the superclass of users, groups and placeholder users. This end point returns all principals
+    within a joined collection but can be filtered to e.g. only return groups or users.
+  name: Principals
+- description: |-
     ## Linked Properties
 
     |  Link     | Description                                 | Type          | Constraints           | Supported operations |
@@ -3901,7 +3905,7 @@ paths:
             application/hal+json:
               example:
                 _type: Error
-                errorIdentifier: urn:openproject-org:api:v3:errors:InvalidQuery
+                errorIdentifier: urn:openproject-org:api:v3:errors:NotFound
                 message: The requested resource could not be found.
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
@@ -7177,6 +7181,279 @@ paths:
       summary: Get the oauth client credentials object.
       tags:
       - OAuth 2
+  /api/v3/placeholder_users:
+    get:
+      description: |-
+        List all placeholder users. This can only be accessed if the requesting user has the global permission
+        `manage_placeholder_user` or `manage_members` in any project.
+      operationId: list_placeholder_users
+      parameters:
+      - description: |-
+          JSON specifying filter conditions.
+          Accepts the same format as returned by the [queries](https://www.openproject.org/docs/api/endpoints/queries/) endpoint.
+          Currently supported filters are:
+
+          - name: filters placeholder users by the name.
+          - group: filters placeholder by the group it is contained in.
+          - status: filters placeholder by the status it has.
+        example: "[{ \"name\": { \"operator\": \"~\", \"values\": [\"Darth\"] } }]"
+        explode: true
+        in: query
+        name: filters
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated list of properties to include.
+        example: "total,elements/name,elements/self,self"
+        explode: true
+        in: query
+        name: select
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PrincipalCollectionModel'
+          description: OK
+        "400":
+          content:
+            application/hal+json:
+              example:
+                _type: Error
+                errorIdentifier: urn:openproject-org:api:v3:errors:InvalidQuery
+                message: Filters Invalid filter does not exist.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Returned if the client sends invalid request parameters e.g.
+            filters
+      summary: List placehoder users
+      tags:
+      - Principals
+    post:
+      description: |-
+        Creates a new placeholder user. Only administrators and users with `manage_placeholder_user` global permission are
+        allowed to do so. When calling this endpoint the client provides a single object, containing at least the
+        properties and links that are required, in the body.
+      operationId: create_placeholder_user
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaceholderUserCreateModel'
+      responses:
+        "201":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PlaceholderUserModel'
+          description: Created
+        "400":
+          $ref: '#/components/responses/InvalidRequestBody'
+        "403":
+          content:
+            application/hal+json:
+              example:
+                _type: Error
+                errorIdentifier: urn:openproject-org:api:v3:errors:MissingPermission
+                message: You are not allowed to create new placeholder users.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: |-
+            Returned if the client does not have sufficient permissions.
+
+            **Required permission:** Administrator
+        "406":
+          $ref: '#/components/responses/MissingContentType'
+        "415":
+          $ref: '#/components/responses/UnsupportedMediaType'
+        "422":
+          content:
+            application/hal+json:
+              example:
+                _embedded:
+                  details:
+                    attribute: name
+                _type: Error
+                errorIdentifier: urn:openproject-org:api:v3:errors:PropertyConstraintViolation
+                message: Name has already been taken.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: |-
+            Returned if:
+
+            * a constraint for a property was violated (`PropertyConstraintViolation`)
+      summary: Create placeholder user
+      tags:
+      - Principals
+  /api/v3/placeholder_users/{id}:
+    delete:
+      description: Set the specified placeholder user to deleted status.
+      operationId: delete_placeholder_user
+      parameters:
+      - description: Placeholder user id
+        example: "1"
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      responses:
+        "202":
+          description: |-
+            Returned if the group was marked for deletion.
+
+            Note that the response body is empty as of now. In future versions of the API a body
+            *might* be returned, indicating the progress of deletion.
+        "403":
+          content:
+            application/hal+json:
+              example:
+                _type: Error
+                errorIdentifier: urn:openproject-org:api:v3:errors:MissingPermission
+                message: You are not allowed to delete the account of this user.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: |-
+            Returned if the client does not have sufficient permissions.
+
+            **Required permission:** `manage_placeholder_users`
+        "404":
+          content:
+            application/hal+json:
+              example:
+                _type: Error
+                errorIdentifier: urn:openproject-org:api:v3:errors:NotFound
+                message: The specified placeholder user does not exist.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Returned if the placeholder user does not exist.
+      summary: Delete placeholder user
+      tags:
+      - Principals
+    get:
+      description: Return the placeholder user resource.
+      operationId: view_placeholder_user
+      parameters:
+      - description: The placeholder user id
+        example: "1"
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              examples:
+                placeholder user response:
+                  $ref: '#/components/examples/PlaceholderUserResponse'
+              schema:
+                $ref: '#/components/schemas/PlaceholderUserModel'
+          description: OK
+        "404":
+          content:
+            application/hal+json:
+              example:
+                _type: Error
+                errorIdentifier: urn:openproject-org:api:v3:errors:NotFound
+                message: The specified placeholder user does not exist or you do not
+                  have permission to view them.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: |-
+            Returned if the user does not exist or if the API user does not have permission to view them.
+
+            **Required permission**: `manage_placeholder_users`
+      summary: View placeholder user
+      tags:
+      - Principals
+    patch:
+      description: |-
+        Updates the placeholder user's writable attributes.
+        When calling this endpoint the client provides a single object, containing at least the properties and links
+        that are required, in the body.
+      operationId: update_placeholder_user
+      parameters:
+      - description: Placeholder user id
+        example: "1"
+        explode: false
+        in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlaceholderUserCreateModel'
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PlaceholderUserModel'
+          description: OK
+        "400":
+          $ref: '#/components/responses/InvalidRequestBody'
+        "403":
+          content:
+            application/hal+json:
+              example:
+                _type: Error
+                errorIdentifier: urn:openproject-org:api:v3:errors:MissingPermission
+                message: You are not allowed to update the account of this user.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: |-
+            Returned if the client does not have sufficient permissions.
+
+            **Required permission**: `manage_placeholder_users`
+        "404":
+          content:
+            application/hal+json:
+              example:
+                _type: Error
+                errorIdentifier: urn:openproject-org:api:v3:errors:NotFound
+                message: The specified placeholder user does not exist.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Returned if the placeholder user does not exist.
+        "406":
+          $ref: '#/components/responses/MissingContentType'
+        "415":
+          $ref: '#/components/responses/UnsupportedMediaType'
+        "422":
+          content:
+            application/hal+json:
+              example:
+                _embedded:
+                  details:
+                    attribute: name
+                _type: Error
+                errorIdentifier: urn:openproject-org:api:v3:errors:PropertyConstraintViolation
+                message: Name has already been taken.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: |-
+            Returned if:
+
+            - the client tries to modify a read-only property (`PropertyIsReadOnly`)
+            - a constraint for a property was violated (`PropertyConstraintViolation`)
+      summary: Update placeholder user
+      tags:
+      - Principals
   /api/v3/posts/{id}:
     get:
       description: Retrieve an individual post as identified by the id parameter
@@ -7490,6 +7767,62 @@ paths:
       summary: Add attachment to post
       tags:
       - Attachments
+  /api/v3/principals:
+    get:
+      description: |-
+        List all principals. The client can choose to filter the principals similar to how work packages are filtered. In
+        addition to the provided filters, the server will reduce the result set to only contain principals who are members
+        in projects the client is allowed to see.
+      operationId: list_principals
+      parameters:
+      - description: |-
+          JSON specifying filter conditions.
+          Accepts the same format as returned by the [queries](https://www.openproject.org/docs/api/endpoints/queries/) endpoint.
+          Currently supported filters are:
+
+          - type: filters principals by their type (*User*, *Group*, *PlaceholderUser*).
+          - member: filters principals by the projects they are members in.
+          - name: filters principals by the user or group name.
+          - any_name_attribute: filters principals by the user or group first- and last name, email or login.
+          - status: filters principals by their status number (active = *1*, registered = *2*, locked = *3*, invited = *4*)
+        example: "[{ \"type\": { \"operator\": \"=\", \"values\": [\"User\"] } }]"
+        explode: true
+        in: query
+        name: filters
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: Comma separated list of properties to include.
+        example: "total,elements/name,elements/self,self"
+        explode: true
+        in: query
+        name: select
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PrincipalCollectionModel'
+          description: OK
+        "400":
+          content:
+            application/hal+json:
+              example:
+                _type: Error
+                errorIdentifier: urn:openproject-org:api:v3:errors:InvalidQuery
+                message: Filters Invalid filter does not exist.
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+          description: Returned if the client sends invalid request parameters e.g.
+            filters
+      summary: List principals
+      tags:
+      - Principals
   /api/v3/priorities:
     get:
       description: ""
@@ -7725,6 +8058,7 @@ paths:
 
           + active: based on the active property of the project
           + ancestor: filters projects by their ancestor. A project is not considered to be it's own ancestor.
+          + available_project_attributes: filters projects based on the activated project project attributes.
           + created_at: based on the time the project was created
           + latest_activity_at: based on the time the last activity was registered on a project.
           + name_and_identifier: based on both the name and the identifier.
@@ -7814,7 +8148,7 @@ paths:
               with custom fields:
                 $ref: '#/components/examples/ProjectBody'
             schema:
-              type: object
+              $ref: '#/components/schemas/ProjectModel'
       responses:
         "201":
           content:
@@ -8425,7 +8759,7 @@ paths:
               with custom fields:
                 $ref: '#/components/examples/ProjectBody'
             schema:
-              type: object
+              $ref: '#/components/schemas/ProjectModel'
       responses:
         "200":
           content:
@@ -11682,21 +12016,17 @@ paths:
       description: |-
         Lists all relations according to the given (optional, logically conjunctive) filters and ordered by ID.
         The response only includes relations between work packages which the user is allowed to see.
-      operationId: List_Relations
+      operationId: list_relations
       parameters:
       - description: |-
-          JSON specifying filter conditions.
-          Accepts the same format as returned by the [queries](https://www.openproject.org/docs/api/endpoints/queries/) endpoint. Valid fields to filter by are:
+          JSON specifying filter conditions. Accepts the same format as returned by
+          the [queries](https://www.openproject.org/docs/api/endpoints/queries/) endpoint. Valid fields to filter by are:
 
-          + id - ID of relation
-
-          + from - ID of work package from which the filtered relations emanates.
-
-          + to - ID of work package to which this related points.
-
-          + involved - ID of either the `from` or the `to` work package.
-
-          + type - The type of relation to filter by, e.g. "follows".
+          - id - ID of relation
+          - from - ID of work package from which the filtered relations emanates.
+          - to - ID of work package to which this related points.
+          - involved - ID of either the `from` or the `to` work package.
+          - type - The type of relation to filter by, e.g. "follows".
         example: "[{ \"from\": { \"operator\": \"=\", \"values\": 42 }\" }]"
         explode: true
         in: query
@@ -11722,175 +12052,32 @@ paths:
             application/hal+json:
               examples:
                 response:
-                  value:
-                    _embedded:
-                      elements:
-                      - _links:
-                          delete:
-                            href: /api/v3/relations/1
-                            method: DELETE
-                          from:
-                            href: /api/v3/work_packages/42
-                            title: Steel Delivery
-                          self:
-                            href: /api/v3/relations/1
-                          to:
-                            href: /api/v3/work_packages/84
-                            title: Bending the steel
-                          update:
-                            href: /api/v3/relations/1/form
-                            method: POST
-                          updateImmediately:
-                            href: /api/v3/relations/1
-                            method: PATCH
-                        _type: Relation
-                        lag: 0
-                        description: We can't bend the steel before it's been delivered!
-                        id: 1
-                        name: precedes
-                        reverseType: follows
-                        type: precedes
-                    _links:
-                      self:
-                        href: /api/v3/relations
-                    _type: Collection
-                    count: 1
-                    total: 3
+                  $ref: '#/components/examples/RelationCollectionResponse'
               schema:
-                $ref: '#/components/schemas/RelationsModel'
+                $ref: '#/components/schemas/RelationCollectionModel'
           description: OK
-      summary: List Relations
-      tags:
-      - Relations
-  /api/v3/relations/schema:
-    get:
-      description: ""
-      operationId: View_relation_schema
-      responses:
-        "200":
-          content:
-            application/hal+json:
-              examples:
-                response:
-                  value:
-                    _links:
-                      self:
-                        href: /api/v3/relations/schema
-                    _type: Schema
-                    lag:
-                      name: Lag
-                      type: Integer
-                      writable: true
-                    description:
-                      name: Description
-                      type: String
-                      writable: true
-                    from:
-                      name: From work package
-                      type: WorkPackage
-                      writable: false
-                    id:
-                      name: ID
-                      type: Integer
-                      writable: false
-                    reverseType:
-                      name: Reverse Type
-                      type: String
-                      writable: false
-                    to:
-                      name: To work package
-                      type: WorkPackage
-                      writable: false
-                    type:
-                      name: Type
-                      type: String
-                      writable: true
-              schema:
-                $ref: '#/components/schemas/Relation_schemaModel'
-          description: OK
-      summary: View relation schema
-      tags:
-      - Relations
-  /api/v3/relations/schema/{type}:
-    get:
-      description: ""
-      operationId: View_relation_schema_for_type
-      parameters:
-      - description: Type of the schema
-        example: follows
-        explode: false
-        in: path
-        name: type
-        required: true
-        schema:
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/hal+json:
-              examples:
-                response:
-                  value:
-                    _links:
-                      self:
-                        href: /api/v3/relations/schema
-                    _type: Schema
-                    lag:
-                      name: Lag
-                      type: Integer
-                      writable: true
-                    description:
-                      name: Description
-                      type: String
-                      writable: true
-                    from:
-                      name: From work package
-                      type: WorkPackage
-                      writable: false
-                    id:
-                      name: ID
-                      type: Integer
-                      writable: false
-                    reverseType:
-                      name: Reverse Type
-                      type: String
-                      writable: false
-                    to:
-                      name: To work package
-                      type: WorkPackage
-                      writable: false
-                    type:
-                      name: Type
-                      type: String
-                      writable: true
-              schema:
-                $ref: '#/components/schemas/Relation_schemaModel'
-          description: OK
-        "404":
+        "400":
           content:
             application/hal+json:
               examples:
                 response:
                   value:
                     _type: Error
-                    errorIdentifier: urn:openproject-org:api:v3:errors:NotFound
-                    message: The specified relation type does not exist.
+                    errorIdentifier: urn:openproject-org:api:v3:errors:InvalidQuery
+                    message:
+                    - Filters Type filter has invalid values.
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-          description: |-
-            Returned if the relation type does not exist or the client does not have sufficient permissions to see it.
-
-            **Required permission:** manage work package relations
-      summary: View relation schema for type
+          description: Returned if the client provides invalid filter parameters.
+      summary: List Relations
       tags:
       - Relations
   /api/v3/relations/{id}:
     delete:
       description: Deletes the relation.
-      operationId: Delete_Relation
+      operationId: delete_relation
       parameters:
-      - description: Relation ID
+      - description: The unique identifier of the relation resource
         example: "1"
         explode: false
         in: path
@@ -11901,9 +12088,8 @@ paths:
         style: simple
       responses:
         "204":
-          description: |-
-            Returned if the relation was deleted successfully.
-            The response body is empty.
+          description: Returned if the relation was deleted successfully. The response
+            body is empty.
         "403":
           content:
             application/hal+json:
@@ -11933,7 +12119,7 @@ paths:
           description: |-
             Returned if the relation does not exist or the client does not have sufficient permissions to see it.
 
-            **Required permission:** manage work package relations
+            **Required permission:** view work packages
         "406":
           $ref: '#/components/responses/MissingContentType'
         "415":
@@ -11942,8 +12128,8 @@ paths:
       tags:
       - Relations
     get:
-      description: ""
-      operationId: View_Relation
+      description: Get a single relation specified by its unique identifier.
+      operationId: get_relation
       parameters:
       - description: Relation id
         example: "1"
@@ -11960,32 +12146,7 @@ paths:
             application/hal+json:
               examples:
                 response:
-                  value:
-                    _links:
-                      delete:
-                        href: /api/v3/relations/1
-                        method: DELETE
-                      from:
-                        href: /api/v3/work_packages/42
-                        title: Steel Delivery
-                      self:
-                        href: /api/v3/relations/1
-                      to:
-                        href: /api/v3/work_packages/84
-                        title: Bending the steel
-                      update:
-                        href: /api/v3/relations/1/form
-                        method: POST
-                      updateImmediately:
-                        href: /api/v3/relations/1
-                        method: PATCH
-                    _type: Relation
-                    lag: 0
-                    description: We can't bend the steel before it's been delivered!
-                    id: 1
-                    name: precedes
-                    reverseType: follows
-                    type: precedes
+                  $ref: '#/components/examples/RelationResponse'
               schema:
                 $ref: '#/components/schemas/RelationModel'
           description: OK
@@ -12004,18 +12165,18 @@ paths:
             Returned if the relation does not exist or the client does not have sufficient permissions to see it.
 
             **Required permission:** view work packages for the involved work packages
-      summary: View Relation
+      summary: Get Relation
       tags:
       - Relations
     patch:
       description: |-
-        When calling this endpoint the client provides a single object, containing the properties and links that it wants to change, in the body.
-        It is only allowed to provide properties or links supporting the **write** operation.
+        When calling this endpoint the client provides a single object, containing the properties and links that it wants
+        to change, in the body. It is only allowed to provide properties or links supporting the **write** operation.
 
-        Note that changing the `type` of a relation invariably also changes the respective `reverseType` as well as the "name" of it.
-        The returned Relation object will reflect that change. For instance if you change a Relation's
+        Note that changing the `type` of a relation invariably also changes the respective `reverseType` as well as the
+        "name" of it. The returned Relation object will reflect that change. For instance if you change a Relation's
         `type` to "follows" then the `reverseType` will be changed to `precedes`.
-      operationId: Edit_Relation
+      operationId: update_relation
       parameters:
       - description: Relation ID
         example: "1"
@@ -12032,32 +12193,7 @@ paths:
             application/hal+json:
               examples:
                 response:
-                  value:
-                    _links:
-                      delete:
-                        href: /api/v3/relations/1
-                        method: DELETE
-                      from:
-                        href: /api/v3/work_packages/42
-                        title: Steel Delivery
-                      self:
-                        href: /api/v3/relations/1
-                      to:
-                        href: /api/v3/work_packages/84
-                        title: Bending the steel
-                      update:
-                        href: /api/v3/relations/1/form
-                        method: POST
-                      updateImmediately:
-                        href: /api/v3/relations/1
-                        method: PATCH
-                    _type: Relation
-                    lag: 0
-                    description: We can't bend the steel before it's been delivered!
-                    id: 1
-                    name: precedes
-                    reverseType: follows
-                    type: precedes
+                  $ref: '#/components/examples/RelationResponse'
               schema:
                 $ref: '#/components/schemas/RelationModel'
           description: OK
@@ -12077,7 +12213,7 @@ paths:
           description: |-
             Returned if the relation does not exist or the client does not have sufficient permissions to see it.
 
-            **Required permission:** manage work package relations
+            **Required permission:** view work packages
         "406":
           $ref: '#/components/responses/MissingContentType'
         "415":
@@ -12099,146 +12235,12 @@ paths:
           description: |-
             Returned if:
 
-            * the client tries to modify a read-only property (`PropertyIsReadOnly`)
-
-            * a constraint for a property was violated (`PropertyConstraintViolation`)
-
-            * the client provides a link to an invalid resource (`ResourceTypeMismatch`) or a
+            - the client tries to modify a read-only property (`PropertyIsReadOnly`)
+            - a constraint for a property was violated (`PropertyConstraintViolation`)
+            - the client provides a link to an invalid resource (`ResourceTypeMismatch`) or a
               work package that does not exist or for which the client does not have sufficient permissions
               to see it (**required permissions**: `view work packages` for the involved work packages).
-      summary: Edit Relation
-      tags:
-      - Relations
-  /api/v3/relations/{id}/form:
-    post:
-      description: ""
-      operationId: Relation_edit_form
-      parameters:
-      - description: ID of the relation being modified
-        example: "1"
-        explode: false
-        in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-        style: simple
-      responses:
-        "200":
-          content:
-            application/hal+json:
-              examples:
-                response:
-                  value:
-                    _embedded:
-                      payload:
-                        _links:
-                          from:
-                            href: /api/v3/work_packages/4534
-                          to:
-                            href: /api/v3/work_packages/3857
-                        _type: WorkPackage
-                        lag: 3
-                        description: let it rest for 3 days
-                        type: follows
-                      schema:
-                        _links:
-                          self:
-                            href: /api/v3/relations/schema
-                        _type: Schema
-                        lag:
-                          name: Lag
-                          type: Integer
-                          writable: true
-                        description:
-                          name: Description
-                          type: String
-                          writable: true
-                        from:
-                          name: From work package
-                          type: WorkPackage
-                          writable: false
-                        id:
-                          name: ID
-                          type: Integer
-                          writable: false
-                        reverseType:
-                          name: Reverse Type
-                          type: String
-                          writable: false
-                        to:
-                          name: To work package
-                          type: WorkPackage
-                          writable: false
-                        type:
-                          allowedValues:
-                          - relates
-                          - duplicates
-                          - duplicated
-                          - blocks
-                          - blocked
-                          - precedes
-                          - follows
-                          - includes
-                          - partof
-                          - requires
-                          - required
-                          name: Type
-                          type: String
-                          writable: true
-                      validationErrors:
-                        from:
-                          _type: Error
-                          errorIdentifier: urn:openproject-org:api:v3:errors:BadExampleError
-                          message: For the purpose of this example we need a validation
-                            error. The remainder of the response pretends there were
-                            no errors.
-                    _links:
-                      commit:
-                        href: /api/v3/relations
-                        method: PATCH
-                      self:
-                        href: /api/v3/relations/form
-                      validate:
-                        href: /api/v3/relations/form
-                        method: POST
-                    _type: Form
-              schema:
-                $ref: '#/components/schemas/Relation_edit_formModel'
-          description: OK
-        "403":
-          content:
-            application/hal+json:
-              examples:
-                response:
-                  value:
-                    _type: Error
-                    errorIdentifier: urn:openproject-org:api:v3:errors:MissingPermission
-                    message: You are not allowed to edit the specified relation.
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: |-
-            Returned if the client does not have sufficient permissions.
-
-            **Required permission:** manage work package relations
-
-            *Note that you will only receive this error, if you are at least allowed to see the involved work packages.*
-        "404":
-          content:
-            application/hal+json:
-              examples:
-                response:
-                  value:
-                    _type: Error
-                    errorIdentifier: urn:openproject-org:api:v3:errors:NotFound
-                    message: The specified relation does not exist.
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-          description: |-
-            Returned if the relation does not exist or the client does not have sufficient permissions to see it.
-
-            **Required permission:** view (involved) work package(s), manage work package relations
-      summary: Relation edit form
+      summary: Update Relation
       tags:
       - Relations
   /api/v3/render/markdown:
@@ -12777,6 +12779,17 @@ paths:
         "200":
           content:
             application/hal+json:
+              examples:
+                Nextcloud storage:
+                  $ref: '#/components/examples/StorageNextcloudResponse'
+                Freshly created Nextcloud storage:
+                  $ref: '#/components/examples/StorageNextcloudResponseForCreation'
+                OneDrive storage:
+                  $ref: '#/components/examples/StorageOneDriveResponse'
+                Incomplete OneDrive storage:
+                  $ref: '#/components/examples/StorageOneDriveIncompleteResponse'
+                Unauthorized Nextcloud storage:
+                  $ref: '#/components/examples/StorageNextcloudUnauthorizedResponse'
               schema:
                 $ref: '#/components/schemas/StorageReadModel'
           description: OK
@@ -13220,6 +13233,11 @@ paths:
         Please note that while there is a fixed set of attributes, custom fields can extend
         a time entries' attributes and are accepted by the endpoint.
       operationId: create_time_entry
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TimeEntryModel'
       responses:
         "201":
           content:
@@ -14525,6 +14543,8 @@ paths:
           description: Returned if the requested property id is not in a lower camel
             case format.
       summary: View Values schema
+      tags:
+      - Values::Property
   /api/v3/versions:
     get:
       description: "Returns a collection of versions. The client can choose to filter\
@@ -18591,6 +18611,375 @@ components:
             identifier: xls
             type: application/vnd.ms-excel
             title: XLS
+    RelationCollectionResponse:
+      value:
+        _type: Collection
+        total: 40
+        count: 20
+        pageSize: 20
+        offset: 1
+        _embedded:
+        - _type: Relation
+          id: 650
+          name: duplicated by
+          type: duplicated
+          reverseType: duplicates
+          lag: null
+          description: Those are the same... stupid Stormtroopers!
+          _links:
+            self:
+              href: /api/v3/relations/650
+            updateImmediately:
+              href: /api/v3/relations/650
+              method: patch
+            delete:
+              href: /api/v3/relations/650
+              method: "delete,"
+              title: Remove relation
+            from:
+              href: /api/v3/work_packages/108
+              title: Destroy Rebel Base
+            to:
+              href: /api/v3/work_packages/78
+              title: Annihilate Yavin 4
+        - _type: Relation
+          id: 652
+          name: relates to
+          type: relates
+          reverseType: relates
+          _hint: Relation resource shortened for brevity.
+        - _hint: Further relation resources shortened for brevity.
+        _links:
+          self:
+            href: /api/v3/relations?filters=%5B%5D&offset=1&pageSize=20
+          jumpTo:
+            href: /api/v3/relations?filters=%5B%5D&offset=%7Boffset%7D&pageSize=20
+            templated: true
+          changeSize:
+            href: /api/v3/relations?filters=%5B%5D&offset=1&pageSize=%7Bsize%7D
+            templated: true
+          nextByOffset:
+            href: /api/v3/relations?filters=%5B%5D&offset=2&pageSize=20
+    RelationResponse:
+      value:
+        _type: Relation
+        id: 650
+        name: duplicated by
+        type: duplicated
+        reverseType: duplicates
+        lag: null
+        description: Those are the same... stupid Stormtroopers!
+        _embedded:
+          from:
+            id: 108
+            _type: WorkPackage
+            _hint: Work package resource shortened for brevity.
+          to:
+            id: 78
+            _type: WorkPackage
+            _hint: Work package resource shortened for brevity.
+        _links:
+          self:
+            href: /api/v3/relations/650
+          updateImmediately:
+            href: /api/v3/relations/650
+            method: patch
+          delete:
+            href: /api/v3/relations/650
+            method: "delete,"
+            title: Remove relation
+          from:
+            href: /api/v3/work_packages/108
+            title: Destroy Rebel Base
+          to:
+            href: /api/v3/work_packages/78
+            title: Annihilate Yavin 4
+    StorageNextcloudResponse:
+      value:
+        _type: Storage
+        id: 1337
+        name: It's no moon
+        hasApplicationPassword: true
+        createdAt: 2021-12-20T13:37:00.211Z
+        updatedAt: 2021-12-20T13:37:00.211Z
+        configured: true
+        _embedded:
+          oauthApplication:
+            id: 42
+            _type: OAuthApplication
+            name: It's no moon (Nextcloud)
+            clientId: O5h6WObhMg1Z8IcLHRE3_LMh4jJYmmca2V6OTFSv8DA
+            confidential: true
+            createdAt: 2022-12-07T12:56:42.626Z
+            updatedAt: 2022-12-07T12:56:42.626Z
+            scopes:
+            - api_v3
+            _links:
+              self:
+                href: /api/v3/oauth_applications/42
+              owner:
+                href: /api/v3/users/13
+                title: Darth Vader
+              integration:
+                href: /api/v3/storages/1337
+                title: It's no moon
+              redirectUri:
+              - href: https://nextcloud.deathstar.rocks/index.php/apps/integration_openproject/oauth-redirect
+          oauthClientCredentials:
+            _type: OAuthClientCredentials
+            id: 42
+            clientId: fGEFWxIpROrpci25TW6qWCZozDFEAKSkonMBkrf3LYvBXRljBbLajBf2vD2fjePm
+            confidential: true
+            createdAt: 2023-12-08T09:49:24.397Z
+            updatedAt: 2023-12-08T09:49:24.397Z
+            _links:
+              self:
+                href: /api/v3/oauth_client_credentials/42
+              integration:
+                href: /api/v3/storages/1337
+                title: It's no moon
+        _links:
+          self:
+            href: /api/v3/storages/1337
+            title: It's no moon
+          type:
+            href: urn:openproject-org:api:v3:storages:Nextcloud
+            title: Nextcloud
+          origin:
+            href: https://nextcloud.deathstar.rocks/
+          prepareUpload:
+          - href: /api/v3/storages/1337/files/prepare_upload
+            method: post
+            title: Upload file
+            payload:
+              projectId: 21
+              fileName: "{fileName}"
+              parent: "{parent}"
+            templated: true
+          - href: /api/v3/storages/95/files/prepare_upload
+            method: post
+            title: Upload file
+            payload:
+              projectId: 11
+              fileName: "{fileName}"
+              parent: "{parent}"
+            templated: true
+          open:
+            href: /api/v3/storages/1337/open
+          authorizationState:
+            href: urn:openproject-org:api:v3:storages:authorization:Connected
+            title: Connected
+          projectStorages:
+            href: "/api/v3/project_storages?filters=[{\"storageId\":{\"operator\"\
+              :\"=\",\"values\":[\"1337\"]}}]"
+          oauthApplication:
+            href: /api/v3/oauth_application/42
+            title: It's no moon (Nextcloud)
+          oauthClientCredentials:
+            href: /api/v3/oauth_client_credentials/42
+    StorageNextcloudResponseForCreation:
+      value:
+        _type: Storage
+        id: 1337
+        name: My New DeathStar
+        hasApplicationPassword: false
+        createdAt: 2024-05-21T09:11:53.880Z
+        updatedAt: 2024-05-21T09:11:53.880Z
+        configured: false
+        _embedded:
+          oauthApplication:
+            id: 42
+            _type: OAuthApplication
+            name: My New DeathStar (Nextcloud)
+            clientId: gNQ-gi3VX59ruoft5B9aRmukEYbZOhKIsxXE9iT1tcQ
+            confidential: true
+            clientSecret: 79hIlb1Ezj5kPx8LgE6LI9L1-mb8g7jX1-u_a08RJlI
+            createdAt: 2024-05-21T09:11:53.908Z
+            updatedAt: 2024-05-21T09:11:53.908Z
+            scopes:
+            - api_v3
+            _links:
+              self:
+                href: /api/v3/oauth_applications/42
+              owner:
+                href: /api/v3/users/13
+                title: Darth Vader
+              integration:
+                href: /api/v3/storages/1337
+                title: My New DeathStar
+              redirectUri:
+              - href: https://nextcloud.deathstar.rocks/index.php/apps/integration_openproject/oauth-redirect
+        _links:
+          self:
+            href: /api/v3/storages/1337
+            title: My New DeathStar
+          type:
+            href: urn:openproject-org:api:v3:storages:Nextcloud
+            title: Nextcloud
+          origin:
+            href: https://nextcloud.deathstar.rocks/
+          open:
+            href: /api/v3/storages/1337/open
+          prepareUpload: []
+          authorizationState:
+            href: urn:openproject-org:api:v3:storages:authorization:FailedAuthorization
+            title: Authorization failed
+          projectStorages:
+            href: "/api/v3/project_storages?filters=[{\"storageId\":{\"operator\"\
+              :\"=\",\"values\":[\"1337\"]}}]"
+          oauthApplication:
+            href: /api/v3/oauth_application/42
+            title: My New DeathStar (Nextcloud)
+          oauthClientCredentials:
+            href: null
+    StorageNextcloudUnauthorizedResponse:
+      value:
+        _type: Storage
+        id: 1337
+        name: It's no moon
+        hasApplicationPassword: false
+        createdAt: 2021-12-20T13:37:00.211Z
+        updatedAt: 2021-12-20T13:37:00.211Z
+        configured: true
+        _embedded:
+          oauthApplication:
+            id: 42
+            _type: OAuthApplication
+            name: It's no moon (Nextcloud)
+            clientId: O5h6WObhMg1Z8IcLHRE3_LMh4jJYmmca2V6OTFSv8DA
+            confidential: true
+            createdAt: 2022-12-07T12:56:42.626Z
+            updatedAt: 2022-12-07T12:56:42.626Z
+            scopes:
+            - api_v3
+            _links:
+              self:
+                href: /api/v3/oauth_applications/42
+              owner:
+                href: /api/v3/users/13
+                title: Darth Vader
+              integration:
+                href: /api/v3/storages/1337
+                title: It's no moon
+              redirectUri:
+              - href: https://nextcloud.deathstar.rocks/index.php/apps/integration_openproject/oauth-redirect
+          oauthClientCredentials:
+            _type: OAuthClientCredentials
+            id: 42
+            clientId: fGEFWxIpROrpci25TW6qWCZozDFEAKSkonMBkrf3LYvBXRljBbLajBf2vD2fjePm
+            confidential: true
+            createdAt: 2023-12-08T09:49:24.397Z
+            updatedAt: 2023-12-08T09:49:24.397Z
+            _links:
+              self:
+                href: /api/v3/oauth_client_credentials/42
+              integration:
+                href: /api/v3/storages/1337
+                title: It's no moon
+        _links:
+          self:
+            href: /api/v3/storages/1337
+            title: It's no moon
+          type:
+            href: urn:openproject-org:api:v3:storages:Nextcloud
+            title: Nextcloud
+          origin:
+            href: https://nextcloud.deathstar.rocks/
+          prepareUpload: []
+          open:
+            href: /api/v3/storages/1337/open
+          authorizationState:
+            href: urn:openproject-org:api:v3:storages:authorization:FailedAuthorization
+            title: Authorization failed
+          authorize:
+            href: https://nextcloud25.local/index.php/apps/oauth2/authorize?client_id=fnrIeJZqqAKGQlejuDaGhSQfCAVtoayHLACWCYcPJ0w17Pp6daPPUktkM9QaGxca&redirect_uri=https://openproject.local/oauth_clients/fnrIeJZqqAKGQlejuDaGhSQfCAVtoayHLACWCYcPJ0w17Pp6daPPUktkM9QaGxca/callback&response_type=code
+            title: Authorize
+          projectStorages:
+            href: "/api/v3/project_storages?filters=[{\"storageId\":{\"operator\"\
+              :\"=\",\"values\":[\"1337\"]}}]"
+          oauthApplication:
+            href: /api/v3/oauth_application/42
+            title: It's no moon (Nextcloud)
+          oauthClientCredentials:
+            href: /api/v3/oauth_client_credentials/42
+    StorageOneDriveIncompleteResponse:
+      value:
+        _type: Storage
+        id: 1337
+        name: It's no moon
+        tenantId: e36f1dbc-fdae-427e-b61b-0d96ddfb81a4
+        driveId: null
+        createdAt: 2021-12-20T13:37:00.211Z
+        updatedAt: 2021-12-20T13:37:00.211Z
+        configured: false
+        _links:
+          self:
+            href: /api/v3/storages/1337
+            title: It's no moon
+          type:
+            href: urn:openproject-org:api:v3:storages:OneDrive
+            title: OneDrive/SharePoint
+          prepareUpload: []
+          open:
+            href: /api/v3/storages/1337/open
+          authorizationState:
+            href: urn:openproject-org:api:v3:storages:authorization:FailedAuthorization
+            title: Authorization failed
+          projectStorages:
+            href: "/api/v3/project_storages?filters=[{\"storageId\":{\"operator\"\
+              :\"=\",\"values\":[\"1337\"]}}]"
+          oauthClientCredentials:
+            href: /api/v3/oauth_client_credentials/42
+    StorageOneDriveResponse:
+      value:
+        _type: Storage
+        id: 1337
+        name: It's no moon
+        tenantId: e36f1dbc-fdae-427e-b61b-0d96ddfb81a4
+        driveId: b!FeOZEMfQx0eGQKqVBLcP__BG8mq-4-9FuRqOyk3MXY8Qconfm2i6SKEoCmuGYqQK
+        createdAt: 2021-12-20T13:37:00.211Z
+        updatedAt: 2021-12-20T13:37:00.211Z
+        configured: true
+        _embedded:
+          oauthClientCredentials:
+            _type: OAuthClientCredentials
+            id: 42
+            clientId: b8a5bb54-5fb2-4e0e-9427-9d24dbac32ff
+            confidential: true
+            createdAt: 2023-12-08T09:49:24.397Z
+            updatedAt: 2023-12-08T09:49:24.397Z
+            _links:
+              self:
+                href: /api/v3/oauth_client_credentials/42
+              integration:
+                href: /api/v3/storages/1337
+                title: It's no moon
+        _links:
+          self:
+            href: /api/v3/storages/1337
+            title: It's no moon
+          type:
+            href: urn:openproject-org:api:v3:storages:OneDrive
+            title: OneDrive/SharePoint
+          prepareUpload:
+          - href: /api/v3/storages/1337/files/prepare_upload
+            method: post
+            title: Upload file
+            payload:
+              projectId: 33
+              fileName: "{fileName}"
+              parent: "{parent}"
+            templated: true
+          open:
+            href: /api/v3/storages/1337/open
+          authorizationState:
+            href: urn:openproject-org:api:v3:storages:authorization:Connected
+            title: Connected
+          projectStorages:
+            href: "/api/v3/project_storages?filters=[{\"storageId\":{\"operator\"\
+              :\"=\",\"values\":[\"1337\"]}}]"
+          oauthClientCredentials:
+            href: /api/v3/oauth_client_credentials/42
     QueriesModel:
       value:
         _links:
@@ -19144,6 +19533,7 @@ components:
             _type: Storage
             name: It's no moon
             hasApplicationPassword: true
+            configured: true
             createdAt: 2021-12-20T13:37:00.211Z
             updatedAt: 2021-12-20T13:37:00.211Z
             _links:
@@ -19163,6 +19553,9 @@ components:
               authorize:
                 href: https://nextcloud.deathstar.rocks/authorize/
                 title: Authorize
+              projectStorages:
+                href: "/api/v3/project_storages?filters=[{\"storageId\":{\"operator\"\
+                  :\"=\",\"values\":[\"1337\"]}}]"
               oauthApplication:
                 href: /api/v3/oauth_application/42
                 title: It's no moon (Nextcloud)
@@ -19171,8 +19564,11 @@ components:
           - id: 1338
             _type: Storage
             name: EmpireSharepoint
-            createdAt: 2022-12-21T13:37:00.296Z
-            updatedAt: 2022-12-21T13:37:00.296Z
+            tenantId: e36f1dbc-fdae-427e-b61b-0d96ddfb81a4
+            driveId: b!FeOZEMfQx0eGQKqVBLcP__BG8mq-4-9FuRqOyk3MXY8Qconfm2i6SKEoCmuGYqQK
+            createdAt: 2021-12-20T13:37:00.211Z
+            updatedAt: 2021-12-20T13:37:00.211Z
+            configured: true
             _links:
               self:
                 href: /api/v3/storages/1338
@@ -19185,6 +19581,9 @@ components:
               authorizationState:
                 href: urn:openproject-org:api:v3:storages:authorization:Connected
                 title: Connected
+              projectStorages:
+                href: "/api/v3/project_storages?filters=[{\"storageId\":{\"operator\"\
+                  :\"=\",\"values\":[\"1338\"]}}]"
               oauthClientCredentials:
                 href: /api/v3/oauth_client_credentials/44
     UserResponse:
@@ -19517,6 +19916,7 @@ components:
       - description
       - digest
       - fileName
+      - title
     Attachments_Model:
       allOf:
       - $ref: '#/components/schemas/CollectionModel'
@@ -20877,8 +21277,8 @@ components:
           description: "The grid widget's unique identifier. Can be null, if a new\
             \ widget is created within a grid."
           minimum: 1
-          type: integer
           nullable: true
+          type: integer
         identifier:
           description: "An alternative, human legible, and unique identifier."
           type: string
@@ -21137,7 +21537,6 @@ components:
         href:
           description: URL to the referenced resource (might be relative)
           type: string
-          nullable: true
         title:
           description: Representative label for the resource
           type: string
@@ -21748,7 +22147,7 @@ components:
     OAuthApplicationReadModel:
       example:
         id: 1337
-        _type: OauthClientCredentials
+        _type: OAuthApplication
         name: Vader's secure OAuth app
         clientId: O5h6WObhMg1Z8IcLHRE3_LMh4jJYmmca2V6OTFSv8DA
         confidential: true
@@ -21766,7 +22165,7 @@ components:
             href: /api/v3/storages/42
             title: Death Star Cloud
           redirectUri:
-            href: https://death-star.cloud.tools/index.php/apps/integration_openproject/oauth-redirect
+          - href: https://death-star.cloud.tools/index.php/apps/integration_openproject/oauth-redirect
       properties:
         id:
           minimum: 1
@@ -21913,6 +22312,8 @@ components:
             _type: PlaceholderUser
             id: 1338
     PlaceholderUserCreateModel:
+      example:
+        name: name
       properties:
         name:
           description: The new name of the placeholder user to be created.
@@ -22089,6 +22490,166 @@ components:
         - _embedded
         - _links
     ProjectModel:
+      example:
+        identifier: identifier
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        public: true
+        _links:
+          storages:
+          - identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          - identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          parent:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          types:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          createWorkPackage:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          projectStorages:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          update:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          delete:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          memberships:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          updateImmediately:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          createWorkPackageImmediately:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          versions:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          self:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          workPackages:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          categories:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          ancestors:
+          - identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          - identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          status:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+        _type: Project
+        name: name
+        active: true
+        description:
+          format: markdown
+          raw: I am formatted!
+          html: I am formatted!
+        id: 1
+        statusExplanation:
+          format: markdown
+          raw: I **am** formatted!
+          html: I <strong>am</strong> formatted!
+        updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         _type:
           enum:
@@ -22859,6 +23420,17 @@ components:
         name:
           description: Query name.
           type: string
+    RelationCollectionModel:
+      allOf:
+      - $ref: '#/components/schemas/CollectionModel'
+      - properties:
+          _links:
+            $ref: '#/components/schemas/RelationCollectionModel_allOf__links'
+          _embedded:
+            $ref: '#/components/schemas/RelationCollectionModel_allOf__embedded'
+        required:
+        - _embedded
+        - _links
     RelationModel:
       example:
         _links:
@@ -22889,173 +23461,56 @@ components:
       properties:
         id:
           description: Relation ID
-          readOnly: true
           type: integer
         name:
-          description: The internationalized name of this kind of relation
+          description: The internationalized name of this type of relation
           type: string
         type:
-          description: "Which kind of relation (blocks, precedes, etc.)"
+          description: The relation type.
+          enum:
+          - relates
+          - duplicates
+          - duplicated
+          - blocks
+          - blocked
+          - precedes
+          - follows
+          - includes
+          - partof
+          - requires
+          - required
           type: string
         reverseType:
-          description: The kind of relation from the other WP's perspective
-          readOnly: true
+          description: The type of relation from the perspective of the related work
+            package.
+          enum:
+          - relates
+          - duplicates
+          - duplicated
+          - blocks
+          - blocked
+          - precedes
+          - follows
+          - includes
+          - partof
+          - requires
+          - required
           type: string
         description:
-          description: Short text further describing the relation
+          description: A descriptive text for the relation.
+          nullable: true
           type: string
-        lag*:
+        lag:
           description: The lag in days between closing of `from` and start of `to`
           minimum: 0
+          nullable: true
           type: integer
+        _embedded:
+          $ref: '#/components/schemas/RelationModel__embedded'
         _links:
           $ref: '#/components/schemas/RelationModel__links'
-    Relation_edit_formModel:
-      example:
-        _links:
-          self:
-            href: /api/v3/relations/form
-          validate:
-            href: /api/v3/relations/form
-            method: POST
-          commit:
-            href: /api/v3/relations
-            method: PATCH
-        _type: Form
-        _embedded:
-          payload:
-            _links:
-              from:
-                href: /api/v3/work_packages/4534
-              to:
-                href: /api/v3/work_packages/3857
-            _type: WorkPackage
-            type: follows
-            lag: 3
-            description: let it rest for 3 days
-          schema:
-            _type: Schema
-            _links:
-              self:
-                href: /api/v3/relations/schema
-            id:
-              name: ID
-              type: Integer
-              writable: false
-            type:
-              name: Type
-              type: String
-              writable: true
-              allowedValues:
-              - relates
-              - duplicates
-              - duplicated
-              - blocks
-              - blocked
-              - precedes
-              - follows
-              - includes
-              - partof
-              - requires
-              - required
-            reverseType:
-              name: Reverse Type
-              type: String
-              writable: false
-            description:
-              name: Description
-              type: String
-              writable: true
-            from:
-              name: From work package
-              type: WorkPackage
-              writable: false
-            to:
-              name: To work package
-              type: WorkPackage
-              writable: false
-            lag:
-              name: lag
-              type: Integer
-              writable: true
-          validationErrors:
-            from:
-              _type: Error
-              errorIdentifier: urn:openproject-org:api:v3:errors:BadExampleError
-              message: For the purpose of this example we need a validation error.
-                The remainder of the response pretends there were no errors.
-      type: object
-    Relation_schemaModel:
-      example:
-        _type: Schema
-        _links:
-          self:
-            href: /api/v3/relations/schema
-        id:
-          name: ID
-          type: Integer
-          writable: false
-        type:
-          name: Type
-          type: String
-          writable: true
-        reverseType:
-          name: Reverse Type
-          type: String
-          writable: false
-        description:
-          name: Description
-          type: String
-          writable: true
-        from:
-          name: From work package
-          type: WorkPackage
-          writable: false
-        to:
-          name: To work package
-          type: WorkPackage
-          writable: false
-        lag:
-          name: Lag
-          type: Integer
-          writable: true
-      type: object
-    RelationsModel:
-      example:
-        _links:
-          self:
-            href: /api/v3/relations
-        total: 3
-        count: 1
-        _type: Collection
-        _embedded:
-          elements:
-          - _links:
-              self:
-                href: /api/v3/relations/1
-              update:
-                href: /api/v3/relations/1/form
-                method: POST
-              updateImmediately:
-                href: /api/v3/relations/1
-                method: PATCH
-              delete:
-                href: /api/v3/relations/1
-                method: DELETE
-              from:
-                href: /api/v3/work_packages/42
-                title: Steel Delivery
-              to:
-                href: /api/v3/work_packages/84
-                title: Bending the steel
-            _type: Relation
-            id: 1
-            name: precedes
-            type: precedes
-            reverseType: follows
-            description: We can't bend the steel before it's been delivered!
-            lag: 0
-      type: object
+      required:
+      - id
     RevisionModel:
       example:
         _type: Revision
@@ -24103,35 +24558,6 @@ components:
       - _links
       - _type
     StorageReadModel:
-      example:
-        id: 1337
-        _type: Storage
-        name: It's no moon
-        hasApplicationPassword: true
-        createdAt: 2021-12-20T13:37:00.211Z
-        updatedAt: 2021-12-20T13:37:00.211Z
-        _links:
-          self:
-            href: /api/v3/storages/1337
-            title: It's no moon
-          type:
-            href: urn:openproject-org:api:v3:storages:nextcloud
-            title: Nextcloud
-          origin:
-            href: https://nextcloud.deathstar.rocks/
-          open:
-            href: https://nextcloud.deathstar.rocks/apps/files
-          authorizationState:
-            href: urn:openproject-org:api:v3:storages:authorization:FailedAuthorization
-            title: Failed Authorization
-          authorize:
-            href: https://nextcloud.deathstar.rocks/authorize/
-            title: Authorize
-          oauthApplication:
-            href: /api/v3/oauth_application/42
-            title: It's no moon (Nextcloud)
-          oauthClientCredentials:
-            href: /api/v3/oauth_client_credentials/42
       properties:
         id:
           description: Storage id
@@ -24143,11 +24569,23 @@ components:
         name:
           description: Storage name
           type: string
+        tenantId:
+          description: |-
+            The tenant id of a file storage of type OneDrive/SharePoint.
+
+            Ignored if the provider type is not OneDrive/SharePoint.
+          type: string
+        driveId:
+          description: |-
+            The drive id of a file storage of type OneDrive/SharePoint.
+
+            Ignored if the provider type is not OneDrive/SharePoint.
+          type: string
         hasApplicationPassword:
           description: |-
             Whether the storage has the application password to use for the Nextcloud storage.
 
-            Ignored if the provider type is not Nextcloud
+            Ignored if the provider type is not Nextcloud.
           type: boolean
         createdAt:
           description: Time of creation
@@ -24157,6 +24595,9 @@ components:
           description: Time of the most recent change to the storage
           format: date-time
           type: string
+        configured:
+          description: "Indication, if the storage is fully configured"
+          type: boolean
         _embedded:
           $ref: '#/components/schemas/StorageReadModel__embedded'
         _links:
@@ -24185,8 +24626,8 @@ components:
 
             If a string is provided, the password is set and automatic management is enabled for the storage.
             If null is provided, the password is unset and automatic management is disabled for the storage.
-          type: string
           nullable: true
+          type: string
         _links:
           $ref: '#/components/schemas/StorageWriteModel__links'
     TimeEntryActivityModel:
@@ -24232,6 +24673,90 @@ components:
         - _embedded
         - _links
     TimeEntryModel:
+      example:
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        hours: hours
+        spentOn: 2000-01-23
+        ongoing: true
+        _links:
+          schema:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          updateImmediately:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          activity:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          self:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          update:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          project:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          workPackage:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          delete:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+          user:
+            identifier: identifier
+            templated: false
+            method: GET
+            payload: "{}"
+            href: href
+            title: title
+            type: type
+        comment:
+          format: markdown
+          raw: I **am** formatted!
+          html: I <strong>am</strong> formatted!
+        id: 1
+        updatedAt: 2000-01-23T04:56:07.000+00:00
       properties:
         id:
           description: The id of the time entry
@@ -24608,8 +25133,8 @@ components:
               # Conditions
 
               - User is self, or `create_user` or `manage_user` permission globally
-            type: string
             nullable: true
+            type: string
           createdAt:
             description: Time of creation
             format: date-time
@@ -24665,6 +25190,10 @@ components:
     ValuesPropertyModel:
       properties:
         _type:
+          enum:
+          - Values::Property
+          type: string
+        property:
           description: The key of the key - value pair represented by the Values::Property
           type: string
         value:
@@ -24675,6 +25204,7 @@ components:
       required:
       - _links
       - _type
+      - property
       - value
     VersionModel:
       example:
@@ -25756,6 +26286,12 @@ components:
         properties:
           _embedded:
             $ref: '#/components/schemas/Work_Package_activitiesModel_allOf__embedded'
+    Work_Package_activitiesModel_allOf__embedded:
+      properties:
+        elements:
+          items:
+            $ref: '#/components/schemas/ActivityModel'
+          type: array
     Work_PackagesModel:
       allOf:
       - $ref: '#/components/schemas/CollectionModel'
@@ -25852,6 +26388,22 @@ components:
           $ref: '#/components/schemas/WorkPackagePatchModel__links'
       required:
       - lockVersion
+    create_attachment_request:
+      properties:
+        metadata:
+          $ref: '#/components/schemas/create_attachment_request_metadata'
+        file:
+          format: binary
+          type: string
+    Create_Relation_request:
+      properties:
+        type:
+          type: string
+        _links:
+          $ref: '#/components/schemas/Create_Relation_request__links'
+      required:
+      - _links
+      - type
     Update_activity_request__links:
       properties:
         user:
@@ -25865,19 +26417,6 @@ components:
           type: string
         _links:
           $ref: '#/components/schemas/Update_activity_request__links'
-    create_attachment_request_metadata:
-      properties:
-        fileName:
-          type: string
-      required:
-      - fileName
-    create_attachment_request:
-      properties:
-        metadata:
-          $ref: '#/components/schemas/create_attachment_request_metadata'
-        file:
-          format: binary
-          type: string
     Execute_custom_action_request__links_workPackage:
       properties:
         href:
@@ -25942,24 +26481,6 @@ components:
       properties:
         comment:
           $ref: '#/components/schemas/Comment_work_package_request_comment'
-    Create_Relation_request__links:
-      properties:
-        from:
-          $ref: '#/components/schemas/Link'
-        to:
-          $ref: '#/components/schemas/Link'
-      required:
-      - from
-      - to
-    Create_Relation_request:
-      properties:
-        type:
-          type: string
-        _links:
-          $ref: '#/components/schemas/Create_Relation_request__links'
-      required:
-      - _links
-      - type
     Add_watcher_request:
       example:
         user:
@@ -25967,6 +26488,14 @@ components:
       properties:
         user:
           $ref: '#/components/schemas/Execute_custom_action_request__links_workPackage'
+    ActivityModel__links:
+      properties:
+        self:
+          $ref: '#/components/schemas/Link'
+        workPackage:
+          $ref: '#/components/schemas/Link'
+        user:
+          $ref: '#/components/schemas/Link'
     ActivityModel_comment:
       allOf:
       - $ref: '#/components/schemas/Formattable'
@@ -27273,11 +27802,11 @@ components:
           able to create and maintain own OAuth application.
 
           **Resource**: Storage
-    OAuthApplicationReadModel__links_redirectUri:
+    OAuthApplicationReadModel__links_redirectUri_inner:
       allOf:
       - $ref: '#/components/schemas/Link'
       - description: |-
-          The redirect URI of the OAuth application
+          A redirect URI of the OAuth application
 
           **Resource**: N/A
     OAuthApplicationReadModel__links:
@@ -27289,7 +27818,9 @@ components:
         integration:
           $ref: '#/components/schemas/OAuthApplicationReadModel__links_integration'
         redirectUri:
-          $ref: '#/components/schemas/OAuthApplicationReadModel__links_redirectUri'
+          items:
+            $ref: '#/components/schemas/OAuthApplicationReadModel__links_redirectUri_inner'
+          type: array
       required:
       - owner
       - redirectUri
@@ -27539,6 +28070,10 @@ components:
       - $ref: '#/components/schemas/Formattable'
       - description: A text detailing and explaining why the project has the reported
           status
+      example:
+        format: markdown
+        raw: I **am** formatted!
+        html: I <strong>am</strong> formatted!
     ProjectModel__links_update:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -27548,6 +28083,14 @@ components:
           # Conditions
 
           **Permission**: edit project
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     ProjectModel__links_updateImmediately:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -27557,6 +28100,14 @@ components:
           # Conditions
 
           **Permission**: edit project
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     ProjectModel__links_delete:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -27566,6 +28117,14 @@ components:
           # Conditions
 
           **Permission**: admin
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     ProjectModel__links_createWorkPackage:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -27575,6 +28134,14 @@ components:
           # Conditions
 
           **Permission**: add work packages
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     ProjectModel__links_createWorkPackageImmediately:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -27584,6 +28151,14 @@ components:
           # Conditions
 
           **Permission**: add work packages
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     ProjectModel__links_self:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -27591,6 +28166,14 @@ components:
           This project
 
           **Resource**: Project
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     ProjectModel__links_categories:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -27598,6 +28181,14 @@ components:
           Categories available in this project
 
           **Resource**: Collection
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     ProjectModel__links_types:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -27609,6 +28200,14 @@ components:
           # Conditions
 
           **Permission**: view work packages or manage types
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     ProjectModel__links_versions:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -27620,6 +28219,14 @@ components:
           # Conditions
 
           **Permission**: view work packages or manage versions
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     ProjectModel__links_memberships:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -27631,6 +28238,14 @@ components:
           # Conditions
 
           **Permission**: view members
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     ProjectModel__links_workPackages:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -27638,6 +28253,14 @@ components:
           Work Packages of this project
 
           **Resource**: Collection
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     ProjectModel__links_parent:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -27649,6 +28272,14 @@ components:
           # Conditions
 
           **Permission** edit project
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     ProjectModel__links_status:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -27660,6 +28291,14 @@ components:
           # Conditions
 
           **Permission** edit project
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     ProjectModel__links_storages_inner:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -27671,6 +28310,14 @@ components:
           # Conditions
 
           **Permission**: view_file_links
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     ProjectModel__links_projectStorages:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -27682,6 +28329,14 @@ components:
           # Conditions
 
           **Permission**: view_file_links
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     ProjectModel__links_ancestors_inner:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -27689,7 +28344,158 @@ components:
           The link to an ancestor project.
 
           **Resource**: Project
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     ProjectModel__links:
+      example:
+        storages:
+        - identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        - identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        parent:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        types:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        createWorkPackage:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        projectStorages:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        update:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        delete:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        memberships:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        updateImmediately:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        createWorkPackageImmediately:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        versions:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        self:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        workPackages:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        categories:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        ancestors:
+        - identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        - identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        status:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
       properties:
         update:
           $ref: '#/components/schemas/ProjectModel__links_update'
@@ -27903,36 +28709,33 @@ components:
       required:
       - filter
       - self
-    RelationModel__links_update:
+    RelationCollectionModel_allOf__links_self:
       allOf:
       - $ref: '#/components/schemas/Link'
       - description: |-
-          Updates the relation between two work packages via a form
+          This relation collection
 
-          # Conditions
-
-          **Permission**: manage work package relations
-        readOnly: true
-    RelationModel__links_updateImmediately:
-      allOf:
-      - $ref: '#/components/schemas/Link'
-      - description: |-
-          Updates the relation between two work packages
-
-          # Conditions
-
-          **Permission**: manage work package relations
-        readOnly: true
-    RelationModel__links_delete:
-      allOf:
-      - $ref: '#/components/schemas/Link'
-      - description: |-
-          Destroys the relation between the two work packages
-
-          # Conditions
-
-          **Permission**: manage work package relations
-        readOnly: true
+          **Resource**: RelationCollectionReadModel
+    RelationCollectionModel_allOf__links:
+      properties:
+        self:
+          $ref: '#/components/schemas/RelationCollectionModel_allOf__links_self'
+      required:
+      - self
+    RelationCollectionModel_allOf__embedded:
+      properties:
+        elements:
+          items:
+            $ref: '#/components/schemas/RelationModel'
+          type: array
+      required:
+      - elements
+    RelationModel__embedded:
+      properties:
+        from:
+          $ref: '#/components/schemas/Work_PackageModel'
+        to:
+          $ref: '#/components/schemas/Work_PackageModel'
     RelationModel__links_self:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -27944,15 +28747,24 @@ components:
           # Conditions
 
           **Permission**: view work packages
-        readOnly: true
-    RelationModel__links_schema:
+    RelationModel__links_updateImmediately:
       allOf:
       - $ref: '#/components/schemas/Link'
       - description: |-
-          The schema of this relation
+          Updates the relation between two work packages
 
-          **Resource**: Schema
-        readOnly: true
+          # Conditions
+
+          **Permission**: manage work package relations
+    RelationModel__links_delete:
+      allOf:
+      - $ref: '#/components/schemas/Link'
+      - description: |-
+          Destroys the relation between the two work packages
+
+          # Conditions
+
+          **Permission**: manage work package relations
     RelationModel__links_from:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -27964,7 +28776,6 @@ components:
           # Conditions
 
           **Permission**: view work packages
-        readOnly: true
     RelationModel__links_to:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -27976,26 +28787,20 @@ components:
           # Conditions
 
           **Permission**: view work packages
-        readOnly: true
     RelationModel__links:
       properties:
-        update:
-          $ref: '#/components/schemas/RelationModel__links_update'
+        self:
+          $ref: '#/components/schemas/RelationModel__links_self'
         updateImmediately:
           $ref: '#/components/schemas/RelationModel__links_updateImmediately'
         delete:
           $ref: '#/components/schemas/RelationModel__links_delete'
-        self:
-          $ref: '#/components/schemas/RelationModel__links_self'
-        schema:
-          $ref: '#/components/schemas/RelationModel__links_schema'
         from:
           $ref: '#/components/schemas/RelationModel__links_from'
         to:
           $ref: '#/components/schemas/RelationModel__links_to'
       required:
       - from
-      - schema
       - self
       - to
     RevisionModel_message:
@@ -28292,9 +29097,6 @@ components:
           $ref: '#/components/schemas/OAuthApplicationReadModel'
         oauthClientCredentials:
           $ref: '#/components/schemas/OAuthClientCredentialsReadModel'
-      required:
-      - oauthApplication
-      - oauthClientCredentials
     StorageReadModel__links_self:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -28313,7 +29115,8 @@ components:
       allOf:
       - $ref: '#/components/schemas/Link'
       - description: |-
-          Web URI of the storage instance.
+          Web URI of the storage instance. This link is ignored, if the storage is hosted in a cloud and has no own
+          URL, like file storages of type OneDrive/SharePoint.
 
           **Resource**: N/A
     StorageReadModel__links_open:
@@ -28390,7 +29193,6 @@ components:
       required:
       - authorizationState
       - open
-      - origin
       - self
       - type
     StorageWriteModel__links_origin:
@@ -28476,6 +29278,10 @@ components:
       allOf:
       - $ref: '#/components/schemas/Formattable'
       - description: A comment to the time entry
+      example:
+        format: markdown
+        raw: I **am** formatted!
+        html: I <strong>am</strong> formatted!
     TimeEntryModel__links_self:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -28483,6 +29289,14 @@ components:
           This time entry
 
           **Resource**: TimeEntry
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     TimeEntryModel__links_updateImmediately:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -28492,6 +29306,14 @@ components:
           # Conditions
 
           **Permission**: 'edit time entries' or 'edit own time entries' if the time entry belongs to the user
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     TimeEntryModel__links_update:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -28501,6 +29323,14 @@ components:
           # Conditions
 
           **Permission**: 'edit time entries' or 'edit own time entries' if the time entry belongs to the user
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     TimeEntryModel__links_delete:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -28510,6 +29340,14 @@ components:
           # Conditions
 
           **Permission**: 'edit time entries' or 'edit own time entries' if the time entry belongs to the user
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     TimeEntryModel__links_schema:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -28517,6 +29355,14 @@ components:
           The time entry schema
 
           **Resource**: Schema
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     TimeEntryModel__links_project:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -28524,6 +29370,14 @@ components:
           The project the time entry is bundled in. The project might be different from the work package's project once the workPackage is moved.
 
           **Resource**: Project
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     TimeEntryModel__links_workPackage:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -28531,6 +29385,14 @@ components:
           The work package the time entry is created on
 
           **Resource**: WorkPackage
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     TimeEntryModel__links_user:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -28538,6 +29400,14 @@ components:
           The user the time entry tracks expenditures for
 
           **Resource**: User
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     TimeEntryModel__links_activity:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -28545,7 +29415,88 @@ components:
           The time entry activity the time entry is categorized as
 
           **Resource**: TimeEntriesActivity
+      example:
+        identifier: identifier
+        templated: false
+        method: GET
+        payload: "{}"
+        href: href
+        title: title
+        type: type
     TimeEntryModel__links:
+      example:
+        schema:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        updateImmediately:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        activity:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        self:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        update:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        project:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        workPackage:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        delete:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
+        user:
+          identifier: identifier
+          templated: false
+          method: GET
+          payload: "{}"
+          href: href
+          title: title
+          type: type
       properties:
         self:
           $ref: '#/components/schemas/TimeEntryModel__links_self'
@@ -28706,6 +29657,14 @@ components:
           $ref: '#/components/schemas/UserModel_allOf__links_delete'
         authSource:
           $ref: '#/components/schemas/UserModel_allOf__links_authSource'
+    UserPreferencesModel__links:
+      properties:
+        self:
+          $ref: '#/components/schemas/Link'
+        user:
+          $ref: '#/components/schemas/Link'
+        updateImmediately:
+          $ref: '#/components/schemas/Link'
     ValuesPropertyModel__links_self:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -29290,12 +30249,6 @@ components:
           $ref: '#/components/schemas/Work_PackageModel__links_version'
         watchers:
           $ref: '#/components/schemas/Work_PackageModel__links_watchers'
-    Work_Package_activitiesModel_allOf__embedded:
-      properties:
-        elements:
-          items:
-            $ref: '#/components/schemas/ActivityModel'
-          type: array
     Work_PackagesModel_allOf__links_self:
       allOf:
       - $ref: '#/components/schemas/Link'
@@ -29340,22 +30293,21 @@ components:
           $ref: '#/components/schemas/Work_PackageModel__links_type'
         version:
           $ref: '#/components/schemas/Work_PackageModel__links_version'
-    ActivityModel__links:
+    create_attachment_request_metadata:
       properties:
-        self:
-          $ref: '#/components/schemas/Link'
-        workPackage:
-          $ref: '#/components/schemas/Link'
-        user:
-          $ref: '#/components/schemas/Link'
-    UserPreferencesModel__links:
+        fileName:
+          type: string
+      required:
+      - fileName
+    Create_Relation_request__links:
       properties:
-        self:
+        from:
           $ref: '#/components/schemas/Link'
-        user:
+        to:
           $ref: '#/components/schemas/Link'
-        updateImmediately:
-          $ref: '#/components/schemas/Link'
+      required:
+      - from
+      - to
   securitySchemes:
     BasicAuth:
       scheme: basic

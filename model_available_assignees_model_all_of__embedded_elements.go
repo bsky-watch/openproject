@@ -48,7 +48,7 @@ type AvailableAssigneesModelAllOfEmbeddedElements struct {
 	// User's language | ISO 639-1 format  # Conditions  - User is self, or `create_user` or `manage_user` permission globally
 	Language *string `json:"language,omitempty"`
 	// User's identity_url for OmniAuth authentication.  # Conditions  - User is self, or `create_user` or `manage_user` permission globally
-	IdentityUrl *string `json:"identityUrl,omitempty"`
+	IdentityUrl NullableString `json:"identityUrl,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -484,36 +484,46 @@ func (o *AvailableAssigneesModelAllOfEmbeddedElements) SetLanguage(v string) {
 	o.Language = &v
 }
 
-// GetIdentityUrl returns the IdentityUrl field value if set, zero value otherwise.
+// GetIdentityUrl returns the IdentityUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *AvailableAssigneesModelAllOfEmbeddedElements) GetIdentityUrl() string {
-	if o == nil || IsNil(o.IdentityUrl) {
+	if o == nil || IsNil(o.IdentityUrl.Get()) {
 		var ret string
 		return ret
 	}
-	return *o.IdentityUrl
+	return *o.IdentityUrl.Get()
 }
 
 // GetIdentityUrlOk returns a tuple with the IdentityUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AvailableAssigneesModelAllOfEmbeddedElements) GetIdentityUrlOk() (*string, bool) {
-	if o == nil || IsNil(o.IdentityUrl) {
+	if o == nil {
 		return nil, false
 	}
-	return o.IdentityUrl, true
+	return o.IdentityUrl.Get(), o.IdentityUrl.IsSet()
 }
 
 // HasIdentityUrl returns a boolean if a field has been set.
 func (o *AvailableAssigneesModelAllOfEmbeddedElements) HasIdentityUrl() bool {
-	if o != nil && !IsNil(o.IdentityUrl) {
+	if o != nil && o.IdentityUrl.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetIdentityUrl gets a reference to the given string and assigns it to the IdentityUrl field.
+// SetIdentityUrl gets a reference to the given NullableString and assigns it to the IdentityUrl field.
 func (o *AvailableAssigneesModelAllOfEmbeddedElements) SetIdentityUrl(v string) {
-	o.IdentityUrl = &v
+	o.IdentityUrl.Set(&v)
+}
+// SetIdentityUrlNil sets the value for IdentityUrl to be an explicit nil
+func (o *AvailableAssigneesModelAllOfEmbeddedElements) SetIdentityUrlNil() {
+	o.IdentityUrl.Set(nil)
+}
+
+// UnsetIdentityUrl ensures that no value is present for IdentityUrl, not even an explicit nil
+func (o *AvailableAssigneesModelAllOfEmbeddedElements) UnsetIdentityUrl() {
+	o.IdentityUrl.Unset()
 }
 
 func (o AvailableAssigneesModelAllOfEmbeddedElements) MarshalJSON() ([]byte, error) {
@@ -558,8 +568,8 @@ func (o AvailableAssigneesModelAllOfEmbeddedElements) ToMap() (map[string]interf
 	if !IsNil(o.Language) {
 		toSerialize["language"] = o.Language
 	}
-	if !IsNil(o.IdentityUrl) {
-		toSerialize["identityUrl"] = o.IdentityUrl
+	if o.IdentityUrl.IsSet() {
+		toSerialize["identityUrl"] = o.IdentityUrl.Get()
 	}
 
 	for key, value := range o.AdditionalProperties {

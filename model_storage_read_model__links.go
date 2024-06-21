@@ -22,7 +22,7 @@ var _ MappedNullable = &StorageReadModelLinks{}
 type StorageReadModelLinks struct {
 	Self StorageReadModelLinksSelf `json:"self"`
 	Type StorageReadModelLinksType `json:"type"`
-	Origin StorageReadModelLinksOrigin `json:"origin"`
+	Origin *StorageReadModelLinksOrigin `json:"origin,omitempty"`
 	Open StorageReadModelLinksOpen `json:"open"`
 	AuthorizationState StorageReadModelLinksAuthorizationState `json:"authorizationState"`
 	Authorize *StorageReadModelLinksAuthorize `json:"authorize,omitempty"`
@@ -37,11 +37,10 @@ type _StorageReadModelLinks StorageReadModelLinks
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStorageReadModelLinks(self StorageReadModelLinksSelf, type_ StorageReadModelLinksType, origin StorageReadModelLinksOrigin, open StorageReadModelLinksOpen, authorizationState StorageReadModelLinksAuthorizationState) *StorageReadModelLinks {
+func NewStorageReadModelLinks(self StorageReadModelLinksSelf, type_ StorageReadModelLinksType, open StorageReadModelLinksOpen, authorizationState StorageReadModelLinksAuthorizationState) *StorageReadModelLinks {
 	this := StorageReadModelLinks{}
 	this.Self = self
 	this.Type = type_
-	this.Origin = origin
 	this.Open = open
 	this.AuthorizationState = authorizationState
 	return &this
@@ -103,28 +102,36 @@ func (o *StorageReadModelLinks) SetType(v StorageReadModelLinksType) {
 	o.Type = v
 }
 
-// GetOrigin returns the Origin field value
+// GetOrigin returns the Origin field value if set, zero value otherwise.
 func (o *StorageReadModelLinks) GetOrigin() StorageReadModelLinksOrigin {
-	if o == nil {
+	if o == nil || IsNil(o.Origin) {
 		var ret StorageReadModelLinksOrigin
 		return ret
 	}
-
-	return o.Origin
+	return *o.Origin
 }
 
-// GetOriginOk returns a tuple with the Origin field value
+// GetOriginOk returns a tuple with the Origin field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageReadModelLinks) GetOriginOk() (*StorageReadModelLinksOrigin, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Origin) {
 		return nil, false
 	}
-	return &o.Origin, true
+	return o.Origin, true
 }
 
-// SetOrigin sets field value
+// HasOrigin returns a boolean if a field has been set.
+func (o *StorageReadModelLinks) HasOrigin() bool {
+	if o != nil && !IsNil(o.Origin) {
+		return true
+	}
+
+	return false
+}
+
+// SetOrigin gets a reference to the given StorageReadModelLinksOrigin and assigns it to the Origin field.
 func (o *StorageReadModelLinks) SetOrigin(v StorageReadModelLinksOrigin) {
-	o.Origin = v
+	o.Origin = &v
 }
 
 // GetOpen returns the Open field value
@@ -283,7 +290,9 @@ func (o StorageReadModelLinks) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["self"] = o.Self
 	toSerialize["type"] = o.Type
-	toSerialize["origin"] = o.Origin
+	if !IsNil(o.Origin) {
+		toSerialize["origin"] = o.Origin
+	}
 	toSerialize["open"] = o.Open
 	toSerialize["authorizationState"] = o.AuthorizationState
 	if !IsNil(o.Authorize) {
@@ -310,7 +319,6 @@ func (o *StorageReadModelLinks) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"self",
 		"type",
-		"origin",
 		"open",
 		"authorizationState",
 	}

@@ -11,231 +11,138 @@ API version: 3
 package openproject
 
 import (
-	"encoding/json"
+	"bytes"
+	"context"
+	"io"
+	"net/http"
+	"net/url"
+	"strings"
 )
 
-// checks if the StorageWriteModel type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &StorageWriteModel{}
 
-// StorageWriteModel struct for StorageWriteModel
-type StorageWriteModel struct {
-	// Storage name, if not provided, falls back to a default.
-	Name *string `json:"name,omitempty"`
-	// The application password to use for the Nextcloud storage. Ignored if the provider type is not Nextcloud.  If a string is provided, the password is set and automatic management is enabled for the storage. If null is provided, the password is unset and automatic management is disabled for the storage.
-	ApplicationPassword NullableString `json:"applicationPassword,omitempty"`
-	Links *StorageWriteModelLinks `json:"_links,omitempty"`
-	AdditionalProperties map[string]interface{}
+// ValuesPropertyAPIService ValuesPropertyAPI service
+type ValuesPropertyAPIService service
+
+type ApiViewValuesSchemaRequest struct {
+	ctx context.Context
+	ApiService *ValuesPropertyAPIService
+	id string
 }
 
-type _StorageWriteModel StorageWriteModel
-
-// NewStorageWriteModel instantiates a new StorageWriteModel object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewStorageWriteModel() *StorageWriteModel {
-	this := StorageWriteModel{}
-	return &this
+func (r ApiViewValuesSchemaRequest) Execute() (*SchemaModel, *http.Response, error) {
+	return r.ApiService.ViewValuesSchemaExecute(r)
 }
 
-// NewStorageWriteModelWithDefaults instantiates a new StorageWriteModel object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewStorageWriteModelWithDefaults() *StorageWriteModel {
-	this := StorageWriteModel{}
-	return &this
-}
+/*
+ViewValuesSchema View Values schema
 
-// GetName returns the Name field value if set, zero value otherwise.
-func (o *StorageWriteModel) GetName() string {
-	if o == nil || IsNil(o.Name) {
-		var ret string
-		return ret
+The schema of a `Values` resource.
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param id The identifier of the value. This is typically the value of the `property` property of the `Values` resource. It should be in lower camelcase format.
+ @return ApiViewValuesSchemaRequest
+*/
+func (a *ValuesPropertyAPIService) ViewValuesSchema(ctx context.Context, id string) ApiViewValuesSchemaRequest {
+	return ApiViewValuesSchemaRequest{
+		ApiService: a,
+		ctx: ctx,
+		id: id,
 	}
-	return *o.Name
 }
 
-// GetNameOk returns a tuple with the Name field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *StorageWriteModel) GetNameOk() (*string, bool) {
-	if o == nil || IsNil(o.Name) {
-		return nil, false
-	}
-	return o.Name, true
-}
+// Execute executes the request
+//  @return SchemaModel
+func (a *ValuesPropertyAPIService) ViewValuesSchemaExecute(r ApiViewValuesSchemaRequest) (*SchemaModel, *http.Response, error) {
+	var (
+		localVarHTTPMethod   = http.MethodGet
+		localVarPostBody     interface{}
+		formFiles            []formFile
+		localVarReturnValue  *SchemaModel
+	)
 
-// HasName returns a boolean if a field has been set.
-func (o *StorageWriteModel) HasName() bool {
-	if o != nil && !IsNil(o.Name) {
-		return true
-	}
-
-	return false
-}
-
-// SetName gets a reference to the given string and assigns it to the Name field.
-func (o *StorageWriteModel) SetName(v string) {
-	o.Name = &v
-}
-
-// GetApplicationPassword returns the ApplicationPassword field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *StorageWriteModel) GetApplicationPassword() string {
-	if o == nil || IsNil(o.ApplicationPassword.Get()) {
-		var ret string
-		return ret
-	}
-	return *o.ApplicationPassword.Get()
-}
-
-// GetApplicationPasswordOk returns a tuple with the ApplicationPassword field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *StorageWriteModel) GetApplicationPasswordOk() (*string, bool) {
-	if o == nil {
-		return nil, false
-	}
-	return o.ApplicationPassword.Get(), o.ApplicationPassword.IsSet()
-}
-
-// HasApplicationPassword returns a boolean if a field has been set.
-func (o *StorageWriteModel) HasApplicationPassword() bool {
-	if o != nil && o.ApplicationPassword.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetApplicationPassword gets a reference to the given NullableString and assigns it to the ApplicationPassword field.
-func (o *StorageWriteModel) SetApplicationPassword(v string) {
-	o.ApplicationPassword.Set(&v)
-}
-// SetApplicationPasswordNil sets the value for ApplicationPassword to be an explicit nil
-func (o *StorageWriteModel) SetApplicationPasswordNil() {
-	o.ApplicationPassword.Set(nil)
-}
-
-// UnsetApplicationPassword ensures that no value is present for ApplicationPassword, not even an explicit nil
-func (o *StorageWriteModel) UnsetApplicationPassword() {
-	o.ApplicationPassword.Unset()
-}
-
-// GetLinks returns the Links field value if set, zero value otherwise.
-func (o *StorageWriteModel) GetLinks() StorageWriteModelLinks {
-	if o == nil || IsNil(o.Links) {
-		var ret StorageWriteModelLinks
-		return ret
-	}
-	return *o.Links
-}
-
-// GetLinksOk returns a tuple with the Links field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *StorageWriteModel) GetLinksOk() (*StorageWriteModelLinks, bool) {
-	if o == nil || IsNil(o.Links) {
-		return nil, false
-	}
-	return o.Links, true
-}
-
-// HasLinks returns a boolean if a field has been set.
-func (o *StorageWriteModel) HasLinks() bool {
-	if o != nil && !IsNil(o.Links) {
-		return true
-	}
-
-	return false
-}
-
-// SetLinks gets a reference to the given StorageWriteModelLinks and assigns it to the Links field.
-func (o *StorageWriteModel) SetLinks(v StorageWriteModelLinks) {
-	o.Links = &v
-}
-
-func (o StorageWriteModel) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ValuesPropertyAPIService.ViewValuesSchema")
 	if err != nil {
-		return []byte{}, err
-	}
-	return json.Marshal(toSerialize)
-}
-
-func (o StorageWriteModel) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Name) {
-		toSerialize["name"] = o.Name
-	}
-	if o.ApplicationPassword.IsSet() {
-		toSerialize["applicationPassword"] = o.ApplicationPassword.Get()
-	}
-	if !IsNil(o.Links) {
-		toSerialize["_links"] = o.Links
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	for key, value := range o.AdditionalProperties {
-		toSerialize[key] = value
+	localVarPath := localBasePath + "/api/v3/values/schema/{id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"id"+"}", url.PathEscape(parameterValueToString(r.id, "id")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
 	}
 
-	return toSerialize, nil
-}
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/hal+json"}
 
-func (o *StorageWriteModel) UnmarshalJSON(data []byte) (err error) {
-	varStorageWriteModel := _StorageWriteModel{}
-
-	err = json.Unmarshal(data, &varStorageWriteModel)
-
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
 	if err != nil {
-		return err
+		return localVarReturnValue, nil, err
 	}
 
-	*o = StorageWriteModel(varStorageWriteModel)
-
-	additionalProperties := make(map[string]interface{})
-
-	if err = json.Unmarshal(data, &additionalProperties); err == nil {
-		delete(additionalProperties, "name")
-		delete(additionalProperties, "applicationPassword")
-		delete(additionalProperties, "_links")
-		o.AdditionalProperties = additionalProperties
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
-	return err
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+					newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }
-
-type NullableStorageWriteModel struct {
-	value *StorageWriteModel
-	isSet bool
-}
-
-func (v NullableStorageWriteModel) Get() *StorageWriteModel {
-	return v.value
-}
-
-func (v *NullableStorageWriteModel) Set(val *StorageWriteModel) {
-	v.value = val
-	v.isSet = true
-}
-
-func (v NullableStorageWriteModel) IsSet() bool {
-	return v.isSet
-}
-
-func (v *NullableStorageWriteModel) Unset() {
-	v.value = nil
-	v.isSet = false
-}
-
-func NewNullableStorageWriteModel(val *StorageWriteModel) *NullableStorageWriteModel {
-	return &NullableStorageWriteModel{value: val, isSet: true}
-}
-
-func (v NullableStorageWriteModel) MarshalJSON() ([]byte, error) {
-	return json.Marshal(v.value)
-}
-
-func (v *NullableStorageWriteModel) UnmarshalJSON(src []byte) error {
-	v.isSet = true
-	return json.Unmarshal(src, &v.value)
-}
-
-

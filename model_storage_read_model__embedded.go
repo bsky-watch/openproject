@@ -12,7 +12,6 @@ package openproject
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 // checks if the StorageReadModelEmbedded type satisfies the MappedNullable interface at compile time
@@ -20,8 +19,8 @@ var _ MappedNullable = &StorageReadModelEmbedded{}
 
 // StorageReadModelEmbedded struct for StorageReadModelEmbedded
 type StorageReadModelEmbedded struct {
-	OauthApplication OAuthApplicationReadModel `json:"oauthApplication"`
-	OauthClientCredentials OAuthClientCredentialsReadModel `json:"oauthClientCredentials"`
+	OauthApplication *OAuthApplicationReadModel `json:"oauthApplication,omitempty"`
+	OauthClientCredentials *OAuthClientCredentialsReadModel `json:"oauthClientCredentials,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -31,10 +30,8 @@ type _StorageReadModelEmbedded StorageReadModelEmbedded
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStorageReadModelEmbedded(oauthApplication OAuthApplicationReadModel, oauthClientCredentials OAuthClientCredentialsReadModel) *StorageReadModelEmbedded {
+func NewStorageReadModelEmbedded() *StorageReadModelEmbedded {
 	this := StorageReadModelEmbedded{}
-	this.OauthApplication = oauthApplication
-	this.OauthClientCredentials = oauthClientCredentials
 	return &this
 }
 
@@ -46,52 +43,68 @@ func NewStorageReadModelEmbeddedWithDefaults() *StorageReadModelEmbedded {
 	return &this
 }
 
-// GetOauthApplication returns the OauthApplication field value
+// GetOauthApplication returns the OauthApplication field value if set, zero value otherwise.
 func (o *StorageReadModelEmbedded) GetOauthApplication() OAuthApplicationReadModel {
-	if o == nil {
+	if o == nil || IsNil(o.OauthApplication) {
 		var ret OAuthApplicationReadModel
 		return ret
 	}
-
-	return o.OauthApplication
+	return *o.OauthApplication
 }
 
-// GetOauthApplicationOk returns a tuple with the OauthApplication field value
+// GetOauthApplicationOk returns a tuple with the OauthApplication field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageReadModelEmbedded) GetOauthApplicationOk() (*OAuthApplicationReadModel, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.OauthApplication) {
 		return nil, false
 	}
-	return &o.OauthApplication, true
+	return o.OauthApplication, true
 }
 
-// SetOauthApplication sets field value
+// HasOauthApplication returns a boolean if a field has been set.
+func (o *StorageReadModelEmbedded) HasOauthApplication() bool {
+	if o != nil && !IsNil(o.OauthApplication) {
+		return true
+	}
+
+	return false
+}
+
+// SetOauthApplication gets a reference to the given OAuthApplicationReadModel and assigns it to the OauthApplication field.
 func (o *StorageReadModelEmbedded) SetOauthApplication(v OAuthApplicationReadModel) {
-	o.OauthApplication = v
+	o.OauthApplication = &v
 }
 
-// GetOauthClientCredentials returns the OauthClientCredentials field value
+// GetOauthClientCredentials returns the OauthClientCredentials field value if set, zero value otherwise.
 func (o *StorageReadModelEmbedded) GetOauthClientCredentials() OAuthClientCredentialsReadModel {
-	if o == nil {
+	if o == nil || IsNil(o.OauthClientCredentials) {
 		var ret OAuthClientCredentialsReadModel
 		return ret
 	}
-
-	return o.OauthClientCredentials
+	return *o.OauthClientCredentials
 }
 
-// GetOauthClientCredentialsOk returns a tuple with the OauthClientCredentials field value
+// GetOauthClientCredentialsOk returns a tuple with the OauthClientCredentials field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *StorageReadModelEmbedded) GetOauthClientCredentialsOk() (*OAuthClientCredentialsReadModel, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.OauthClientCredentials) {
 		return nil, false
 	}
-	return &o.OauthClientCredentials, true
+	return o.OauthClientCredentials, true
 }
 
-// SetOauthClientCredentials sets field value
+// HasOauthClientCredentials returns a boolean if a field has been set.
+func (o *StorageReadModelEmbedded) HasOauthClientCredentials() bool {
+	if o != nil && !IsNil(o.OauthClientCredentials) {
+		return true
+	}
+
+	return false
+}
+
+// SetOauthClientCredentials gets a reference to the given OAuthClientCredentialsReadModel and assigns it to the OauthClientCredentials field.
 func (o *StorageReadModelEmbedded) SetOauthClientCredentials(v OAuthClientCredentialsReadModel) {
-	o.OauthClientCredentials = v
+	o.OauthClientCredentials = &v
 }
 
 func (o StorageReadModelEmbedded) MarshalJSON() ([]byte, error) {
@@ -104,8 +117,12 @@ func (o StorageReadModelEmbedded) MarshalJSON() ([]byte, error) {
 
 func (o StorageReadModelEmbedded) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["oauthApplication"] = o.OauthApplication
-	toSerialize["oauthClientCredentials"] = o.OauthClientCredentials
+	if !IsNil(o.OauthApplication) {
+		toSerialize["oauthApplication"] = o.OauthApplication
+	}
+	if !IsNil(o.OauthClientCredentials) {
+		toSerialize["oauthClientCredentials"] = o.OauthClientCredentials
+	}
 
 	for key, value := range o.AdditionalProperties {
 		toSerialize[key] = value
@@ -115,28 +132,6 @@ func (o StorageReadModelEmbedded) ToMap() (map[string]interface{}, error) {
 }
 
 func (o *StorageReadModelEmbedded) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"oauthApplication",
-		"oauthClientCredentials",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err;
-	}
-
-	for _, requiredProperty := range(requiredProperties) {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
 	varStorageReadModelEmbedded := _StorageReadModelEmbedded{}
 
 	err = json.Unmarshal(data, &varStorageReadModelEmbedded)
