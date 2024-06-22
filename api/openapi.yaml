@@ -19916,7 +19916,6 @@ components:
       - description
       - digest
       - fileName
-      - title
     Attachments_Model:
       allOf:
       - $ref: '#/components/schemas/CollectionModel'
