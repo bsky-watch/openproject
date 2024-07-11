@@ -219,9 +219,10 @@ func Test_openproject_WorkPackagesAPIService(t *testing.T) {
 
 		var id int
 
-		httpRes, err := apiClient.WorkPackagesAPI.ListWorkPackageRelations(context.Background(), id).Execute()
+		resp, httpRes, err := apiClient.WorkPackagesAPI.ListWorkPackageRelations(context.Background(), id).Execute()
 
 		require.Nil(t, err)
+		require.NotNil(t, resp)
 		assert.Equal(t, 200, httpRes.StatusCode)
 
 	})

@@ -17505,21 +17505,15 @@ paths:
           type: integer
         style: simple
       responses:
-        "302":
+        "200":
           content:
-            text/plain:
+            application/hal+json:
               examples:
                 response:
-                  value: "You are being redirected to /api/v3/relations?involved={work_package_id}"
+                  $ref: '#/components/examples/RelationCollectionResponse'
               schema:
-                type: string
-          description: Found
-          headers:
-            Location:
-              explode: false
-              schema:
-                type: string
-              style: simple
+                $ref: '#/components/schemas/RelationCollectionModel'
+          description: OK
       summary: List relations
       tags:
       - Work Packages

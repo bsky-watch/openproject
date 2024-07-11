@@ -14860,19 +14860,15 @@ paths:
         schema:
           type: integer
       responses:
-        '302':
+        '200':
+          description: OK
           content:
-            text/plain:
+            application/hal+json:
               schema:
-                type: string
+                "$ref": "#/components/schemas/RelationCollectionModel"
               examples:
                 response:
-                  value: You are being redirected to /api/v3/relations?involved={work_package_id}
-          description: Found
-          headers:
-            Location:
-              schema:
-                type: string
+                  "$ref": "#/components/examples/RelationCollectionResponse"
       tags:
       - Work Packages
       description: Lists all relations this work package is involved in.
